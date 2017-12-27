@@ -1,0 +1,76 @@
+html { height : 100% ; margin : 0px }
+ 
+body { min-height : 100% ; margin : 0px }
+body.default { color : #393939 ; background-color : white }
+body.dark { color : #c6c6c6 ; background-color : black }
+
+a.default { color : #600060 }
+a.default:hover { color : #a000a0 }
+a.dark { color : #ffbfbf }
+a.dark:hover { color : #ff8f8f }
+
+div.centered /* sic */ { display : flex ; justify-content : center }
+div.default { color : #393939 ; background-color : white }
+div.default.alternative { color : #262626 ; background-color : #dfdfdf }
+div.dark { color : #c6c6c6 ; background-color : black }
+div.dark.alternative { color : #d9d9d9 ; background-color : #202020 }
+
+hr { margin-top : 0.75rem ; margin-bottom : 0.75rem }
+hr.default { background-color : #dfdfdf }
+hr.default.alternative { background-color : #bfbfbf }
+hr.dark { background-color : #202020 }
+hr.dark.alternative { background-color : #404040 }
+
+span.healthy { color : #4b0082 /* indigo (or dark-violet: #9400d3?) */ }
+span.unhealthy { color : #d8bfd8 /* thistle (or plum: #dda0dd?) */ }
+
+.box.default { color : #393939 ; background-color : white ; box-shadow : 0 2px 3px rgba(32, 32, 32, 0.1), 0 0 0 1px rgba(32, 32, 32, 0.1) }
+.box.default.alternative { color : #262626 ; background-color : #efefef ; box-shadow : 0 2px 3px rgba(16, 16, 16, 0.1), 0 0 0 1px rgba(16, 16, 16, 0.1) }
+.box.dark { color : #c6c6c6 ; background-color : black ; box-shadow : 0 2px 3px rgba(224, 224, 224, 0.1), 0 0 0 1px rgba(224, 224, 224, 0.1) }
+.box.dark.alternative { color : #d9d9d9 ; background-color : #101010 ; box-shadow : 0 2px 3px rgba(240, 240, 240, 0.1), 0 0 0 1px rgba(240, 240, 240, 0.1) }
+
+.footer { padding-top : 0.5rem ; padding-left : 0.5rem ; padding-bottom : 0.5rem ; padding-right : 0.5rem }
+.footer.default.alternative { color : #262626 ; background-color : #ffdfdf /* custom $white */ }
+.footer.dark.alternative { color : #d9d9d9 ; background-color : #200020 /* custom $black */ }
+
+.level:not(:last-child) { margin-bottom : 1.0rem }
+.level.hasContinuation:not(:last-child) { margin-bottom : 0.5rem }
+
+.navbar-item { padding-left : 0.5rem ; padding-right : 0.5rem }
+.navbar-menu.white { background-color : #ffdfdf /* custom $white */ }
+.navbar-menu.black { background-color : #200020 /* custom $black */ }
+/* TODO-NMB: More .navbar-menu.{semantic}?... */
+
+.notification:not(:last-child)  { margin-bottom : 0.0rem }
+
+.progress.default::-webkit-progress-bar { background-color : #dfdfdf }
+.progress.default.alternative::-webkit-progress-bar { background-color : #bfbfbf }
+.progress.dark::-webkit-progress-bar { background-color : #202020 }
+.progress.dark.alternative::-webkit-progress-bar { background-color : #404040 }
+
+.table { margin-bottom : 0.75rem }
+.table.default { background-color : white }
+.table.default td { color : #393939 ; border-bottom-color : #cfcfcf }
+.table.default tr.is-selected td { background-color : #ffdfdf /* custom $white */ ; border-bottom-color : #200020 /* custom $black */ }
+.table.default tr.is-selected:hover td { background-color : #f3d3d3 }
+.table.default tr:not(.is-selected):hover { background-color : #f3f3f3 } 
+.table.default.is-striped tbody tr:not(.is-selected):nth-child(even) { background-color : #f9f9f9 }
+.table.default.is-striped tr:not(.is-selected):nth-child(even):hover { background-color : #ededed }
+.table.default.alternative { background-color : #efefef }
+.table.default.alternative td { color : #262626 ; border-bottom-color : #bfbfbf }
+.table.default.alternative tr:not(.is-selected):hover { background-color : #dfdfdf } 
+.table.default.alternative.is-striped tbody tr:not(.is-selected):nth-child(even) { background-color : #e7e7e7 }
+.table.default.alternative.is-striped tr:not(.is-selected):nth-child(even):hover { background-color : #d7d7d7 }
+.table.dark { background-color : black }
+.table.dark td { color : #c6c6c6 ; border-bottom-color : #303030 }
+.table.dark tr.is-selected td { background-color : #200020 /* custom $black */ ; border-bottom-color : #ffdfdf /* custom $white */ }
+.table.dark tr.is-selected:hover td { background-color : #2a0a2a }
+.table.dark tr:not(.is-selected):hover { background-color : #0a0a0a }
+.table.dark.is-striped tbody tr:not(.is-selected):nth-child(even) { background-color : #040404 }
+.table.dark.is-striped tr:not(.is-selected):nth-child(even):hover { background-color : #101010 }
+.table.dark.alternative { background-color : #101010 }
+.table.dark.alternative td { color : #d9d9d9 ; border-bottom-color : #404040 }
+.table.dark.alternative tr:not(.is-selected):hover { background-color : #202020 }  
+.table.dark.alternative.is-striped tbody tr:not(.is-selected):nth-child(even) { background-color : #181818 }
+.table.dark.alternative.is-striped tr:not(.is-selected):nth-child(even):hover { background-color : #282828 }
+

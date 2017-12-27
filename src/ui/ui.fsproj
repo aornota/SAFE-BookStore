@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\ui-render-bulma\render-common.fs" />
+    <Compile Include="..\ui-render-bulma\render-bulma.fs" />
+    <Compile Include="..\ui-theme-bulma\theme-common.fs" />
+    <Compile Include="..\ui-theme-bulma\theme-default.fs" />
+    <Compile Include="..\ui-theme-bulma\theme-dark.fs" />
+    <Compile Include="..\ui-theme-bulma\theme-render-bulma.fs" />
+    <Compile Include="ui-app.fs" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>
