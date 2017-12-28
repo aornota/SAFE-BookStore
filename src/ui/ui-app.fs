@@ -1,8 +1,12 @@
 module Aornota.DJNarration.UI.App
 
+open Aornota.DJNarration.Buncemixes
+open Aornota.DJNarration.Cmprssd
+open Aornota.DJNarration.Domain
+open Aornota.DJNarration.ForYourEarsOnly
+open Aornota.DJNarration.NowWeAreN
 open Aornota.UI.Common.DebugMessages
 open Aornota.UI.Common.LocalStorage
-//open Aornota.UI.Common.UnitsOfMeasure
 open Aornota.UI.Render.Bulma
 open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
@@ -47,6 +51,8 @@ type State = {
 
 let [<Literal>] private APP_DESCRIPTION = "djnarration"
 let [<Literal>] private APP_PREFERENCES_KEY = "djnarration-ui-app-preferences"
+
+let mixes = buncemixes @ cmprssd @ forYourEarsOnly @ nowWeAreN
 
 let private readPreferences () = async { return Option.map ofJson<Preferences> (readJson APP_PREFERENCES_KEY) }
 
