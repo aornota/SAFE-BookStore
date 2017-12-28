@@ -7,7 +7,9 @@ We do not believe in ourselves until someone reveals that deep inside us somethi
 -- e. e. cummings, ??? *)
 let cmprssd0001 = {
     MixSeries = Cmprssd
+    MixcloudUrl = "https://www.mixcloud.com/djnarration/cmprssd-0001-for-sam-rachel/"
     Name = "cmprssd-0001"
+    MixedBy = None
     Image = "cmprssd-0001-500x500.png"
     Dedication = "for sam & rachel {05-june-2010}"
     Tracks =
@@ -34,5 +36,38 @@ let cmprssd0001 = {
     ]
 }
 
-let cmprssd = [ cmprssd0001 ]
+(* TEMP-NMB: [total duration ~ 01:18:25.70]
+...Once we believe in ourselves, we can risk curiosity, wonder, spontaneous delight or any experience that reveals the human spirit.
+-- e. e. cummings, ??? *)
+let cmprssd0010 = {
+    MixSeries = Cmprssd
+    MixcloudUrl = "https://www.mixcloud.com/djnarration/cmprssd-0010-for-sam-rachel/"
+    Name = "cmprssd-0010"
+    MixedBy = None
+    Image = "cmprssd-0010-500x500.png"
+    Dedication = "for sam & rachel {05-june-2010}"
+    Tracks =
+    [
+        { Artist = "pinch feat. jukali" ; Title = "brighter day" ; Label = Some "tectonic" ; Duration = 314.502<second> }
+        { Artist = "efdemin" ; Title = "acid bells (martyn's bittersweet mix)" ; Label = Some "curle" ; Duration = 279.695<second> }
+        { Artist = "kode9 & the spaceape" ; Title = "ghost town" ; Label = Some "hyperdub" ; Duration = 260.713<second> }
+        { Artist = "dusk & blackdown" ; Title = "crackle blues (burial remix)" ; Label = Some "keysound recordings" ; Duration = 320.760<second> }
+        { Artist = "ramadanman" ; Title = "hungarian skank" ; Label = Some "aeclecktrick" ; Duration = 213.344<second> }
+        { Artist = "23hz & numaestro" ; Title = "fantasmas" ; Label = Some "2nd drop" ; Duration = 288.101<second> }
+        { Artist = "pinch feat. rudey lee" ; Title = "one blood one source" ; Label = Some "tectonic" ; Duration = 264.335<second> }
+        { Artist = "dusk & blackdown" ; Title = "lata" ; Label = Some "keysound recordings" ; Duration = 306.097<second> }
+        { Artist = "king midas sound" ; Title = "goodbye girl" ; Label = Some "hyperdub" ; Duration = 236.413<second> }
+        { Artist = "fat freddy's drop" ; Title = "cay's crays (digital mystikz version)" ; Label = Some "the drop / kartel" ; Duration = 286.452<second> }
+        { Artist = "darkstar" ; Title = "dead 2 me" ; Label = Some "2010" ; Duration = 347.927<second> }
+        { Artist = "king soly" ; Title = "tamil dub" ; Label = Some "soul jazz" ; Duration = 310.508<second> }
+        { Artist = "dj hatcha" ; Title = "never sleep" ; Label = Some "southside dubstars" ; Duration = 240.372<second> }
+        { Artist = "kode9 & the spaceape feat. ms haptic" ; Title = "curious" ; Label = Some "hyperdub" ; Duration = 294.324<second> }
+        { Artist = "untold" ; Title = "just for you" ; Label = Some "hotflush" ; Duration = 410.795<second> }
+        { Artist = "pangaea" ; Title = "router" ; Label = Some "hessle audio" ; Duration = 331.685<second> }
+    ]
+}
+
+// TODO-NMB...
+
+let cmprssd = [ cmprssd0001 ; cmprssd0010 ]
 

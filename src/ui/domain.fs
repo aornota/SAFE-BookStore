@@ -12,7 +12,9 @@ type Track = {
 
 type Mix = {
     MixSeries : MixSeries
+    MixcloudUrl : string
     Name : string
+    MixedBy : string option
     Image : string
     Dedication : string // TODO-NMB: Optional?...
     // TODO-NMB?... Narrative : ReactElement
