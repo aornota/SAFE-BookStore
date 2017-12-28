@@ -11,7 +11,7 @@ let cmprssd0001 = {
     Name = "cmprssd-0001"
     MixedBy = None
     Image = "cmprssd-0001-500x500.png"
-    Dedication = "for sam & rachel {05-june-2010}"
+    Dedication = Some "for sam & rachel {05-june-2010}"
     Tracks =
     [
         { Artist = "© (leslie winer)" ; Title = "he was ('volume' version)" ; Label = Some "volume" ; Duration = 327.064<second> }
@@ -45,7 +45,7 @@ let cmprssd0010 = {
     Name = "cmprssd-0010"
     MixedBy = None
     Image = "cmprssd-0010-500x500.png"
-    Dedication = "for sam & rachel {05-june-2010}"
+    Dedication = Some "for sam & rachel {05-june-2010}"
     Tracks =
     [
         { Artist = "pinch feat. jukali" ; Title = "brighter day" ; Label = Some "tectonic" ; Duration = 314.502<second> }

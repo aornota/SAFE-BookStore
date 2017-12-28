@@ -16,7 +16,7 @@ type Mix = {
     Name : string
     MixedBy : string option
     Image : string
-    Dedication : string // TODO-NMB: Optional?...
+    Dedication : string option
     // TODO-NMB?... Narrative : ReactElement
     Tracks : Track list }
 

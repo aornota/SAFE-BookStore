@@ -6,7 +6,6 @@
 		"node_modules":true,
 		"packages/":true,
 		"paket-files/":true,
-		"publish/":true,
 		"src/**/bin":true,
 		"src/**/obj":true,
 		"src/ui/public/":true,

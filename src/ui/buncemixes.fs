@@ -11,7 +11,7 @@ let sss0011a = {
     Name = "sss0011-a"
     MixedBy = Some "dj leah betts"
     Image = "sss0011-a-500x500.png"
-    Dedication = "buncemix {in memory of simon stocker (1967-2010)}"
+    Dedication = Some "buncemix {in memory of simon stocker (1967-2010)}"
     Tracks =
     [
         { Artist = "nick cave & the bad seeds" ; Title = "by the time i get to phoenix" ; Label = None ; Duration = 215.504<second> }
@@ -49,7 +49,7 @@ let sss0011b = {
     Name = "sss0011-b"
     MixedBy = Some "dj austerity"
     Image = "sss0011-b-500x500.png"
-    Dedication = "buncemix {for black farr}"
+    Dedication = Some "buncemix {for black farr}"
     Tracks =
     [
         { Artist = "eluviumthoughts for pachelbel" ; Title = "thoughts for pachelbel" ; Label = None ; Duration = 156.107<second> }
