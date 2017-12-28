@@ -8,9 +8,13 @@ type Track = {
     Artist : string
     Title : string
     Label : string option
-    Duration : float<millisecond> }
+    Duration : float<second> }
 
 type Mix = {
     MixSeries : MixSeries
+    Name : string
+    Image : string
+    Dedication : string // TODO-NMB: Optional?...
+    // TODO-NMB?... Narrative : ReactElement
     Tracks : Track list }
 
