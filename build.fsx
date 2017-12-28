@@ -91,10 +91,10 @@ Target "publish-ui" (fun _ ->
     CopyFiles publishUIPublicResourcesDir !! @".\src\ui\public\resources\*.*")
 
 Target "publish-gh-pages" (fun _ ->
-    let tempDir = __SOURCE_DIRECTORY__ </> "temp"
+    let tempDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
     CreateDir tempDir
     CleanDir tempDir
-    Repository.cloneSingleBranch "" "git@github.com:aornota/djnarration.git" "gh-pages" tempDir
+    Repository.cloneSingleBranch "" "https://github.com/aornota/djnarration.git" "gh-pages" tempDir
     let publishUIDir = publishDir </> "djnarration-ui"
     CopyRecursive publishUIDir tempDir true |> printfn "%A"
     Staging.StageAll tempDir
