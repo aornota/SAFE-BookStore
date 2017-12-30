@@ -22,6 +22,7 @@ open Elmish.React
 
 open Fable.Core.JsInterop
 open Fable.Import
+module Rct = Fable.Helpers.React
 
 importSideEffects "babel-polyfill" // TODO-NMB: Is this necessary?...
 
@@ -289,12 +290,45 @@ let private renderFooter theme =
                 link theme { LinkUrl = "https://www.google.com/chrome/index.html" ; LinkType = NewWindow } [ str "Chrome" ]
                 str "." ] ] ]
 
-let private renderMixContent theme mix renderMode =
-    let imageSize = match renderMode with | RenderMixSeries | RenderSearch -> Square96 | RenderMix -> Square128
-    let title =
-        match renderMode with
-        | RenderMixSeries | RenderSearch -> link theme { LinkUrl = toUrlHash (Mix mix) ; LinkType = SameWindow } [ str mix.Name ]
-        | RenderMix -> str mix.Name
+let private formatTime (time:float<second>) =
+    let pad2 i = if i < 10 then sprintf "0%i" i else sprintf "%i" i
+    let time = int time
+    let hours = time / (60 * 60)
+    let minutes = (time - (hours * 60 * 60)) / 60
+    let seconds = (time - ((hours * 60 * 60) + (minutes * 60)))
+    if hours < 1 then sprintf "%s:%s" (pad2 minutes) (pad2 seconds)
+    else sprintf "%i:%s:%s" hours (pad2 minutes) (pad2 seconds)
+
+let private renderMixcloudPlayer isMini isDefault mixcloudUrl =
+    let height = if isMini then "60" else "120"
+    let src =
+        match isMini, isDefault with
+        | true, true -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&light=1&hide_artwork=1&feed=%s" mixcloudUrl
+        | true, false -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&hide_artwork=1&feed=%s" mixcloudUrl
+        | false, true -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&hide_artwork=1&feed=%s" mixcloudUrl
+        | false, false -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&feed=%s" mixcloudUrl
+    Rct.iframe [ 
+        Rct.Props.Width "100%"
+        Rct.Props.Height height
+        Rct.Props.Src src
+        Rct.Props.FrameBorder "0" ] []
+
+let private renderTracklisting theme mix =
+    let durations = mix.Tracks |> List.map (fun track -> track.Duration)
+    let starts ordinal = if ordinal = 0 then 0.<second> else durations |> List.take ordinal |> List.sum
+    let trackRow ordinal track =
+        tr false [
+            td [ para theme { paraDefaultSmallest with Weight = LightWeight } [ italic (formatTime (starts ordinal)) ] ]
+            td [ para theme { paraDefaultSmallest with ParaAlignment = RightAligned ; Weight = Bold } [ str (sprintf "%i." (ordinal + 1)) ] ]
+            td [ para theme { paraDefaultSmallest with Weight = SemiBold } [ str track.Artist ] ]
+            td [ para theme { paraDefaultSmallest with Weight = SemiBold } [ str track.Title ] ]
+            td [ para theme paraDefaultSmallest [ match track.Label with | Some label -> yield str label | None -> () ] ]
+            td [ para theme { paraDefaultSmallest with Weight = SemiBold } [ str (formatTime track.Duration) ] ]
+        ]
+    table theme false { tableFullWidth with IsNarrow = true} [ tbody (mix.Tracks |> List.mapi trackRow) ]
+
+let private renderMixContent theme state mix renderMode =
+    let title = match renderMode with | RenderMixSeries | RenderSearch -> link theme { LinkUrl = toUrlHash (Mix mix) ; LinkType = SameWindow } [ str mix.Name ] | RenderMix -> str mix.Name
     let mixcloudLink =
         match renderMode with
         | RenderMixSeries | RenderSearch -> None
@@ -303,33 +337,39 @@ let private renderMixContent theme mix renderMode =
                 [ link theme { LinkUrl = sprintf "https://www.mixcloud.com%s" mix.MixcloudUrl ; LinkType = NewWindow } [ str "view on mixcloud.com" ] ])
     let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
     let narrative = match renderMode with | RenderMix -> divVerticalSpace 10 :: mix.Narrative theme | RenderMixSeries | RenderSearch -> []
+    // TODO-NMB: If implement "TagSearch", use tagSuccess for matching?...
     let tags = [
         match renderMode with | RenderSearch -> yield tag theme { tagBlack with IsRounded = false } [ str (mixSeriesTagText mix.MixSeries) ] | RenderMixSeries | RenderMix -> ()
         for tagText in (mix.Tags |> List.map tagText |> List.sortBy id) do yield tag theme { tagDark with IsRounded = false } [ str tagText ]
     ]
-    let mixDuration =
-        let pad2 i = if i < 10 then sprintf "0%i" i else sprintf "%i" i
-        let duration = int (mix.Tracks |> List.sumBy (fun track -> track.Duration))
-        let hours = duration / (60 * 60)
-        let minutes = (duration - (hours * 60 * 60)) / 60
-        let seconds = (duration - ((hours * 60 * 60) + (minutes * 60)))
-        sprintf "%i:%s:%s" hours (pad2 minutes) (pad2 seconds)
-    let totals = sprintf "%i tracks | %s" mix.Tracks.Length mixDuration
-    let left = [ image (sprintf "public/resources/%s-500x500.png" mix.Key) (Some (FixedSize imageSize)) ]
+    let embedded =
+        match renderMode with
+        | RenderMix -> Some (renderMixcloudPlayer false state.UseDefaultTheme mix.MixcloudUrl)
+        | RenderMixSeries | RenderSearch -> None
+    let totals = sprintf "%i tracks | %s" mix.Tracks.Length (formatTime (mix.Tracks |> List.sumBy (fun track -> track.Duration)))
+    let left = [ image (sprintf "public/resources/%s-500x500.png" mix.Key) (Some (FixedSize Square128)) ]
     let content = [
         yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
         yield para theme { paraDefaultSmallest with Weight = SemiBold } [ str additional]
         yield! narrative
         yield divVerticalSpace 10
-        yield divTags tags ]
+        yield divTags tags
+        match embedded with | Some embedded -> yield embedded | None -> ()
+        // TODO-NMB: Search matches (if RenderSearch)...
+        ]
     let right = [
         yield para theme { paraDefaultSmallest with ParaAlignment = RightAligned ; Weight = SemiBold } [ str totals ]
         match mixcloudLink with | Some mixcloudLink -> yield mixcloudLink | None -> () ]
     [
-        media theme left content right
+        yield media theme left content right
+        match renderMode with
+        | RenderMix ->
+            yield divVerticalSpace 15
+            yield renderTracklisting theme mix
+        | RenderMixSeries | RenderSearch -> ()
     ]
 
-let private renderMixSeries theme mixSeries =
+let private renderMixSeries theme state mixSeries =
     let mixes = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.sortBy (fun mix -> mix.Name)
     [
         divVerticalSpace 10
@@ -337,27 +377,28 @@ let private renderMixSeries theme mixSeries =
             div divDefault [
                 yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "%s | %i mixes" (mixSeriesText mixSeries) mixes.Length) ]
                 yield hr theme false
-                for mix in mixes do yield! renderMixContent theme mix RenderMixSeries ] ]
+                for mix in mixes do yield! renderMixContent theme state mix RenderMixSeries ] ]
     ]
 
-let private renderMix theme mix =
+let private renderMix theme state mix =
     [
         divVerticalSpace 10
         columnContent [
             div divDefault [
                 yield para theme { paraCentredMedium with Weight = SemiBold } [ str mix.Name ]
                 yield hr theme false
-                yield! renderMixContent theme mix RenderMix ] ]
+                yield! renderMixContent theme state mix RenderMix ] ]
     ]
 
-let private renderSearch theme searchText (searchResults:Mix list) =
+let private renderSearch theme state searchText =
+    let searchResults = state.SearchResults
     [
         divVerticalSpace 10
         columnContent [
             div divDefault [
                 yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "search results for '%s' | %i mixes" searchText searchResults.Length) ]
                 yield hr theme false
-                for mix in searchResults do yield! renderMixContent theme mix RenderSearch ] ]
+                for mix in searchResults do yield! renderMixContent theme state mix RenderSearch ] ]
     ]
 
 let private render state dispatch =
@@ -375,11 +416,11 @@ let private render state dispatch =
             | Home ->
                 yield image "public/resources/banner-461x230.png" (Some (Ratio TwoByOne))
             | MixSeries mixSeries ->
-                yield! renderMixSeries theme mixSeries
+                yield! renderMixSeries theme state mixSeries
             | Mix mix ->
-                yield! renderMix theme mix
+                yield! renderMix theme state mix
             | Search searchText ->
-                yield! renderSearch theme searchText state.SearchResults
+                yield! renderSearch theme state searchText
             yield renderFooter theme ]
 
 Program.mkProgram initialize transition render

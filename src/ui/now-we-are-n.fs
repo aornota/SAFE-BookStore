@@ -78,7 +78,7 @@ let nowWeAre01ii = {
 (* TEMP-NMB: [total duration ~ 01:18:30.21] *)
 let nowWeAre02 = {
     MixSeries = NowWeAreN
-    MixcloudUrl = "/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
+    MixcloudUrl = "/djnarration/now-we-are-02-this-dance-of-masks/"
     Key = "now-we-are-02"
     Name = "now we are 02"
     MixedBy = None
