@@ -80,7 +80,9 @@ let image source size =
             | Square -> Some Image.is1by1 | FourByThree -> Some Image.is4by3 | ThreeByTwo -> Some Image.is3by2 | SixteenByNine -> Some Image.is16by9
             | TwoByOne -> Some Image.is2by1
         | None -> None
-    Image.image [ match option with | Some option -> yield option | None -> () ] [ Rct.img [ Src source] ]
+    Image.image [
+        yield Image.props [ Key source ]
+        match option with | Some option -> yield option | None -> () ] [ Rct.img [ Src source] ]
 
 let level hasContinuation children = Level.level [ if hasContinuation then yield Level.Types.Level.CustomClass "hasContinuation" ] children
 
