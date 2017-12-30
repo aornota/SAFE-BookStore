@@ -250,7 +250,7 @@ let private renderHeader theme state dispatch =
                 yield navbarItem [ image "public/resources/djnarration-96x96.png" (Some (FixedSize Square24)) ]
                 yield navbarItem [
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
-                        link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str "dj narration" ] ] ]
+                        link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str APP_DESCRIPTION ] ] ]
                 yield navbarItem [ tabs theme { tabsDefault with Tabs = seriesTabs } ]
                 yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) state.NavbarBurgerIsActive ]
             navbarMenu theme navbarData state.NavbarBurgerIsActive [ navbarEnd [ navbarItem [ button theme toggleThemeButton [] ] ] ] ] ]
@@ -294,12 +294,15 @@ let private render state dispatch =
             | MixSeries mixSeries ->
                 let count = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.length
                 let temp = sprintf "%s | %i mixes" (mixSeriesText mixSeries) count
-                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str temp ] ] ]
+                yield divVerticalSpace 10
+                yield columnContent [ div divDefault [ para themeDefault paraCentredMedium [ str temp ] ] ]
             | Mix mix ->
-                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str mix.Name ] ] ]
+                yield divVerticalSpace 10
+                yield columnContent [ div divDefault [ para themeDefault paraCentredMedium [ str mix.Name ] ] ]
             | Search searchText ->
                 let temp = sprintf "search results for '%s' | %i mixes" searchText state.SearchResults.Length
-                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str temp ] ] ]
+                yield divVerticalSpace 10
+                yield columnContent [ div divDefault [ para themeDefault paraCentredMedium [ str temp ] ] ]
             yield renderFooter theme ]
 
 Program.mkProgram initialize transition render
