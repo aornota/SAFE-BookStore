@@ -5,7 +5,6 @@ open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 open Aornota.UI.Theme.Render.Bulma
 
-(* TEMP-NMB: [total duration ~ 01:19:50.12] *)
 let nowWeAre01i = {
     MixSeries = NowWeAreN
     MixcloudUrl = "/djnarration/now-we-are-01-part-i-this-short-day-of-frost-and-sun/"
@@ -39,7 +38,6 @@ let nowWeAre01i = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:43.57] *)
 let nowWeAre01ii = {
     MixSeries = NowWeAreN
     MixcloudUrl = "/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
@@ -75,7 +73,6 @@ let nowWeAre01ii = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:18:30.21] *)
 let nowWeAre02 = {
     MixSeries = NowWeAreN
     MixcloudUrl = "/djnarration/now-we-are-02-this-dance-of-masks/"

@@ -8,7 +8,7 @@ type [<Measure>] second
 
 type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
 
-// TODO-NMB: More?...
+// TODO-NMB: Order alphabetically - and more?...
 type Tag = | KitchenSink | Dub | World | Choral | Ambient | Fado | Classical | Jazz | Piano | Folk | Guitar | Calypso | SingerSongwriter | ModernClassical | Electronic | HipHop
 
 type Track = {
@@ -32,7 +32,7 @@ let allMixSeries = [ Buncemixes ; Cmprssd ; ForYourEarsOnly ; NowWeAreN ]
 
 let mixSeriesTabText mixSeries = match mixSeries with | Buncemixes -> "buncemixes" | Cmprssd -> "cmprssd" | ForYourEarsOnly -> "for your ears only" | NowWeAreN -> "now we are n"
 let mixSeriesTagText mixSeries = match mixSeries with | Buncemixes -> "buncemix" | _ -> mixSeriesTabText mixSeries
-let mixSeriesText mixSeries = match mixSeries with | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesTabText mixSeries
+let mixSeriesText mixSeries = match mixSeries with | ForYourEarsOnly -> "for your ears only -- the concert" | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesTabText mixSeries
 
 let tagText tag =
     match tag with

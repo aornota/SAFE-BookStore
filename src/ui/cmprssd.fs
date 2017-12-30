@@ -5,7 +5,6 @@ open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 open Aornota.UI.Theme.Render.Bulma
 
-(* TEMP-NMB: [total duration ~ 01:18:26.46] *)
 let cmprssd0001 = {
     MixSeries = Cmprssd
     MixcloudUrl = "/djnarration/cmprssd-0001-for-sam-rachel/"
@@ -43,7 +42,6 @@ let cmprssd0001 = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:18:25.70] *)
 let cmprssd0010 = {
     MixSeries = Cmprssd
     MixcloudUrl = "/djnarration/cmprssd-0010-for-sam-rachel/"
