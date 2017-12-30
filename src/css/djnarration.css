@@ -35,6 +35,9 @@ hr.dark.alternative { background-color : #404040 }
 .level:not(:last-child) { margin-bottom : 1.0rem }
 .level.hasContinuation:not(:last-child) { margin-bottom : 0.5rem }
 
+.media+.media.default { border-top-color : #dfdfdf }
+.media+.media.dark { border-top-color : #202020 }
+
 .navbar-item { padding-left : 0.5rem ; padding-right : 0.5rem }
 .navbar-menu.light { background-color : #b3b3b3 /* custom $light */ }
 .navbar-menu.dark { background-color : #4c4c4c /* custom $dark */ }

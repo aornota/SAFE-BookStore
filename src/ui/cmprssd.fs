@@ -1,17 +1,24 @@
 module Aornota.DJNarration.Cmprssd
 
 open Aornota.DJNarration.Domain
+open Aornota.UI.Render.Common
+open Aornota.UI.Theme.Common
+open Aornota.UI.Theme.Render.Bulma
 
-(* TEMP-NMB: [total duration ~ 01:18:26.46]
-We do not believe in ourselves until someone reveals that deep inside us something is valuable, worth listening to, worthy of our trust, sacred to our touch...
--- e. e. cummings, ??? *)
+(* TEMP-NMB: [total duration ~ 01:18:26.46] *)
 let cmprssd0001 = {
     MixSeries = Cmprssd
     MixcloudUrl = "/djnarration/cmprssd-0001-for-sam-rachel/"
     Key = "cmprssd-0001"
     Name = "cmprssd-0001"
     MixedBy = None
-    Dedication = Some "for sam & rachel"
+    Dedication = "for sam & rachel"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "We do not believe in ourselves until someone reveals that deep inside us something is valuable, worth listening to, worthy of our trust, sacred to our touch..." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- e. e. cummings" ]
+        ])
+    Tags = [ Dub ]
     Tracks =
     [
         { Artist = "© (leslie winer)" ; Title = "he was ('volume' version)" ; Label = Some "volume" ; Duration = 327.064<second> }
@@ -36,16 +43,20 @@ let cmprssd0001 = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:18:25.70]
-...Once we believe in ourselves, we can risk curiosity, wonder, spontaneous delight or any experience that reveals the human spirit.
--- e. e. cummings, ??? *)
+(* TEMP-NMB: [total duration ~ 01:18:25.70] *)
 let cmprssd0010 = {
     MixSeries = Cmprssd
     MixcloudUrl = "/djnarration/cmprssd-0010-for-sam-rachel/"
     Key = "cmprssd-0010"
     Name = "cmprssd-0010"
     MixedBy = None
-    Dedication = Some "for sam & rachel"
+    Dedication = "for sam & rachel"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...Once we believe in ourselves, we can risk curiosity, wonder, spontaneous delight or any experience that reveals the human spirit." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- e. e. cummings" ]
+        ])
+    Tags = [ Dub ]
     Tracks =
     [
         { Artist = "pinch feat. jukali" ; Title = "brighter day" ; Label = Some "tectonic" ; Duration = 314.502<second> }

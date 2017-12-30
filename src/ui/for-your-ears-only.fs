@@ -1,28 +1,35 @@
 module Aornota.DJNarration.ForYourEarsOnly
 
 open Aornota.DJNarration.Domain
+open Aornota.UI.Render.Common
+open Aornota.UI.Theme.Common
+open Aornota.UI.Theme.Render.Bulma
 
-(* TEMP-NMB: [total duration ~ 01:18:55.03]
-The last piano in the world
-Is about to be played
-In a room empty of all other furniture.
-There are parts of the floor you cannot stand on.
-These parts are called 'holes'.
-
-The pianist has the last clean white suit,
-The last hale shirt with tails.
-Some people won't believe
-Our sponsors found a piece of soap
-For him to wash his hands.
-But he has no shoes.
-Alas, there are no longer any shoes... *)
+(* TEMP-NMB: [total duration ~ 01:18:55.03] *)
 let forYourEarsOnlyi = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-part-i-for-emma/"
     Key = "for-your-ears-only-part-i"
     Name = "for your ears only (part i)"
     MixedBy = None
-    Dedication = Some "for emma | fluttering a chinese fan in a knoxville fashion"
+    Dedication = "for emma (fluttering a chinese fan in a knoxville fashion)"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "The last piano in the world" ]
+            para theme paraDefaultSmallest [ str "Is about to be played" ]
+            para theme paraDefaultSmallest [ str "In a room empty of all other furniture." ]
+            para theme paraDefaultSmallest [ str "There are parts of the floor you cannot stand on." ]
+            para theme paraDefaultSmallest [ str "These parts are called 'holes'." ]
+            divVerticalSpace 10
+            para theme paraDefaultSmallest [ str "The pianist has the last clean white suit," ]
+            para theme paraDefaultSmallest [ str "The last hale shirt with tails." ]
+            para theme paraDefaultSmallest [ str "Some people won't believe" ]
+            para theme paraDefaultSmallest [ str "Our sponsors found a piece of soap" ]
+            para theme paraDefaultSmallest [ str "For him to wash his hands." ]
+            para theme paraDefaultSmallest [ str "But he has no shoes." ]
+            para theme paraDefaultSmallest [ str "Alas, there are no longer any shoes..." ]
+        ])
+    Tags = [ SingerSongwriter ]
     Tracks =
     [
         { Artist = "julianna barwick" ; Title = "call" ; Label = Some "suicide squeeze" ; Duration = 308.221<second> }
@@ -46,19 +53,23 @@ let forYourEarsOnlyi = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:45.48]
-...And the room fills with people,
-Apart from those parts called 'holes' in the old language.
-But some stand on the ground, in the 'holes',
-With their heads looking over the floorboards,
-Through ragged trousers, women's legs... *)
+(* TEMP-NMB: [total duration ~ 01:19:45.48] *)
 let forYourEarsOnlyii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-part-ii-for-tom-mizuno/"
     Key = "for-your-ears-only-part-ii"
     Name = "for your ears only (part ii)"
     MixedBy = None
-    Dedication = Some "for tom & mizuno | how small a thought..."
+    Dedication = "for tom & mizuno (how small a thought...)"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...And the room fills with people," ]
+            para theme paraDefaultSmallest [ str "Apart from those parts called 'holes' in the old language." ]
+            para theme paraDefaultSmallest [ str "But some stand on the ground, in the 'holes'," ]
+            para theme paraDefaultSmallest [ str "With their heads looking over the floorboards," ]
+            para theme paraDefaultSmallest [ str "Through ragged trousers, women's legs..." ]
+        ])
+    Tags = [ ModernClassical ; Classical ; Piano ]
     Tracks =
     [
         { Artist = "anton bruckner | dirk mommertz" ; Title = "stille betrachtung (live)" ; Label = None ; Duration = 196.232<second> }
@@ -75,18 +86,22 @@ let forYourEarsOnlyii = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:39.70]
-...Latecomers sit outside in the long grass,
-Among the foxgloves, thick vines of ivy
-That strangle the plains, playing with
-Stale, blanched bones of the unfortunate... *)
+(* TEMP-NMB: [total duration ~ 01:19:39.70] *)
 let forYourEarsOnlyiii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-part-iii-for-will/"
     Key = "for-your-ears-only-part-iii"
     Name = "for your ears only (part iii)"
     MixedBy = None
-    Dedication = Some "for will... | i love you more than the world can contain in its lonely and ramshackle head"
+    Dedication = "for will... (i love you more than the world can contain in its lonely and ramshackle head)"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...Latecomers sit outside in the long grass," ]
+            para theme paraDefaultSmallest [ str "Among the foxgloves, thick vines of ivy" ]
+            para theme paraDefaultSmallest [ str "That strangle the plains, playing with" ]
+            para theme paraDefaultSmallest [ str "Stale, blanched bones of the unfortunate..." ]
+        ])
+    Tags = [ SingerSongwriter ]
     Tracks =
     [
         { Artist = "r.e.m." ; Title = "you are the everything" ; Label = Some "warner bros" ; Duration = 220.485<second> }
@@ -111,26 +126,30 @@ let forYourEarsOnlyiii = {
         { Artist = "richard thompson" ; Title = "shenandoah (live)" ; Label = None ; Duration = 225.106<second> }
         { Artist = "pere ubu" ; Title = "irene" ; Label = Some "fire" ; Duration = 252.087<second> }
         { Artist = "beth orton" ; Title = "last leaves of autumn" ; Label = Some "anti-" ; Duration = 232.699<second> }
-        { Artist = "songs: ohia" ; Title = "blue chicago moon" ; Label = Some "secretly canadian" ; Duration = 0.<second> }
+        { Artist = "songs: ohia" ; Title = "blue chicago moon" ; Label = Some "secretly canadian" ; Duration = 401.554<second> }
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:18:45.01]
-...The old ones of the audience
-Anticipate the works of Bach,
-Mozart, Scriabin, Beethoven,
-Debussy, Chopin, Liszt.
-
-They are just names to them,
-Names that make them think, or hum
-What was written by someone else... *)
+(* TEMP-NMB: [total duration ~ 01:18:45.01] *)
 let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-part-iv-and-priya/"
     Key = "for-your-ears-only-part-iv"
     Name = "for your ears only (part iv)"
     MixedBy = None
-    Dedication = Some "...and priya | all is a blank before us; all waits, undream'd of"
+    Dedication = "...and priya (all is a blank before us; all waits, undream'd of)"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...The old ones of the audience" ]
+            para theme paraDefaultSmallest [ str "Anticipate the works of Bach," ]
+            para theme paraDefaultSmallest [ str "Mozart, Scriabin, Beethoven," ]
+            para theme paraDefaultSmallest [ str "Debussy, Chopin, Liszt." ]
+            divVerticalSpace 10
+            para theme paraDefaultSmallest [ str "They are just names to them," ]
+            para theme paraDefaultSmallest [ str "Names that make them think, or hum" ]
+            para theme paraDefaultSmallest [ str "What was written by someone else..." ]
+        ])
+    Tags = [ Classical ; Piano ]
     Tracks =
     [
         { Artist = "maurice ravel | benjamin grosvenor" ; Title = "gaspard de la nuit (2. le gibet)" ; Label = Some "decca" ; Duration = 321.956<second> }
@@ -151,21 +170,24 @@ let forYourEarsOnlyiv = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:46.29]
-...And the pianist sits down,
-And the people remember to clap.
-Then the old pianist weeps.
-For all he can remember
-Is 'Three Blind Mice'.
-
--- 'The Concert' by Douglas Dunn, from 'Love or Nothing' (p48-9) [Faber, 1974] *)
+(* TEMP-NMB: [total duration ~ 01:19:46.29] *)
 let forYourEarsOnlyv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-part-v-for-chad-babs/"
     Key = "for-your-ears-only-part-v"
     Name = "for your ears only (part v)"
     MixedBy = None
-    Dedication = Some "for chad & babs | i touch your tears with pearls of love / oh take my heart to wed"
+    Dedication = "for chad & babs (i touch your tears with pearls of love / oh take my heart to wed)"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...And the pianist sits down," ]
+            para theme paraDefaultSmallest [ str "And the people remember to clap." ]
+            para theme paraDefaultSmallest [ str "Then the old pianist weeps." ]
+            para theme paraDefaultSmallest [ str "For all he can remember" ]
+            para theme paraDefaultSmallest [ str "Is " ; italic "Three Blind Mice" ; str "." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Douglas Dunn, 'The Concert'" ]
+        ])
+    Tags = [ Guitar ; SingerSongwriter ]
     Tracks =
     [
         { Artist = "robbie basho" ; Title = "blue crystal fire" ; Label = Some "grass tops" ; Duration = 284.642<second> }

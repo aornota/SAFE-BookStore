@@ -2,11 +2,8 @@ module Aornota.DJNarration.UI.App
 
 open System
 
-//open Aornota.DJNarration.Buncemixes
-//open Aornota.DJNarration.Cmprssd
+open Aornota.DJNarration.Data
 open Aornota.DJNarration.Domain
-//open Aornota.DJNarration.ForYourEarsOnly
-//open Aornota.DJNarration.NowWeAreN
 open Aornota.DJNarration.UI.Navigation
 open Aornota.UI.Common.DebugMessages
 open Aornota.UI.Common.LocalStorage
@@ -28,6 +25,11 @@ open Fable.Import
 
 importSideEffects "babel-polyfill" // TODO-NMB: Is this necessary?...
 
+type private MixRenderMode =
+    | RenderMixSeries
+    | RenderMix
+    | RenderSearch
+
 type LastRoute =
     | LastWasHome
     | LastWasMixSeries of mixSeries : MixSeries
@@ -38,7 +40,7 @@ type Preferences = {
     UseDefaultTheme : bool
     LastRoute : LastRoute }
 
-type Input =
+type private Input =
     | DismissDebugMessage of debugId : DebugId
     | PreferencesRead of preferences : Preferences option
     | ErrorReadingPreferences of exn : exn
@@ -67,7 +69,7 @@ type private State = {
     SearchText : string
     SearchResults : Mix list (* TODO-NMB: Extend 'Mix list' with match details?... *) }
 
-let [<Literal>] private APP_DESCRIPTION = "dj narration"
+let [<Literal>] private DJ_NARRATION = "dj narration"
 let [<Literal>] private APP_PREFERENCES_KEY = "djnarration-ui-app-preferences"
 
 let private invalidRouteMessage invalidRoute isLastRoute =
@@ -83,6 +85,15 @@ let private getTheme useDefaultTheme = if useDefaultTheme then themeDefault else
 
 let private setBodyClass useDefaultTheme = Browser.document.body.className <- getThemeClass (getTheme useDefaultTheme).ThemeClass
 
+let private setTitle validRoute =
+    let title =
+        match validRoute with
+        | Home -> DJ_NARRATION
+        | MixSeries mixSeries -> sprintf "%s | %s" DJ_NARRATION (mixSeriesTabText mixSeries)
+        | Mix mix -> sprintf "%s | %s" DJ_NARRATION mix.Name
+        | Search searchText -> sprintf "%s | search results for '%s'" DJ_NARRATION searchText
+    Browser.document.title <- title
+
 let private readPreferencesCmd =
     let readPreferences () = async { return Option.map ofJson<Preferences> (readJson APP_PREFERENCES_KEY) }
     Cmd.ofAsync readPreferences () PreferencesRead ErrorReadingPreferences
@@ -94,7 +105,7 @@ let private writePreferencesCmd state =
     let preferences = { UseDefaultTheme = state.UseDefaultTheme ; LastRoute = lastRoute }
     Cmd.ofAsync writePreferences preferences (fun _ -> PreferencesWritten) ErrorWritingPreferences       
 
-let processSearchCmd searchText =
+let private processSearchCmd searchText =
     let processSearch (searchText:string) = async {
         do! Async.Sleep 1
         let searchText = searchText.ToLower ()
@@ -138,6 +149,7 @@ let private urlUpdate route state =
         state, Cmd.ofMsg ProcessSearch
     | Some (ValidRoute validRoute) ->
         let state = { state with ValidRoute = validRoute }
+        setTitle state.ValidRoute
         state, writePreferencesCmd state        
     | Some (InvalidRoute (UnknownMix key)) ->
         let state = { state with DebugMessages = invalidRouteMessage (UnknownMix key) false :: state.DebugMessages }
@@ -228,6 +240,7 @@ let private transition input state =
             state, processSearchCmd state.SearchText
     | SearchProcessed matches ->
         let state = { state with Status = Ready ; ValidRoute = Search state.SearchText ; SearchResults = matches }
+        setTitle state.ValidRoute
         state, Cmd.batch [ writePreferencesCmd state ; navigateCmd state.ValidRoute ]
     | ErrorProcessingSearch exn ->
         let state = { state with DebugMessages = debugMessage (sprintf "Error processing search -> %s" exn.Message) :: state.DebugMessages ; Status = Ready }
@@ -250,7 +263,7 @@ let private renderHeader theme state dispatch =
                 yield navbarItem [ image "public/resources/djnarration-96x96.png" (Some (FixedSize Square24)) ]
                 yield navbarItem [
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
-                        link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str APP_DESCRIPTION ] ] ]
+                        link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str DJ_NARRATION ] ] ]
                 yield navbarItem [ tabs theme { tabsDefault with Tabs = seriesTabs } ]
                 yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) state.NavbarBurgerIsActive ]
             navbarMenu theme navbarData state.NavbarBurgerIsActive [ navbarEnd [ navbarItem [ button theme toggleThemeButton [] ] ] ] ] ]
@@ -276,6 +289,77 @@ let private renderFooter theme =
                 link theme { LinkUrl = "https://www.google.com/chrome/index.html" ; LinkType = NewWindow } [ str "Chrome" ]
                 str "." ] ] ]
 
+let private renderMixContent theme mix renderMode =
+    let imageSize = match renderMode with | RenderMixSeries | RenderSearch -> Square96 | RenderMix -> Square128
+    let title =
+        match renderMode with
+        | RenderMixSeries | RenderSearch -> link theme { LinkUrl = toUrlHash (Mix mix) ; LinkType = SameWindow } [ str mix.Name ]
+        | RenderMix -> str mix.Name
+    let mixcloudLink =
+        match renderMode with
+        | RenderMixSeries | RenderSearch -> None
+        | RenderMix ->
+            Some (para theme { paraDefaultSmallest with ParaAlignment = RightAligned }
+                [ link theme { LinkUrl = sprintf "https://www.mixcloud.com%s" mix.MixcloudUrl ; LinkType = NewWindow } [ str "view on mixcloud.com" ] ])
+    let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
+    let narrative = match renderMode with | RenderMix -> divVerticalSpace 10 :: mix.Narrative theme | RenderMixSeries | RenderSearch -> []
+    let tags = [
+        match renderMode with | RenderSearch -> yield tag theme { tagBlack with IsRounded = false } [ str (mixSeriesTagText mix.MixSeries) ] | RenderMixSeries | RenderMix -> ()
+        for tagText in (mix.Tags |> List.map tagText |> List.sortBy id) do yield tag theme { tagDark with IsRounded = false } [ str tagText ]
+    ]
+    let mixDuration =
+        let pad2 i = if i < 10 then sprintf "0%i" i else sprintf "%i" i
+        let duration = int (mix.Tracks |> List.sumBy (fun track -> track.Duration))
+        let hours = duration / (60 * 60)
+        let minutes = (duration - (hours * 60 * 60)) / 60
+        let seconds = (duration - ((hours * 60 * 60) + (minutes * 60)))
+        sprintf "%i:%s:%s" hours (pad2 minutes) (pad2 seconds)
+    let totals = sprintf "%i tracks | %s" mix.Tracks.Length mixDuration
+    let left = [ image (sprintf "public/resources/%s-500x500.png" mix.Key) (Some (FixedSize imageSize)) ]
+    let content = [
+        yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
+        yield para theme { paraDefaultSmallest with Weight = SemiBold } [ str additional]
+        yield! narrative
+        yield divVerticalSpace 10
+        yield divTags tags ]
+    let right = [
+        yield para theme { paraDefaultSmallest with ParaAlignment = RightAligned ; Weight = SemiBold } [ str totals ]
+        match mixcloudLink with | Some mixcloudLink -> yield mixcloudLink | None -> () ]
+    [
+        media theme left content right
+    ]
+
+let private renderMixSeries theme mixSeries =
+    let mixes = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.sortBy (fun mix -> mix.Name)
+    [
+        divVerticalSpace 10
+        columnContent [
+            div divDefault [
+                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "%s | %i mixes" (mixSeriesText mixSeries) mixes.Length) ]
+                yield hr theme false
+                for mix in mixes do yield! renderMixContent theme mix RenderMixSeries ] ]
+    ]
+
+let private renderMix theme mix =
+    [
+        divVerticalSpace 10
+        columnContent [
+            div divDefault [
+                yield para theme { paraCentredMedium with Weight = SemiBold } [ str mix.Name ]
+                yield hr theme false
+                yield! renderMixContent theme mix RenderMix ] ]
+    ]
+
+let private renderSearch theme searchText (searchResults:Mix list) =
+    [
+        divVerticalSpace 10
+        columnContent [
+            div divDefault [
+                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "search results for '%s' | %i mixes" searchText searchResults.Length) ]
+                yield hr theme false
+                for mix in searchResults do yield! renderMixContent theme mix RenderSearch ] ]
+    ]
+
 let private render state dispatch =
     let theme = getTheme state.UseDefaultTheme
     match state.Status with
@@ -286,23 +370,16 @@ let private render state dispatch =
     | Ready ->
         div divDefault [
             yield renderHeader theme state dispatch
-            yield! renderDebugMessages theme APP_DESCRIPTION state.DebugMessages (DismissDebugMessage >> dispatch)
-            // TEMP-NMB... yield image "public/resources/cmprssd-1000-500x500.png" (Some (FixedSize Square128))
+            yield! renderDebugMessages theme DJ_NARRATION state.DebugMessages (DismissDebugMessage >> dispatch)
             match state.ValidRoute with
             | Home ->
                 yield image "public/resources/banner-461x230.png" (Some (Ratio TwoByOne))
             | MixSeries mixSeries ->
-                let count = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.length
-                let temp = sprintf "%s | %i mixes" (mixSeriesText mixSeries) count
-                yield divVerticalSpace 10
-                yield columnContent [ div divDefault [ para themeDefault paraCentredMedium [ str temp ] ] ]
+                yield! renderMixSeries theme mixSeries
             | Mix mix ->
-                yield divVerticalSpace 10
-                yield columnContent [ div divDefault [ para themeDefault paraCentredMedium [ str mix.Name ] ] ]
+                yield! renderMix theme mix
             | Search searchText ->
-                let temp = sprintf "search results for '%s' | %i mixes" searchText state.SearchResults.Length
-                yield divVerticalSpace 10
-                yield columnContent [ div divDefault [ para themeDefault paraCentredMedium [ str temp ] ] ]
+                yield! renderSearch theme searchText state.SearchResults
             yield renderFooter theme ]
 
 Program.mkProgram initialize transition render

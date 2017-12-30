@@ -7,6 +7,7 @@ open Aornota.UI.Theme.Common
 module Rct = Fable.Helpers.React
 open Fable.Helpers.React.Props
 
+open Fulma.Common
 open Fulma.Components
 open Fulma.Elements
 module Btn = Fulma.Elements.Button.Types
@@ -130,6 +131,13 @@ let link theme linkData children =
         yield Href linkData.LinkUrl :> IHTMLProp
         match linkData.LinkType with | NewWindow -> yield Target "_blank" :> IHTMLProp | DownloadFile fileName -> yield Download fileName :> IHTMLProp | SameWindow -> ()
     ] children
+
+let media theme left content right =
+    let className = getClassName theme false
+    Media.media [ CustomClass className ] [
+        Media.left [] left
+        Media.content [] content
+        Media.right [] right ]
 
 let message theme messageData headerChildren bodyChildren =
     let messageData = theme.TransformMessageData messageData

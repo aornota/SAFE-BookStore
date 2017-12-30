@@ -1,18 +1,24 @@
 module Aornota.DJNarration.Buncemixes
 
 open Aornota.DJNarration.Domain
+open Aornota.UI.Render.Common
+open Aornota.UI.Theme.Common
+open Aornota.UI.Theme.Render.Bulma
 
-(* TEMP-NMB: [total duration ~ 01:17:02.04]
-That's true, Mother. The English are frightfully conservative. I used to know a butler from the English Legation, and he for the Lord God wouldn't put a Czech sausage in his mouth. People don't eat them in our country, he said, and so he wouldn't eat one either, he said.
--- Karel Capek, 'War With The Newts' *)
+(* TEMP-NMB: [total duration ~ 01:17:02.04] *)
 let sss0011a = {
     MixSeries = Buncemixes
     MixcloudUrl = "/djnarration/sss0011-a-in-memory-of-simon-stocker/"
     Key = "sss0011-a"
     Name = "sss0011-a"
     MixedBy = Some "dj leah betts"
-    Dedication = Some "in memory of simon stocker (1967-2010)"
-    // TODO-NMB?... Summary = "\"Sting singing on the roof of the Barbican...\""
+    Dedication = "in memory of simon stocker (1967-2010)"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "That's true, Mother. The English are frightfully conservative. I used to know a butler from the English Legation, and he for the Lord God wouldn't put a Czech sausage in his mouth. People don't eat them in our country, he said, and so he wouldn't eat one either, he said." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Karel Capek, 'War With The Newts'" ]
+        ])
+    Tags = [ KitchenSink ; SingerSongwriter ]
     Tracks =
     [
         { Artist = "nick cave & the bad seeds" ; Title = "by the time i get to phoenix" ; Label = None ; Duration = 215.504<second> }
@@ -41,16 +47,20 @@ let sss0011a = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:57.66]
-And to be human, to be anything like human, is to know what one lacks, to know what one needs, to know what one must look for to find some semblance of completeness amongst strangers, all alone in the darkness.
--- Iain M. Banks, 'Matter' *)
+(* TEMP-NMB: [total duration ~ 01:19:57.66] *)
 let sss0011b = {
     MixSeries = Buncemixes
     MixcloudUrl = "/djnarration/sss0011-b-for-black-farr/"
     Key = "sss0011-b"
     Name = "sss0011-b"
     MixedBy = Some "dj austerity"
-    Dedication = Some "for black farr"
+    Dedication = "for black farr"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "And to be human, to be anything like human, is to know what one lacks, to know what one needs, to know what one must look for to find some semblance of completeness amongst strangers, all alone in the darkness." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Iain M. Banks, 'Matter'" ]
+        ])
+    Tags = [ KitchenSink ; Ambient ; SingerSongwriter ; Electronic ]
     Tracks =
     [
         { Artist = "eluvium" ; Title = "thoughts for pachelbel" ; Label = None ; Duration = 156.107<second> }

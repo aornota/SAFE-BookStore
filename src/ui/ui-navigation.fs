@@ -2,21 +2,17 @@ module Aornota.DJNarration.UI.Navigation
 
 open System
 
-open Aornota.DJNarration.Buncemixes
-open Aornota.DJNarration.Cmprssd
+open Aornota.DJNarration.Data
 open Aornota.DJNarration.Domain
-open Aornota.DJNarration.ForYourEarsOnly
-open Aornota.DJNarration.NowWeAreN
 
 open Elmish.Browser.UrlParser
-
-let allMixes = buncemixes @ cmprssd @ forYourEarsOnly @ nowWeAreN
 
 type ValidRoute =
     | Home
     | MixSeries of mixSeries : MixSeries
     | Mix of mix : Mix
     | Search of searchText : string
+    //TODO-NMB?... | Tag of tag : Tag
 
 type InvalidRoute =
     | UnknownMix of key : string

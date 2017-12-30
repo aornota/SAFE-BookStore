@@ -23,6 +23,10 @@ let private padStyle padV padH =
 
 let str text = Rct.str text
 
+let bold text = Rct.b [] [ str text ]
+
+let italic text = Rct.i [] [ str text ]
+
 let div divData children =
     let customClasses = [
         match divData.DivCustomClass with | Some divCustomClass -> yield divCustomClass | None -> ()
