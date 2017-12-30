@@ -8,9 +8,9 @@ In a sense it might even be said that our failure is to form habits: for, after 
 let nowWeAre01i = {
     MixSeries = NowWeAreN
     MixcloudUrl = "https://www.mixcloud.com/djnarration/now-we-are-01-part-i-this-short-day-of-frost-and-sun/"
-    Name = "now-we-are-01-part-i"
+    Key = "now-we-are-01-part-i"
+    Name = "now we are 01 (part i)"
     MixedBy = None
-    Image = "now-we-are-01-part-i-500x500.png"
     Dedication = None
     Tracks =
     [
@@ -38,9 +38,9 @@ I love springtime, I shouted inside myself stubbornly. I forced myself to believ
 let nowWeAre01ii = {
     MixSeries = NowWeAreN
     MixcloudUrl = "https://www.mixcloud.com/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
-    Name = "now-we-are-01-part-ii"
+    Key = "now-we-are-01-part-ii"
+    Name = "now we are 01 (part ii)"
     MixedBy = None
-    Image = "now-we-are-01-part-ii-500x500.png"
     Dedication = None
     Tracks =
     [
@@ -70,9 +70,9 @@ But because she was not a girl now, she was not awed, but only wondered at how m
 let nowWeAre02 = {
     MixSeries = NowWeAreN
     MixcloudUrl = "https://www.mixcloud.com/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
-    Name = "now-we-are-02"
+    Key = "now-we-are-02"
+    Name = "now we are 02"
     MixedBy = None
-    Image = "now-we-are-02-500x500.png"
     Dedication = None
     Tracks =
     [

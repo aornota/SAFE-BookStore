@@ -14,6 +14,7 @@ let themeDefault = {
     TransformProgressData = id
     TransformSpanData = id
     TransformTableData = id
+    TransformTabsData = id
     TransformTagData = id
     TransformTooltipData = id }
 

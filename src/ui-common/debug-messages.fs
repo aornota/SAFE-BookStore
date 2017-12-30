@@ -26,10 +26,10 @@ let private renderChildren theme colour source message = [
 
 let renderDebugMessage theme source message =
 #if DEBUG
-    let children = renderChildren theme (GreyscalePara GreyLighter) (sprintf "%s | Debug" source) message
+    let children = renderChildren theme (GreyscalePara GreyDarker) (sprintf "%s | Debug" source) message
     [ columnContent [
         divVerticalSpace 10
-        notification theme notificationBlack children ] ]
+        notification theme notificationLight children ] ]
 #else
     []
 #endif
@@ -42,10 +42,10 @@ let renderDebugMessages theme source (debugMessages:DebugMessage list) dispatch 
             columnContent [
                 yield! debugMessages
                 |> List.map (fun debugMessage ->
-                    let children = renderChildren theme (GreyscalePara GreyDarker) (sprintf "%s | Debug" source) debugMessage.DebugMessage
+                    let children = renderChildren theme (GreyscalePara GreyLighter) (sprintf "%s | Debug" source) debugMessage.DebugMessage
                     [
                         divVerticalSpace 10
-                        notification theme { notificationWhite with OnDismissNotification = Some (fun _ -> dispatch debugMessage.DebugId) } children
+                        notification theme { notificationDark with OnDismissNotification = Some (fun _ -> dispatch debugMessage.DebugId) } children
                     ])                   
                 |> List.collect id ]
         ]

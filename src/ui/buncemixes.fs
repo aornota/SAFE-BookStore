@@ -8,9 +8,9 @@ That's true, Mother. The English are frightfully conservative. I used to know a 
 let sss0011a = {
     MixSeries = Buncemixes
     MixcloudUrl = "https://www.mixcloud.com/djnarration/sss0011-a-in-memory-of-simon-stocker/"
+    Key = "sss0011-a"
     Name = "sss0011-a"
     MixedBy = Some "dj leah betts"
-    Image = "sss0011-a-500x500.png"
     Dedication = Some "buncemix {in memory of simon stocker (1967-2010)}"
     Tracks =
     [
@@ -46,9 +46,9 @@ And to be human, to be anything like human, is to know what one lacks, to know w
 let sss0011b = {
     MixSeries = Buncemixes
     MixcloudUrl = "https://www.mixcloud.com/djnarration/sss0011-b-for-black-farr/"
+    Key = "sss0011-b"
     Name = "sss0011-b"
     MixedBy = Some "dj austerity"
-    Image = "sss0011-b-500x500.png"
     Dedication = Some "buncemix {for black farr}"
     Tracks =
     [

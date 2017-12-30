@@ -86,6 +86,19 @@ type TableData = {
     IsStriped : bool
     IsFullWidth : bool }
 
+type TabData = {
+    IsActive : bool
+    TabText : string
+    TabLink : string }
+
+type TabsData = {
+    IsBoxed : bool
+    IsToggle : bool
+    // TODO-NMB?... IsToggleRounded : bool
+    TabsAlignment : Alignment
+    TabsSize : Size
+    Tabs : TabData list }    
+
 type TagData = {
     TagSemantic : Semantic option
     TagSize : Size
@@ -104,6 +117,7 @@ type Theme = {
     TransformProgressData : ProgressData -> ProgressData
     TransformSpanData : SpanData -> SpanData
     TransformTableData : TableData -> TableData
+    TransformTabsData : TabsData -> TabsData
     TransformTagData : TagData -> TagData
     TransformTooltipData : TooltipData -> TooltipData }
 
@@ -187,6 +201,8 @@ let tableDefault = { IsBordered = false ; IsNarrow = false ; IsStriped = false ;
 let tableFullWidth = { tableDefault with IsFullWidth = true }
 let tableStriped = { tableDefault with IsStriped = true }
 let tableFullWidthStriped = { tableFullWidth with IsStriped = true }
+
+let tabsDefault = { IsBoxed = false ; IsToggle = false ; TabsAlignment = LeftAligned ; TabsSize = Small ; Tabs = [] }
 
 let tagDefault = { TagSemantic = None ; TagSize = Normal ; IsRounded = true ; OnDismiss = None }
 let tagDefaultMedium = { tagDefault with TagSize = Medium }

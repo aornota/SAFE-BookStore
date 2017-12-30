@@ -8,9 +8,9 @@ We do not believe in ourselves until someone reveals that deep inside us somethi
 let cmprssd0001 = {
     MixSeries = Cmprssd
     MixcloudUrl = "https://www.mixcloud.com/djnarration/cmprssd-0001-for-sam-rachel/"
+    Key = "cmprssd-0001"
     Name = "cmprssd-0001"
     MixedBy = None
-    Image = "cmprssd-0001-500x500.png"
     Dedication = Some "for sam & rachel {05-june-2010}"
     Tracks =
     [
@@ -42,9 +42,9 @@ let cmprssd0001 = {
 let cmprssd0010 = {
     MixSeries = Cmprssd
     MixcloudUrl = "https://www.mixcloud.com/djnarration/cmprssd-0010-for-sam-rachel/"
+    Key = "cmprssd-0010"
     Name = "cmprssd-0010"
     MixedBy = None
-    Image = "cmprssd-0010-500x500.png"
     Dedication = Some "for sam & rachel {05-june-2010}"
     Tracks =
     [

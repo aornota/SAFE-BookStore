@@ -33,6 +33,7 @@ let themeDark = {
     TransformProgressData = (fun progressData -> { progressData with ProgressSemantic = transformSemanticOption progressData.ProgressSemantic })
     TransformSpanData = (fun spanData -> { spanData with SpanClass = transformSpanClassOption spanData.SpanClass })
     TransformTableData = id
+    TransformTabsData = id
     TransformTagData = (fun tagData -> { tagData with TagSemantic = transformSemanticOption tagData.TagSemantic })
     TransformTooltipData = (fun tooltipData -> { tooltipData with TooltipSemantic = transformSemanticOption tooltipData.TooltipSemantic }) }
 

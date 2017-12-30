@@ -19,9 +19,9 @@ Alas, there are no longer any shoes... *)
 let forYourEarsOnlyi = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-i-for-emma/"
-    Name = "for-your-ears-only-part-i"
+    Key = "for-your-ears-only-part-i"
+    Name = "for your ears only (part i)"
     MixedBy = None
-    Image = "for-your-ears-only-part-i-500x500.png"
     Dedication = Some "for emma | fluttering a chinese fan in a knoxville fashion"
     Tracks =
     [
@@ -55,9 +55,9 @@ Through ragged trousers, women's legs... *)
 let forYourEarsOnlyii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-ii-for-tom-mizuno/"
-    Name = "for-your-ears-only-part-ii"
+    Key = "for-your-ears-only-part-ii"
+    Name = "for your ears only (part ii)"
     MixedBy = None
-    Image = "for-your-ears-only-part-ii-500x500.png"
     Dedication = Some "for tom & mizuno | how small a thought..."
     Tracks =
     [
@@ -83,9 +83,9 @@ Stale, blanched bones of the unfortunate... *)
 let forYourEarsOnlyiii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-iii-for-will/"
-    Name = "for-your-ears-only-part-iii"
+    Key = "for-your-ears-only-part-iii"
+    Name = "for your ears only (part iii)"
     MixedBy = None
-    Image = "for-your-ears-only-part-iii-500x500.png"
     Dedication = Some "for will... | i love you more than the world can contain in its lonely and ramshackle head"
     Tracks =
     [
@@ -127,9 +127,9 @@ What was written by someone else... *)
 let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-iv-and-priya/"
-    Name = "for-your-ears-only-part-iv"
+    Key = "for-your-ears-only-part-iv"
+    Name = "for your ears only (part iv)"
     MixedBy = None
-    Image = "for-your-ears-only-part-iv-500x500.png"
     Dedication = Some "...and priya | all is a blank before us; all waits, undream'd of"
     Tracks =
     [
@@ -162,9 +162,9 @@ Is 'Three Blind Mice'.
 let forYourEarsOnlyv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-v-for-chad-babs/"
-    Name = "for-your-ears-only-part-v"
+    Key = "for-your-ears-only-part-v"
+    Name = "for your ears only (part v)"
     MixedBy = None
-    Image = "for-your-ears-only-part-v-500x500.png"
     Dedication = Some "for chad & babs | i touch your tears with pearls of love / oh take my heart to wed"
     Tracks =
     [
@@ -188,4 +188,3 @@ let forYourEarsOnlyv = {
 
 let forYourEarsOnly : Mix list = [ forYourEarsOnlyi ; forYourEarsOnlyii ; forYourEarsOnlyiii ; forYourEarsOnlyiv ; forYourEarsOnlyv ]
 
- 

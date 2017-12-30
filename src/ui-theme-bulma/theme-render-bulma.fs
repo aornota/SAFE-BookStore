@@ -20,6 +20,7 @@ type FieldData = {
     TooltipData : TooltipData option }
 
 type LinkType =
+    | SameWindow
     | NewWindow
     | DownloadFile of fileName : string
 
@@ -127,7 +128,7 @@ let link theme linkData children =
     Rct.a [
         yield ClassName className :> IHTMLProp
         yield Href linkData.LinkUrl :> IHTMLProp
-        match linkData.LinkType with | NewWindow -> yield Target "_blank" :> IHTMLProp | DownloadFile fileName -> yield Download fileName :> IHTMLProp
+        match linkData.LinkType with | NewWindow -> yield Target "_blank" :> IHTMLProp | DownloadFile fileName -> yield Download fileName :> IHTMLProp | SameWindow -> ()
     ] children
 
 let message theme messageData headerChildren bodyChildren =
@@ -257,6 +258,27 @@ let span theme spanData children =
         match spanData.SpanClass with | Some Healthy -> yield "healthy" | Some Unhealthy -> yield "unhealthy" | None -> () ]
     let customClass = match customClasses with | _ :: _ -> Some (ClassName (String.concat SPACE customClasses)) | _ -> None
     Rct.span [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ] children
+
+let tabs theme tabsData =
+    let className = getClassName theme false
+    let tabsData = theme.TransformTabsData tabsData
+    // Note: Tabs.customClass does not work, so handle manually.
+    let customClasses = [
+        yield "tabs"
+        yield className
+        if tabsData.IsBoxed then yield "is-boxed"
+        if tabsData.IsToggle then yield "is-toggle"
+        match tabsData.TabsSize with | Large -> yield "is-large" | Medium -> yield "is-medium" | Small -> yield "is-small" | _ -> ()
+        match tabsData.TabsAlignment with | Centred -> yield "is-centered" | RightAligned -> yield "is-right" | FullWidth -> yield "is-fullwidth" | _ -> ()
+    ]
+    let customClass = match customClasses with | _ :: _ -> Some (ClassName (String.concat SPACE customClasses)) | _ -> None
+    Rct.div [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ]
+        [ Rct.ul [] [
+            for tab in tabsData.Tabs do
+                yield Tabs.tab
+                    [ if tab.IsActive then yield Tabs.Tab.isActive ]
+                    [ Rct.a [ Href tab.TabLink ] [ str tab.TabText ] ]
+        ] ]
 
 let table theme useAlternativeClass tableData children =
     let className = getClassName theme useAlternativeClass
