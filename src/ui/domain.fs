@@ -31,7 +31,6 @@ type Mix = {
 let allMixSeries = [ Buncemixes ; Cmprssd ; ForYourEarsOnly ; NowWeAreN ]
 
 let mixSeriesTabText mixSeries = match mixSeries with | Buncemixes -> "buncemixes" | Cmprssd -> "cmprssd" | ForYourEarsOnly -> "for your ears only" | NowWeAreN -> "now we are n"
-let mixSeriesTagText mixSeries = match mixSeries with | Buncemixes -> "buncemix" | _ -> mixSeriesTabText mixSeries
 let mixSeriesText mixSeries = match mixSeries with | ForYourEarsOnly -> "for your ears only -- the concert" | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesTabText mixSeries
 
 let tagText tag =

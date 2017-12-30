@@ -9,6 +9,7 @@
 		"src/**/bin":true,
 		"src/**/obj":true,
 		"src/ui/public/":true,
+		"temp-gh-pages/":true,
 		".gitattributes":true,
 		".gitignore":true,
 		"build.cmd":true,

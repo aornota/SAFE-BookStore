@@ -329,27 +329,31 @@ let private renderTracklisting theme mix =
 
 let private renderMixContent theme state mix renderMode =
     let title = match renderMode with | RenderMixSeries | RenderSearch -> link theme { LinkUrl = toUrlHash (Mix mix) ; LinkType = SameWindow } [ str mix.Name ] | RenderMix -> str mix.Name
+    let mixSeriesLink =
+        match renderMode with
+        | RenderMix | RenderSearch ->
+            Some (para theme paraDefaultSmallest
+                [ link theme { LinkUrl = toUrlHash (MixSeries mix.MixSeries) ; LinkType = SameWindow } [ str (mixSeriesTabText mix.MixSeries) ] ])
+        | RenderMixSeries -> None
+    let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
+    let narrative = match renderMode with | RenderMix -> divVerticalSpace 10 :: mix.Narrative theme | RenderMixSeries | RenderSearch -> []
+    // TODO-NMB: If implement "TagSearch", use tagSuccess for matching?...
+    let tags = mix.Tags |> List.map tagText |> List.sortBy id |> List.map (fun tagText -> tag theme { tagDark with IsRounded = false } [ str tagText ])
+    let embedded =
+        match renderMode with
+        | RenderMix -> Some (renderMixcloudPlayer false state.UseDefaultTheme mix.MixcloudUrl)
+        | RenderMixSeries | RenderSearch -> None
+    let totals = sprintf "%i tracks | %s" mix.Tracks.Length (formatTime (mix.Tracks |> List.sumBy (fun track -> track.Duration)))
     let mixcloudLink =
         match renderMode with
         | RenderMixSeries | RenderSearch -> None
         | RenderMix ->
             Some (para theme { paraDefaultSmallest with ParaAlignment = RightAligned }
                 [ link theme { LinkUrl = sprintf "https://www.mixcloud.com%s" mix.MixcloudUrl ; LinkType = NewWindow } [ str "view on mixcloud.com" ] ])
-    let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
-    let narrative = match renderMode with | RenderMix -> divVerticalSpace 10 :: mix.Narrative theme | RenderMixSeries | RenderSearch -> []
-    // TODO-NMB: If implement "TagSearch", use tagSuccess for matching?...
-    let tags = [
-        match renderMode with | RenderSearch -> yield tag theme { tagBlack with IsRounded = false } [ str (mixSeriesTagText mix.MixSeries) ] | RenderMixSeries | RenderMix -> ()
-        for tagText in (mix.Tags |> List.map tagText |> List.sortBy id) do yield tag theme { tagDark with IsRounded = false } [ str tagText ]
-    ]
-    let embedded =
-        match renderMode with
-        | RenderMix -> Some (renderMixcloudPlayer false state.UseDefaultTheme mix.MixcloudUrl)
-        | RenderMixSeries | RenderSearch -> None
-    let totals = sprintf "%i tracks | %s" mix.Tracks.Length (formatTime (mix.Tracks |> List.sumBy (fun track -> track.Duration)))
     let left = [ image (sprintf "public/resources/%s-500x500.png" mix.Key) (Some (FixedSize Square128)) ]
     let content = [
         yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
+        match mixSeriesLink with | Some mixSeriesLink -> yield mixSeriesLink | None -> ()
         yield para theme { paraDefaultSmallest with Weight = SemiBold } [ str additional]
         yield! narrative
         yield divVerticalSpace 10
