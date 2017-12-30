@@ -15,8 +15,8 @@
     <Compile Include="buncemixes.fs" />
     <Compile Include="cmprssd.fs" />
     <Compile Include="for-your-ears-only.fs" />
-    <Compile Include="data.fs" />
     <Compile Include="now-we-are-n.fs" />
+    <Compile Include="data.fs" />
     <Compile Include="ui-navigation.fs" />
     <Compile Include="ui-app.fs" />
   </ItemGroup>
