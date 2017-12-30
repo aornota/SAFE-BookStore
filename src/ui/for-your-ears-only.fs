@@ -18,7 +18,7 @@ But he has no shoes.
 Alas, there are no longer any shoes... *)
 let forYourEarsOnlyi = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-i-for-emma/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-part-i-for-emma/"
     Key = "for-your-ears-only-part-i"
     Name = "for your ears only (part i)"
     MixedBy = None
@@ -54,7 +54,7 @@ With their heads looking over the floorboards,
 Through ragged trousers, women's legs... *)
 let forYourEarsOnlyii = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-ii-for-tom-mizuno/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-part-ii-for-tom-mizuno/"
     Key = "for-your-ears-only-part-ii"
     Name = "for your ears only (part ii)"
     MixedBy = None
@@ -82,7 +82,7 @@ That strangle the plains, playing with
 Stale, blanched bones of the unfortunate... *)
 let forYourEarsOnlyiii = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-iii-for-will/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-part-iii-for-will/"
     Key = "for-your-ears-only-part-iii"
     Name = "for your ears only (part iii)"
     MixedBy = None
@@ -126,7 +126,7 @@ Names that make them think, or hum
 What was written by someone else... *)
 let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-iv-and-priya/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-part-iv-and-priya/"
     Key = "for-your-ears-only-part-iv"
     Name = "for your ears only (part iv)"
     MixedBy = None
@@ -161,7 +161,7 @@ Is 'Three Blind Mice'.
 -- 'The Concert' by Douglas Dunn, from 'Love or Nothing' (p48-9) [Faber, 1974] *)
 let forYourEarsOnlyv = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/for-your-ears-only-part-v-for-chad-babs/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-part-v-for-chad-babs/"
     Key = "for-your-ears-only-part-v"
     Name = "for your ears only (part v)"
     MixedBy = None

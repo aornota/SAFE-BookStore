@@ -22,7 +22,8 @@ type Mix = {
 
 let allMixSeries = [ Buncemixes ; Cmprssd ; ForYourEarsOnly ; NowWeAreN ]
 
-let mixSeriesText mixSeries = match mixSeries with | Buncemixes -> "buncemixes" | Cmprssd -> "cmprssd" | ForYourEarsOnly -> "for your ears only" | NowWeAreN -> "now we are n"
+let mixSeriesTabText mixSeries = match mixSeries with | Buncemixes -> "buncemixes" | Cmprssd -> "cmprssd" | ForYourEarsOnly -> "for your ears only" | NowWeAreN -> "now we are n"
+let mixSeriesText mixSeries = match mixSeries with | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesTabText mixSeries
 
 let totalDuration mix = mix.Tracks |> List.sumBy (fun track -> track.Duration)
 

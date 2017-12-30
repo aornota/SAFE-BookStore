@@ -7,11 +7,11 @@ We do not believe in ourselves until someone reveals that deep inside us somethi
 -- e. e. cummings, ??? *)
 let cmprssd0001 = {
     MixSeries = Cmprssd
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/cmprssd-0001-for-sam-rachel/"
+    MixcloudUrl = "/djnarration/cmprssd-0001-for-sam-rachel/"
     Key = "cmprssd-0001"
     Name = "cmprssd-0001"
     MixedBy = None
-    Dedication = Some "for sam & rachel {05-june-2010}"
+    Dedication = Some "for sam & rachel"
     Tracks =
     [
         { Artist = "© (leslie winer)" ; Title = "he was ('volume' version)" ; Label = Some "volume" ; Duration = 327.064<second> }
@@ -41,11 +41,11 @@ let cmprssd0001 = {
 -- e. e. cummings, ??? *)
 let cmprssd0010 = {
     MixSeries = Cmprssd
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/cmprssd-0010-for-sam-rachel/"
+    MixcloudUrl = "/djnarration/cmprssd-0010-for-sam-rachel/"
     Key = "cmprssd-0010"
     Name = "cmprssd-0010"
     MixedBy = None
-    Dedication = Some "for sam & rachel {05-june-2010}"
+    Dedication = Some "for sam & rachel"
     Tracks =
     [
         { Artist = "pinch feat. jukali" ; Title = "brighter day" ; Label = Some "tectonic" ; Duration = 314.502<second> }

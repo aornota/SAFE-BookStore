@@ -238,7 +238,7 @@ let private renderHeader theme state dispatch =
         allMixSeries
         |> List.map (fun mixSeries ->
             let isActive = match state.ValidRoute with | MixSeries mixSeries' when mixSeries' = mixSeries -> true | _ -> false
-            { IsActive = isActive ; TabText = mixSeriesText mixSeries ; TabLink = toUrlHash (MixSeries mixSeries) })
+            { IsActive = isActive ; TabText = mixSeriesTabText mixSeries ; TabLink = toUrlHash (MixSeries mixSeries) })
     let tooltipText = match state.UseDefaultTheme with | true -> "Switch to dark theme" | false -> "Switch to light theme"           
     let tooltipData = if state.NavbarBurgerIsActive then tooltipDefaultRight else tooltipDefaultLeft    
     let toggleThemeInteraction = Clickable ((fun _ -> dispatch ToggleTheme), Some { tooltipData with TooltipText = tooltipText })
@@ -292,11 +292,13 @@ let private render state dispatch =
             | Home ->
                 yield image "public/resources/banner-461x230.png" (Some (Ratio TwoByOne))
             | MixSeries mixSeries ->
-                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str (mixSeriesText mixSeries) ] ] ]
+                let count = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.length
+                let temp = sprintf "%s | %i mixes" (mixSeriesText mixSeries) count
+                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str temp ] ] ]
             | Mix mix ->
-                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str (mix.Name) ] ] ]
+                yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str mix.Name ] ] ]
             | Search searchText ->
-                let temp = sprintf "search results for '%s': %i" searchText state.SearchResults.Length
+                let temp = sprintf "search results for '%s' | %i mixes" searchText state.SearchResults.Length
                 yield columnContent [ div divDefault [ para themeDefault paraCentredSmall [ str temp ] ] ]
             yield renderFooter theme ]
 

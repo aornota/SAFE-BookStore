@@ -7,11 +7,11 @@ That's true, Mother. The English are frightfully conservative. I used to know a 
 -- Karel Capek, 'War With The Newts' *)
 let sss0011a = {
     MixSeries = Buncemixes
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/sss0011-a-in-memory-of-simon-stocker/"
+    MixcloudUrl = "/djnarration/sss0011-a-in-memory-of-simon-stocker/"
     Key = "sss0011-a"
     Name = "sss0011-a"
     MixedBy = Some "dj leah betts"
-    Dedication = Some "buncemix {in memory of simon stocker (1967-2010)}"
+    Dedication = Some "in memory of simon stocker (1967-2010)"
     Tracks =
     [
         { Artist = "nick cave & the bad seeds" ; Title = "by the time i get to phoenix" ; Label = None ; Duration = 215.504<second> }
@@ -45,14 +45,14 @@ And to be human, to be anything like human, is to know what one lacks, to know w
 -- Iain M. Banks, 'Matter' *)
 let sss0011b = {
     MixSeries = Buncemixes
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/sss0011-b-for-black-farr/"
+    MixcloudUrl = "/djnarration/sss0011-b-for-black-farr/"
     Key = "sss0011-b"
     Name = "sss0011-b"
     MixedBy = Some "dj austerity"
-    Dedication = Some "buncemix {for black farr}"
+    Dedication = Some "for black farr"
     Tracks =
     [
-        { Artist = "eluviumthoughts for pachelbel" ; Title = "thoughts for pachelbel" ; Label = None ; Duration = 156.107<second> }
+        { Artist = "eluvium" ; Title = "thoughts for pachelbel" ; Label = None ; Duration = 156.107<second> }
         { Artist = "lexaunculpt" ; Title = "emori dixon renamed" ; Label = None ; Duration = 330.849<second> }
         { Artist = "anouar brahem with klaus gesing, björn meyer & khaled yassine" ; Title = "waking state" ; Label = None ; Duration = 459.824<second> }
         { Artist = "the george garabedian players and the awful trumpet of harry arms" ; Title = "begin the beguine" ; Label = None ; Duration = 202.250<second> }

@@ -15,7 +15,7 @@ type ContainerWidth = | Fluid | Widescreen | FullHD
 
 type Size = | Large | Medium | Normal | Small
 
-type Icon = | SpinnerPulse | Theme | Checked | Unchecked | ExpandDown | CollapseUp | Forward | Back | Ascending | Descending | Branch | Database | Notes | File
+type Icon = | SpinnerPulse | Theme | Checked | Unchecked | ExpandDown | CollapseUp | Forward | Back | Ascending | Descending | Branch | Database | Notes | File | Find
 
 type IconData = {
     IconSize : Size
@@ -65,6 +65,7 @@ let icon iconData =
         | Database -> "fa-database"
         | Notes -> "fa-pencil"
         | File -> "fa-file-o"
+        | Find -> "fa-search"
     Icon.icon [ match size with Some size -> yield size | None -> () ] [ Rct.i [ ClassName (sprintf "fa %s %s" iconClass faSize) ] [] ]
 
 let image source size =
@@ -136,4 +137,6 @@ let iconNotes = { iconDefault with Icon = Notes }
 let iconNotesSmall = { iconNotes with IconSize = Small }
 let iconFile = { iconDefault with Icon = File }
 let iconFileSmall = { iconFile with IconSize = Small }
+let iconFind = { iconDefault with Icon = Find }
+let iconFindSmall = { iconFind with IconSize = Small }
 

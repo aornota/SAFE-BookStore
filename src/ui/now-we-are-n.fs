@@ -7,7 +7,7 @@ In a sense it might even be said that our failure is to form habits: for, after 
 -- Walter Pater, 'The Renaissance' *)
 let nowWeAre01i = {
     MixSeries = NowWeAreN
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/now-we-are-01-part-i-this-short-day-of-frost-and-sun/"
+    MixcloudUrl = "/djnarration/now-we-are-01-part-i-this-short-day-of-frost-and-sun/"
     Key = "now-we-are-01-part-i"
     Name = "now we are 01 (part i)"
     MixedBy = None
@@ -37,7 +37,7 @@ I love springtime, I shouted inside myself stubbornly. I forced myself to believ
 -- Meša Selimović, 'Death and the Dervish' *)
 let nowWeAre01ii = {
     MixSeries = NowWeAreN
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
+    MixcloudUrl = "/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
     Key = "now-we-are-01-part-ii"
     Name = "now we are 01 (part ii)"
     MixedBy = None
@@ -69,7 +69,7 @@ But because she was not a girl now, she was not awed, but only wondered at how m
 -- Ursula Le Guin, 'Tehanu' *)
 let nowWeAre02 = {
     MixSeries = NowWeAreN
-    MixcloudUrl = "https://www.mixcloud.com/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
+    MixcloudUrl = "/djnarration/now-we-are-01-part-ii-the-tender-scent-of-fruit-its-silent-carelessness/"
     Key = "now-we-are-02"
     Name = "now we are 02"
     MixedBy = None
