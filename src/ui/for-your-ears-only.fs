@@ -5,10 +5,9 @@ open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 open Aornota.UI.Theme.Render.Bulma
 
-(* TEMP-NMB: [total duration ~ 01:18:55.03] *)
 let forYourEarsOnlyi = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "/djnarration/for-your-ears-only-part-i-for-emma/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-i-for-emma/"
     Key = "for-your-ears-only-part-i"
     Name = "for your ears only -- the concert (part i)"
     MixedBy = None
@@ -56,7 +55,7 @@ let forYourEarsOnlyi = {
 (* TEMP-NMB: [total duration ~ 01:19:45.48] *)
 let forYourEarsOnlyii = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "/djnarration/for-your-ears-only-part-ii-for-tom-mizuno/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-ii-for-tom-mizuno/"
     Key = "for-your-ears-only-part-ii"
     Name = "for your ears only -- the concert (part ii)"
     MixedBy = None
@@ -89,7 +88,7 @@ let forYourEarsOnlyii = {
 (* TEMP-NMB: [total duration ~ 01:19:39.70] *)
 let forYourEarsOnlyiii = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "/djnarration/for-your-ears-only-part-iii-for-will/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-iii-for-will/"
     Key = "for-your-ears-only-part-iii"
     Name = "for your ears only -- the concert (part iii)"
     MixedBy = None
@@ -133,7 +132,7 @@ let forYourEarsOnlyiii = {
 (* TEMP-NMB: [total duration ~ 01:18:45.01] *)
 let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "/djnarration/for-your-ears-only-part-iv-and-priya/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-i-and-priya/"
     Key = "for-your-ears-only-part-iv"
     Name = "for your ears only -- the concert (part iv)"
     MixedBy = None
@@ -173,7 +172,7 @@ let forYourEarsOnlyiv = {
 (* TEMP-NMB: [total duration ~ 01:19:46.29] *)
 let forYourEarsOnlyv = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "/djnarration/for-your-ears-only-part-v-for-chad-babs/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-v-for-chad-babs/"
     Key = "for-your-ears-only-part-v"
     Name = "for your ears only -- the concert (part v)"
     MixedBy = None
