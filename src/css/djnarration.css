@@ -36,8 +36,8 @@ hr.dark.alternative { background-color : #404040 }
 .level.hasContinuation:not(:last-child) { margin-bottom : 0.5rem }
 
 .navbar-item { padding-left : 0.5rem ; padding-right : 0.5rem }
-.navbar-menu.dark { background-color : #4c4c4c /* custom $dark */ }
 .navbar-menu.light { background-color : #b3b3b3 /* custom $light */ }
+.navbar-menu.dark { background-color : #4c4c4c /* custom $dark */ }
 
 .notification:not(:last-child) { margin-bottom : 0.0rem }
 
@@ -67,10 +67,10 @@ hr.dark.alternative { background-color : #404040 }
 .table.dark.alternative.is-striped tbody tr:not(.is-selected):nth-child(even) { background-color : #181818 }
 .table.dark.alternative.is-striped tr:not(.is-selected):nth-child(even):hover { background-color : #282828 }
 
-.tabs.default a { color : #262626 ; background-color : #b3b3b3 /* custom $light */ ; border-bottom-color : #c6c6c6 }
-.tabs.default a:hover { color : #600060 ; border-bottom-color : #d9d9d9 }
+.tabs.default a { color : #600060 ; background-color : #b3b3b3 /* custom $light */ ; border-bottom-color : #d9d9d9 }
+.tabs.default a:hover { color : #a000a0 ; border-bottom-color : #a000a0 }
 .tabs.default li.is-active a { color : #a000a0 ; border-bottom-color : #393939 }
-.tabs.dark a { color : #d9d9d9 ; background-color : #4c4c4c /* custom $dark */ ; border-bottom-color : #393939 }
-.tabs.dark a:hover { color : #ffbfbf ; border-bottom-color : #262626 }
+.tabs.dark a { color : #ffbfbf ; background-color : #4c4c4c /* custom $dark */ ; border-bottom-color : #262626 }
+.tabs.dark a:hover { color : #ff8f8f ; border-bottom-color : #ff8f8f }
 .tabs.dark li.is-active a { color : #ff8f8f ; border-bottom-color : #c6c6c6 }
 
