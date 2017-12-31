@@ -52,7 +52,6 @@ let forYourEarsOnlyi = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:45.48] *)
 let forYourEarsOnlyii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-ii-for-tom-mizuno/"
@@ -72,7 +71,7 @@ let forYourEarsOnlyii = {
     Tracks =
     [
         { Artist = "anton bruckner | dirk mommertz" ; Title = "stille betrachtung (live)" ; Label = None ; Duration = 196.232<second> }
-        { Artist = "maurice ravel | momo kodama" ; Title = "miroirs (2. oiseaux tristes; très lent)" ; Label = Some "ecm" ; Duration = 226.929<second> }
+        { Artist = "maurice ravel | momo kodama" ; Title = "miroirs (2. oiseaux tristes [très lent])" ; Label = Some "ecm" ; Duration = 226.929<second> }
         { Artist = "george i. gurdjieff | anja lechner & françois couturier" ; Title = "hymn no. 8 / night procession" ; Label = Some "ecm" ; Duration = 392.893<second> }
         { Artist = "toru takemitsu | momo kodama" ; Title = "rain tree sketch" ; Label = Some "ecm" ; Duration = 227.869<second> }
         { Artist = "kate moore | saskia lankhoorn" ; Title = "canon (four pianos)" ; Label = Some "ecm" ; Duration = 928.055<second> }
@@ -85,7 +84,6 @@ let forYourEarsOnlyii = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:39.70] *)
 let forYourEarsOnlyiii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-iii-for-will/"
@@ -129,7 +127,6 @@ let forYourEarsOnlyiii = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:18:45.01] *)
 let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-i-and-priya/"
@@ -152,8 +149,8 @@ let forYourEarsOnlyiv = {
     Tracks =
     [
         { Artist = "maurice ravel | benjamin grosvenor" ; Title = "gaspard de la nuit (2. le gibet)" ; Label = Some "decca" ; Duration = 321.956<second> }
-        { Artist = "franz schubert | alfred brendel" ; Title = "four impromptus, op. 90 (3. g-flat major)" ; Label = Some "suite 102" ; Duration = 316.430<second> }
-        { Artist = "frédéric chopin | vladimir ashkenazy" ; Title = "nocturne no. 20 in c-sharp minor, op. posth." ; Label = Some "decca" ; Duration = 236.565<second> }
+        { Artist = "franz schubert | alfred brendel" ; Title = "four impromptus, op. 90 (3. g♭ major)" ; Label = Some "suite 102" ; Duration = 316.430<second> }
+        { Artist = "frédéric chopin | vladimir ashkenazy" ; Title = "nocturne no. 20 in c♯ minor, op. posth." ; Label = Some "decca" ; Duration = 236.565<second> }
         { Artist = "alexander knaifel | andrás keller, jános pilz, zoltán gál & judit szabó" ; Title = "in air clear and unseen (an autumn evening)" ; Label = Some "ecm" ; Duration = 422.406<second> }
         { Artist = "benjamin britten | steven isserlis" ; Title = "cello suite no. 3, op. 87 (9. grant repose together with the saints)" ; Label = Some "virgin" ; Duration = 141.351<second> }
         { Artist = "matthew barley & sukhwinder singh" ; Title = "cello and tabla recital (live excerpt)" ; Label = None ; Duration = 711.065<second> }
@@ -169,7 +166,6 @@ let forYourEarsOnlyiv = {
     ]
 }
 
-(* TEMP-NMB: [total duration ~ 01:19:46.29] *)
 let forYourEarsOnlyv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-v-for-chad-babs/"
