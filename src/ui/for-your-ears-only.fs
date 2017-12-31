@@ -67,7 +67,7 @@ let forYourEarsOnlyii = {
             para theme paraDefaultSmallest [ str "With their heads looking over the floorboards," ]
             para theme paraDefaultSmallest [ str "Through ragged trousers, women's legs..." ]
         ])
-    Tags = [ ModernClassical ; Classical ; Piano ]
+    Tags = [ Classical ; ModernClassical ; Piano ]
     Tracks =
     [
         { Artist = "anton bruckner | dirk mommertz" ; Title = "stille betrachtung (live)" ; Label = None ; Duration = 196.232<second> }

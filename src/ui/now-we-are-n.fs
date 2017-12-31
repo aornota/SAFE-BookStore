@@ -17,7 +17,7 @@ let nowWeAre01i = {
             para theme paraDefaultSmallest [ str "In a sense it might even be said that our failure is to form habits: for, after all, habit is relative to a stereotyped world, and meantime it is only the roughness of the eye that makes two persons, things, situations, seem alike. While all melts under our feet, we may well grasp at any exquisite passion, or any contribution to knowledge that seems by a lifted horizon to set the spirit free for a moment, or any stirring of the senses, strange dyes, strange colours, and curious odours, or work of the artist’s hands, or the face of one’s friend. Not to discriminate every moment some passionate attitude in those about us, and in the very brilliancy of their gifts some tragic dividing on their ways, is, on this short day of frost and sun, to sleep before evening." ]
             para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Walter Pater, 'The Renaissance'" ]
         ])
-    Tags = [ KitchenSink ; World ; Choral ; Ambient ; Fado ; Electronic ]
+    Tags = [ Ambient ; Choral ; Electronic ; Fado ; KitchenSink ; World ]
     Tracks =
     [
         { Artist = "colleen" ; Title = "geometra del universo" ; Label = Some "second language" ; Duration = 164.931<second> }
@@ -50,7 +50,7 @@ let nowWeAre01ii = {
             para theme paraDefaultSmallest [ str "I love springtime, I shouted inside myself stubbornly. I forced myself to believe in it; for many years I had hidden springtime from myself, but now I was calling it, offering myself unto it. I touched the blossoms and smooth, new branches of an apple tree at the side of the path; sap rushed in its countless veins. I felt their pulsing, I wished that it would enter me through my fingertips, so that apple blossoms might sprout from my fingers and translucent green leaves from my palms, so that I would become the tender scent of fruit, its silent carelessness. I would carry my blossoming hands before my astonished eyes and extend them to the nourishing rain. I would be rooted in the ground, fed by the sky, renewed by the spring, laid to rest by autumn. How good it would be to begin everything anew." ]
             para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Meša Selimović, 'Death and the Dervish'" ]
         ])
-    Tags = [ KitchenSink ; Jazz ; Piano ; Choral ; Fado ]
+    Tags = [ Choral ; Fado ; Jazz ; KitchenSink ; Piano ]
     Tracks =
     [
         { Artist = "john fahey" ; Title = "summertime" ; Label = Some "revenant" ; Duration = 337.583<second> }

@@ -58,7 +58,7 @@ let sss0011b = {
             para theme paraDefaultSmallest [ str "And to be human, to be anything like human, is to know what one lacks, to know what one needs, to know what one must look for to find some semblance of completeness amongst strangers, all alone in the darkness." ]
             para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Iain M. Banks, 'Matter'" ]
         ])
-    Tags = [ KitchenSink ; Ambient ; SingerSongwriter ; Electronic ]
+    Tags = [ Ambient ; Electronic ; KitchenSink ; SingerSongwriter ]
     Tracks =
     [
         { Artist = "eluvium" ; Title = "thoughts for pachelbel" ; Label = None ; Duration = 156.107<second> }
@@ -84,7 +84,10 @@ let sss0011b = {
 
 // TODO-NMB...
 
-(*let sss001na = {
+let buncemixes : Mix list = [ sss0011a ; sss0011b ]
+
+(*
+let sss001na = {
     MixSeries = Buncemixes
     MixcloudUrl = "/djnarration/sss001n-a-.../"
     Key = "sss001n-a"
@@ -101,7 +104,7 @@ let sss0011b = {
     [
         { Artist = "" ; Title = "" ; Label = Some "" ; Duration = 0.<second> }
     ]
-}*)
+}
 
-let buncemixes : Mix list = [ sss0011a ; sss0011b ]
+*)
 
