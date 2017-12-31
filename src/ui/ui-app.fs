@@ -61,7 +61,6 @@ type private Status =
     | Ready
 
 type private State = {
-    IsDebug : bool
     DebugMessages : DebugMessage list
     Status : Status
     UseDefaultTheme : bool
@@ -126,11 +125,6 @@ let private initialize route =
         |> List.filter (fun (_, mixes) -> mixes.Length > 1)
         |> List.map (fun (key, _) -> debugMessage (sprintf "Key '%s' is being used by more than one mix" key))
     let state = {
-#if DEBUG
-        IsDebug = true
-#else
-        IsDebug = false
-#endif
         DebugMessages = duplicateKeyMessages
         Status = ReadingPreferences route
         UseDefaultTheme = true
@@ -261,7 +255,7 @@ let private renderHeader theme state dispatch =
     navbar theme navbarData [
         container (Some Fluid) [
             navbarBrand [
-                yield navbarItem [ image "public/resources/djnarration-96x96.png" (Some (FixedSize Square24)) ]
+                yield navbarItem [ image "public/resources/djnarration-24x24.png" (Some (FixedSize Square24)) ]
                 yield navbarItem [
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
                         link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str DJ_NARRATION ] ] ]
@@ -350,7 +344,7 @@ let private renderMixContent theme state mix renderMode =
         | RenderMix ->
             Some (para theme { paraDefaultSmallest with ParaAlignment = RightAligned }
                 [ link theme { LinkUrl = sprintf "https://www.mixcloud.com%s" mix.MixcloudUrl ; LinkType = NewWindow } [ str "view on mixcloud.com" ] ])
-    let left = [ image (sprintf "public/resources/%s-500x500.png" mix.Key) (Some (FixedSize Square128)) ]
+    let left = [ image (sprintf "public/resources/%s-128x128.png" mix.Key) (Some (FixedSize Square128)) ]
     let content = [
         yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
         match mixSeriesLink with | Some mixSeriesLink -> yield mixSeriesLink | None -> ()
