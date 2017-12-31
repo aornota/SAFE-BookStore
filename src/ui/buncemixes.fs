@@ -84,5 +84,24 @@ let sss0011b = {
 
 // TODO-NMB...
 
+(*let sss001na = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss001n-a-.../"
+    Key = "sss001n-a"
+    Name = "sss001n-a"
+    MixedBy = Some "dj ..."
+    Dedication = "..."
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- " ]
+        ])
+    Tags = [ ... ]
+    Tracks =
+    [
+        { Artist = "" ; Title = "" ; Label = Some "" ; Duration = 0.<second> }
+    ]
+}*)
+
 let buncemixes : Mix list = [ sss0011a ; sss0011b ]
 

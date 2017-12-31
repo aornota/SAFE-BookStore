@@ -78,5 +78,24 @@ let cmprssd0010 = {
 
 // TODO-NMB...
 
+(*let cmprssd00nn = {
+    MixSeries = Cmprssd
+    MixcloudUrl = "/djnarration/cmprssd-00nn-for-.../"
+    Key = "cmprssd-00nn"
+    Name = "cmprssd-00nn"
+    MixedBy = None
+    Dedication = "for ..."
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- " ]
+        ])
+    Tags = [ ... ]
+    Tracks =
+    [
+        { Artist = "" ; Title = "" ; Label = Some "" ; Duration = 0.<second> }
+    ]
+}*)
+
 let cmprssd = [ cmprssd0001 ; cmprssd0010 ]
 

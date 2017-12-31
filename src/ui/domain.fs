@@ -37,6 +37,6 @@ let mixSeriesText mixSeries = match mixSeries with | ForYourEarsOnly -> "for you
 let tagText tag =
     match tag with
     | Ambient -> "ambient" | Calypso -> "calypso" | Choral -> "choral" | Classical -> "classical" | Dub -> "dub" | Electronic -> "electronic" | Fado -> "fado" | Folk -> "folk"
-    | Guitar -> "guitar" | HipHop -> "hip-hop" | House -> "house" | Jazz -> "jazz" | KitchenSink -> "kitchen-sink" | ModernClassical -> "modern-classical" | Piano -> "piano"
+    | Guitar -> "guitar" | HipHop -> "hip-hop" | House -> "house" | Jazz -> "jazz" | KitchenSink -> "kitchen sink" | ModernClassical -> "modern classical" | Piano -> "piano"
     | SingerSongwriter -> "singer/songwriter" | Techno -> "techno" | World -> "world"
 
