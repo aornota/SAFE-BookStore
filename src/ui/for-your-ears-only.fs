@@ -129,7 +129,7 @@ let forYourEarsOnlyiii = {
 
 let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
-    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-i-and-priya/"
+    MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-iv-and-priya/"
     Key = "for-your-ears-only-part-iv"
     Name = "for your ears only -- the concert (part iv)"
     MixedBy = None

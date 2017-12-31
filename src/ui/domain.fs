@@ -8,8 +8,9 @@ type [<Measure>] second
 
 type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
 
-// TODO-NMB: Order alphabetically - and more?...
-type Tag = | KitchenSink | Dub | World | Choral | Ambient | Fado | Classical | Jazz | Piano | Folk | Guitar | Calypso | SingerSongwriter | ModernClassical | Electronic | HipHop
+// TODO-NMB: More?...
+type Tag =
+    | Ambient | Calypso | Choral | Classical | Dub | Electronic | Fado | Folk | Guitar | HipHop | House | Jazz | KitchenSink | ModernClassical | Piano | SingerSongwriter | Techno | World
 
 type Track = {
     Artist : string
@@ -35,7 +36,7 @@ let mixSeriesText mixSeries = match mixSeries with | ForYourEarsOnly -> "for you
 
 let tagText tag =
     match tag with
-    | KitchenSink -> "kitchen-sink" | Dub -> "dub" | World -> "world" | Choral -> "choral" | Ambient -> "ambient" | Fado -> "fado" | Classical -> "classical" | Jazz -> "jazz"
-    | Piano -> "piano" | Folk -> "folk" | Guitar -> "guitar" | Calypso -> "calypso" | SingerSongwriter -> "singer/songwriter" | ModernClassical -> "modern-classical"
-    | Electronic -> "electronic" | HipHop -> "hip-hop"
+    | Ambient -> "ambient" | Calypso -> "calypso" | Choral -> "choral" | Classical -> "classical" | Dub -> "dub" | Electronic -> "electronic" | Fado -> "fado" | Folk -> "folk"
+    | Guitar -> "guitar" | HipHop -> "hip-hop" | House -> "house" | Jazz -> "jazz" | KitchenSink -> "kitchen-sink" | ModernClassical -> "modern-classical" | Piano -> "piano"
+    | SingerSongwriter -> "singer/songwriter" | Techno -> "techno" | World -> "world"
 
