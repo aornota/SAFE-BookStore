@@ -297,30 +297,223 @@ let sss0013b = {
     ]
 }
 
-// TODO-NMB...
-
-let buncemixes : Mix list = [
-    sss0011a ; sss0011b ; sss0012a ; sss0012b ; sss0012c ; sss0012d ; sss0013a ; sss0013b ]
-
-(*
-let sss001na = {
+let sss0014a = {
     MixSeries = Buncemixes
-    MixcloudUrl = "/djnarration/sss001n-a-.../"
-    Key = "sss001n-a"
-    Name = "sss001n-a"
-    MixedBy = Some "dj ..."
-    Dedication = "..."
+    MixcloudUrl = "/djnarration/sss0014-a-for-trol23/"
+    Key = "sss0014-a"
+    Name = "sss0014-a"
+    MixedBy = Some "dj kayhole"
+    Dedication = "for trol23"
     Narrative = (fun theme ->
         [
-            para theme paraDefaultSmallest [ str "" ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- " ]
+            para theme paraDefaultSmallest [ str "mr youse needn't be so spry / concernin questions arty / each has his tastes but as for i / i likes a certain party..." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- e. e. cummings" ]
         ])
-    Tags = [ ... ]
+    Tags = [ Electronic ; HipHop ]
     Tracks =
     [
-        { Artist = "" ; Title = "" ; Label = None ; Duration = 0.<second> }
+        { Artist = "dj dee kline" ; Title = "i don't smoke (original mix edit)" ; Label = Some "east west" ; Duration = 48.158<second> }
+        { Artist = "noah23 feat. ceschi" ; Title = "chicken soup" ; Label = Some "2nd rec" ; Duration = 192.806<second> }
+        { Artist = "rustie feat. 215 tfk" ; Title = "patrick ewing" ; Label = Some "stuff" ; Duration = 205.960<second> }
+        { Artist = "fun boy three" ; Title = "the lunatics (have taken over the asylum)" ; Label = Some "chrysalis" ; Duration = 191.111<second> }
+        { Artist = "cibelle" ; Title = "green grass" ; Label = Some "crammed" ; Duration = 234.103<second> }
+        { Artist = "skinnyman" ; Title = "my life in rhymes" ; Label = Some "pure motion muzik" ; Duration = 206.158<second> }
+        { Artist = "cyne feat. blak lungz" ; Title = "400 years revisited" ; Label = Some "botanica del jibaro" ; Duration = 163.526<second> }
+        { Artist = "different shades of black feat. dazol, da buda, roddy rod & d.a.y.o." ; Title = "comprehension" ; Label = Some "peanuts & corn" ; Duration = 252.157<second> }
+        { Artist = "marcel cartier & agent of change feat. g1 (rebel diaz)" ; Title = "start the revolution" ; Label = None ; Duration = 234.788<second> }
+        { Artist = "pipi skid" ; Title = "super dope producers" ; Label = Some "peanuts & corn" ; Duration = 127.268<second> }
+        { Artist = "non phixion" ; Title = "four w's (dirty)" ; Label = Some "serchlight" ; Duration = 272.021<second> }
+        { Artist = "tes" ; Title = "say when" ; Label = Some "lex" ; Duration = 237.331<second> }
+        { Artist = "om unit feat. tamara blessa" ; Title = "dark sunrise" ; Label = Some "civil music" ; Duration = 185.585<second> }
+        { Artist = "beyoncé" ; Title = "halo (live acoustic)" ; Label = None ; Duration = 229.006<second> }
+        { Artist = "the dubwood allstars" ; Title = "under dubwood" ; Label = Some "rivertones" ; Duration = 229.447<second> }
+        { Artist = "left channel" ; Title = "mournful" ; Label = Some "black arts library" ; Duration = 135.732<second> }
+        { Artist = "airhead" ; Title = "south congress" ; Label = Some "r&s" ; Duration = 230.458<second> }
+        { Artist = "flume feat. jezzabell doran" ; Title = "sleepless (shlohmo remix)" ; Label = Some "future classic" ; Duration = 308.558<second> }
+        { Artist = "oceania" ; Title = "forest" ; Label = Some "7even" ; Duration = 250.229<second> }
+        { Artist = "john smith" ; Title = "genie in a bottle" ; Label = None ; Duration = 191.901<second> }
+        { Artist = "granville sessions" ; Title = "watch this (trol23 'bleak as fuck' remix)" ; Label = None ; Duration = 252.900<second> }
+        { Artist = "third eye foundation" ; Title = "i've lost that loving feline" ; Label = Some "domino" ; Duration = 269.966<second> }
+        { Artist = "paul buchanan (with jools holland)" ; Title = "mid air ('later' version)" ; Label = None ; Duration = 146.483<second> }
     ]
 }
 
-*)
+let sss0014b = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0014-b-for-danny-roiser/"
+    Key = "sss0014-b"
+    Name = "sss0014-b"
+    MixedBy = Some "dj mandatorium"
+    Dedication = "for danny roiser"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...gimme the he-man's solid bliss / for youse ideas i'll match youse / a pretty girl who naked is / is worth a million statues" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- e. e. cummings" ]
+        ])
+    Tags = [ Electronic ; HipHop ]
+    Tracks =
+    [
+        { Artist = "chet atkins & merle travis" ; Title = "muskrat ramble" ; Label = None ; Duration = 148.120<second> }
+        { Artist = "barry adamson" ; Title = "the man with the golden arm" ; Label = Some "mute" ; Duration = 311.646<second> }
+        { Artist = "left channel" ; Title = "eunuch with hammer" ; Label = Some "black arts library" ; Duration = 134.455<second> }
+        { Artist = "tod dockstader" ; Title = "finale" ; Label = Some "sub rosa" ; Duration = 216.758<second> }
+        { Artist = "lord beginner" ; Title = "christmas morning the rum had me yawning" ; Label = Some "dust-to-digital" ; Duration = 184.900<second> }
+        { Artist = "noah23" ; Title = "scream" ; Label = Some "2nd rec" ; Duration = 268.759<second> }
+        { Artist = "sleep (of oldominion)" ; Title = "testimony" ; Label = Some "up above" ; Duration = 260.539<second> }
+        { Artist = "cyne" ; Title = "first person" ; Label = Some "botanica del jibaro" ; Duration = 169.145<second> }
+        { Artist = "saul williams" ; Title = "twice the first time" ; Label = Some "ninja tune" ; Duration = 270.082<second> }
+        { Artist = "noah23" ; Title = "as below so above" ; Label = Some "2nd rec" ; Duration = 227.810<second> }
+        { Artist = "pipi skid" ; Title = "jealousy" ; Label = Some "peanuts & corn" ; Duration = 155.271<second> }
+        { Artist = "mcenroe" ; Title = "the realest" ; Label = Some "peanuts & corn" ; Duration = 296.576<second> }
+        { Artist = "sam sever" ; Title = "what's that sound? (fucked up sound)" ; Label = None ; Duration = 247.931<second> }
+        { Artist = "non phixion" ; Title = "non phixion5 boros (dirty)" ; Label = Some "serchlight" ; Duration = 278.581<second> }
+        { Artist = "alias (with markus acher)" ; Title = "unseen sights" ; Label = Some "anticon" ; Duration = 264.452<second> }
+        { Artist = "liz green" ; Title = "bei mir bist du schoen" ; Label = Some "pias" ; Duration = 170.422<second> }
+        { Artist = "kid koala" ; Title = "5 bit blues" ; Label = Some "ninja tune" ; Duration = 274.622<second> }
+        { Artist = "milton nascimento" ; Title = "francisco" ; Label = Some "decca" ; Duration = 267.029<second> }
+        { Artist = "chants" ; Title = "night after" ; Label = Some "dutty artz" ; Duration = 328.306<second> }
+        { Artist = "actress" ; Title = "n.e.w." ; Label = Some "honest jon's" ; Duration = 321.911<second> }
+    ]
+}
+
+let sss0015a = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0015-a-for-dave-kristen/"
+    Key = "sss0015-a"
+    Name = "sss0015-a"
+    MixedBy = Some "dj backdoor bastard"
+    Dedication = "for dave & kristen"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "Physical pleasure is a sensual experience no different from pure seeing or the pure sensation with which a fine fruit fills the tongue; it is a great unending experience, which is given us, a knowing of the world, the fullness and the glory of all knowing." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Rainer Maria Rilke, 'Letter To A Young Poet [4]'" ]
+        ])
+    Tags = [ SingerSongwriter ]
+    Tracks =
+    [
+        { Artist = "the low anthem" ; Title = "ticket taker (live)" ; Label = None ; Duration = 161.703<second> }
+        { Artist = "richard buckner" ; Title = "witness (wurli version demo)" ; Label = Some "decor" ; Duration = 203.302<second> }
+        { Artist = "devendra banhart" ; Title = "korean dogwood" ; Label = Some "xl" ; Duration = 239.165<second> }
+        { Artist = "john fullbright with radoslav lorkovic" ; Title = "me wanting you (live)" ; Label = None ; Duration = 262.222<second> }
+        { Artist = "the handsome family" ; Title = "grandmother waits for you" ; Label = Some "loose" ; Duration = 224.606<second> }
+        { Artist = "the felice brothers" ; Title = "her eyes dart round ('god bless you amigo' version)" ; Label = None ; Duration = 223.956<second> }
+        { Artist = "dawn mccarthy & bonnie 'prince' billy" ; Title = "what am i living for" ; Label = Some "domino" ; Duration = 211.452<second> }
+        { Artist = "kramer" ; Title = "i love how you love me" ; Label = Some "tzadik" ; Duration = 270.500<second> }
+        { Artist = "warren zevon with emmylou harris" ; Title = "please stay" ; Label = Some "artemis" ; Duration = 210.291<second> }
+        { Artist = "the avett brothers" ; Title = "life" ; Label = Some "universal" ; Duration = 218.615<second> }
+        { Artist = "serafina steer" ; Title = "night before mutiny" ; Label = Some "stolen" ; Duration = 298.074<second> }
+        { Artist = "sufjan stevens" ; Title = "pleasure principle [excerpt from 'impossible soul'] (live)" ; Label = None ; Duration = 167.055<second> }
+        { Artist = "mark eitzel" ; Title = "love's humming" ; Label = Some "tongue master" ; Duration = 260.957<second> }
+        { Artist = "merle haggard" ; Title = "kentucky gambler" ; Label = Some "emi" ; Duration = 157.733<second> }
+        { Artist = "tom waits" ; Title = "i hope that i don't fall in love with you" ; Label = Some "rhino / elektra" ; Duration = 232.629<second> }
+        { Artist = "townes van zandt" ; Title = "still lookin' for you (live)" ; Label = None ; Duration = 142.849<second> }
+        { Artist = "simone felice" ; Title = "mercy" ; Label = None ; Duration = 291.503<second> }
+        { Artist = "tom waits" ; Title = "johnsburg, illinois" ; Label = Some "island" ; Duration = 88.247<second> }
+        { Artist = "andrew bird" ; Title = "don't be scared" ; Label = Some "wegawam" ; Duration = 209.362<second> }
+        { Artist = "richard walters" ; Title = "the letter" ; Label = None ; Duration = 185.666<second> }
+        { Artist = "conway twitty feat. loretta lynn" ; Title = "it's only make believe" ; Label = Some "spectrum" ; Duration = 155.248<second> }
+        { Artist = "ryan adams" ; Title = "in my time of need" ; Label = Some "bloodshot" ; Duration = 327.993<second> }
+    ]
+}
+
+let sss0015b = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0015-b-for-darren-olga/"
+    Key = "sss0015-b"
+    Name = "sss0015-b"
+    MixedBy = Some "dj seditious"
+    Dedication = "for darren & olga"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "I was asked by the record company to sum up \"my\" philosophy of life and music. \"My\" philosophy is quite simple: soul first, technique later, or \"Better to drink wine from the hands than water from a pretty cup\"; of course the ultimate is wine from a pretty cup. Amen." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Robbie Basho" ]
+        ])
+    Tags = [ Ambient ; Classical ; Electronic ; World ]
+    Tracks =
+    [
+        { Artist = "olivier messiaen | ensemble d'ondes martenot de montréal" ; Title = "oraison" ; Label = Some "sub rosa" ; Duration = 461.310<second> }
+        { Artist = "kettel" ; Title = "these birds around meadows" ; Label = Some "mothmouth" ; Duration = 322.142<second> }
+        { Artist = "[the user] (emmanuel madan & thomas mcintosh) with stéphane claude" ; Title = "abandon (part 8)" ; Label = Some "asphodel" ; Duration = 328.492<second> }
+        { Artist = "fortdax" ; Title = "w.h.coder" ; Label = Some "earworm" ; Duration = 352.548<second> }
+        { Artist = "zadik zecharia" ; Title = "saidako (david ovadia remix)" ; Label = Some "bo'weavil" ; Duration = 329.409<second> }
+        { Artist = "robbie basho" ; Title = "the grail and the lotus (live)" ; Label = Some "bo'weavil" ; Duration = 499.089<second> }
+        { Artist = "rainer veil" ; Title = "yield" ; Label = Some "modern love" ; Duration = 260.446<second> }
+        { Artist = "secede" ; Title = "shrine" ; Label = Some "sending orbs" ; Duration = 232.129<second> }
+        { Artist = "cristobal tapia de veer" ; Title = "la llorona finale ('the crimson petal and the white')" ; Label = None ; Duration = 122.709<second> }
+        { Artist = "anna meredith" ; Title = "nautilus" ; Label = Some "moshi moshi" ; Duration = 330.605<second> }
+        { Artist = "zadik zecharia" ; Title = "pada pada" ; Label = Some "bo'weavil" ; Duration = 190.693<second> }
+        { Artist = "octo octa" ; Title = "i can feel you (dub version)" ; Label = Some "100% silk" ; Duration = 320.702<second> }
+        { Artist = "omar souleyman" ; Title = "wenu wenu" ; Label = Some "ribbon" ; Duration = 417.297<second> }
+        { Artist = "plone" ; Title = "plaything" ; Label = Some "warp" ; Duration = 244.215<second> }
+        { Artist = "disco inferno" ; Title = "waking up" ; Label = Some "carrot top" ; Duration = 356.403<second> }
+    ]
+}
+
+let sss0016a = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0016-a-buncemix-5-for-rob-mandy-dj-nepharious/"
+    Key = "sss0016-a"
+    Name = "sss0016-a"
+    MixedBy = Some "dj nepharious"
+    Dedication = "for rob & mandy"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "And the people who choose to try to be able to do as they like, to look for what it is that they like, who discover that this often involves them in difficult (but pleasurable?) rejections of that to which that have been accustomed – these are people held with little social honour in the modern world; who perhaps on some level are envied..." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Nicholas Mosley" ]
+        ])
+    Tags = [ Dub ; KitchenSink; Techno ]
+    Tracks =
+    [
+        { Artist = "molly nilsson" ; Title = "whiskey sour" ; Label = Some "dark skies association" ; Duration = 263.941<second> }
+        { Artist = "iskeletor" ; Title = "gallows" ; Label = Some "boomarm nation" ; Duration = 156.642<second> }
+        { Artist = "high cross society" ; Title = "every time i look (john hendicott remix)" ; Label = Some "emu bands" ; Duration = 241.139<second> }
+        { Artist = "sam binga feat. redders" ; Title = "lef dem (enei remix)" ; Label = Some "critical music" ; Duration = 361.895<second> }
+        { Artist = "el mahdy jr. feat. gulls" ; Title = "zalim delay" ; Label = Some "boomarm nation" ; Duration = 244.332<second> }
+        { Artist = "fantastic mr fox" ; Title = "on my own" ; Label = Some "black acre" ; Duration = 269.546<second> }
+        { Artist = "iskeletor" ; Title = "wa" ; Label = Some "boomarm nation" ; Duration = 164.165<second> }
+        { Artist = "morgan zarate" ; Title = "kaytsu" ; Label = Some "hyperdub" ; Duration = 183.229<second> }
+        { Artist = "chronik" ; Title = "man in the boot" ; Label = Some "no hats no hoods" ; Duration = 193.747<second> }
+        { Artist = "flowdan" ; Title = "ambush" ; Label = Some "hyperdub" ; Duration = 193.701<second> }
+        { Artist = "jack dice feat. stash marina" ; Title = "stash's theme" ; Label = Some "modern love" ; Duration = 256.023<second> }
+        { Artist = "djrum" ; Title = "tailing" ; Label = Some "2nd drop" ; Duration = 443.907<second> }
+        { Artist = "phon.o" ; Title = "kellerkind" ; Label = Some "50 weapons" ; Duration = 252.784<second> }
+        { Artist = "caribou" ; Title = "can't do without you (extended mix)" ; Label = Some "city slang" ; Duration = 389.317<second> }
+        { Artist = "garnier" ; Title = "h.e." ; Label = Some "50 weapons" ; Duration = 414.209<second> }
+        { Artist = "throwing snow feat. adda kaleh" ; Title = "maera (vip)" ; Label = Some "houndstooth" ; Duration = 380.111<second> }
+        { Artist = "el mahdy jr." ; Title = "permanent defeat (disco mix)" ; Label = Some "boomarm nation" ; Duration = 391.163<second> }
+    ]
+}
+
+let sss0016b = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0016-b-buncemix-5-for-su-noah-dj-veteran-aryan/"
+    Key = "sss0016-b"
+    Name = "sss0016-b"
+    MixedBy = Some "dj veteran aryan"
+    Dedication = "for su & noah"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...but not always enough to stop them making themselves and others happy. For the ability to be in a relationship with oneself is the ability to be happy – in this sense to have an area in common with others who are happy – but still, to be often solitary, which is a hard happiness and takes courage." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Nicholas Mosley" ]
+        ])
+    Tags = [ Ambient ; Dub ; Electronic ; House ; Jazz ; Techno ]
+    Tracks =
+    [
+        { Artist = "burl ives" ; Title = "the bird courting song (the leather-winged bat)" ; Label = None ; Duration = 101.494<second> }
+        { Artist = "loscil" ; Title = "lucioles" ; Label = None ; Duration = 332.347<second> }
+        { Artist = "liu bei feat. rachel goswell" ; Title = "fields" ; Label = None ; Duration = 184.297<second> }
+        { Artist = "the de zurik sisters" ; Title = "go to sleep my little baby" ; Label = Some "mississippi records" ; Duration = 174.382<second> }
+        { Artist = "oneohtrix point never" ; Title = "i only have eyes for you" ; Label = Some "warp" ; Duration = 504.477<second> }
+        { Artist = "dj sprinkles & mark fell" ; Title = "fresh (sprinkles alt. mix)" ; Label = Some "comatonse" ; Duration = 656.010<second> }
+        { Artist = "holly herndon" ; Title = "fade" ; Label = Some "rvng international" ; Duration = 373.969<second> }
+        { Artist = "donato dozzy & tin man" ; Title = "test 7" ; Label = Some "acid test" ; Duration = 459.140<second> }
+        { Artist = "kassem mosse" ; Title = "untitled b1" ; Label = Some "workshop" ; Duration = 357.843<second> }
+        { Artist = "you are wolf (feat. alasdair roberts)" ; Title = "doves" ; Label = Some "stone tape" ; Duration = 236.135<second> }
+        { Artist = "rhythm force" ; Title = "clap, children" ; Label = Some "boomarm nation" ; Duration = 387.924<second> }
+        { Artist = "wildflowers" ; Title = "dark sun (live)" ; Label = None ; Duration = 696.831<second> }
+        { Artist = "casino versus japan" ; Title = "sio bid bellwave" ; Label = Some "carpark" ; Duration = 331.604<second> }
+    ]
+}
+
+let buncemixes = [ sss0011a ; sss0011b ; sss0012a ; sss0012b ; sss0012c ; sss0012d ; sss0013a ; sss0013b ; sss0014a ; sss0014b ; sss0015a ; sss0015b ; sss0016a ; sss0016b ]
 

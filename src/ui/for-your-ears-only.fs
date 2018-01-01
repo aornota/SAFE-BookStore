@@ -203,5 +203,5 @@ let forYourEarsOnlyv = {
     ]
 }
 
-let forYourEarsOnly : Mix list = [ forYourEarsOnlyi ; forYourEarsOnlyii ; forYourEarsOnlyiii ; forYourEarsOnlyiv ; forYourEarsOnlyv ]
+let forYourEarsOnly = [ forYourEarsOnlyi ; forYourEarsOnlyii ; forYourEarsOnlyiii ; forYourEarsOnlyiv ; forYourEarsOnlyv ]
 

@@ -119,5 +119,5 @@ let nowWeAre02 = {
     ]
 }
 
-let nowWeAreN : Mix list = [ nowWeAre01i ; nowWeAre01ii ; nowWeAre02 ]
+let nowWeAreN = [ nowWeAre01i ; nowWeAre01ii ; nowWeAre02 ]
 
