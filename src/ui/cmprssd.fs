@@ -86,7 +86,7 @@ let cmprssd0011 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "The best advice I can give you is: Behave honorably, no matter what, even though there is nearly zero probability of an afterlife." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Kurt Vonnegut, personal communication to Lee Thorn (February 3rd, 1991)" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- kurt vonnegut, personal communication to lee thorn (february 3rd, 1991)" ]
         ])
     Tags = [ Ambient ; House ; Techno ]
     Tracks =
@@ -116,7 +116,7 @@ let cmprssd0100 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "In this world, there are things you can only do alone, and things you can only do with somebody else. It's important to combine the two in just the right amount." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Haruki Murakami, 'After Dark'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- haruki murakami, 'after dark'" ]
         ])
     Tags = [ SingerSongwriter ]
     Tracks =
@@ -155,6 +155,7 @@ let cmprssd0101 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "To live in a society is to create a society, to be in a relationship is to create a relationship, to desire one's wife is to create desire..." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- andri snær magnason, 'dreamland: a self-help manual for a frightened nation'" ]
         ])
     Tags = [ Ambient ; House ; Techno ]
     Tracks =
@@ -185,7 +186,7 @@ let cmprssd0110 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...to bring up a child is to create a person, to live is to create a life." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Andri Snær Magnason, 'Dreamland: A Self-Help Manual for a Frightened Nation'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- andri snær magnason, 'dreamland: a self-help manual for a frightened nation'" ]
         ])
     Tags = [ Electronic ; House ; Techno ]
     Tracks =
@@ -220,7 +221,7 @@ let cmprssd0111 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "I would like to be the air / that inhabits you for a moment / only. I would like to be that unnoticed / & that necessary." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Margaret Atwood, 'Variation on the Word Sleep'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- margaret atwood, 'variation on the word sleep'" ]
         ])
     Tags = [ Ambient ; Electronic ]
     Tracks =
@@ -250,7 +251,7 @@ let cmprssd1000 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "He had become something that he had never dared to dream he might become, something that he had been known, in his fear, to scorn: a man who could cut the cloth of his existence and turn it into a suit of clothes that he might wear." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Rupert Thomson, 'Air & Fire'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- rupert thomson, 'air and fire'" ]
         ])
     Tags = [ House ; Techno ]
     Tracks =
@@ -280,6 +281,7 @@ let cmprssd1001 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "What is true of a story is true of love: for either one to work, you'd better be good at talking and good at listening. Likewise, if stories only succeed when we consent to suspend disbelief, relationships require of us something similar: the ability to let go of our own worldview long enough to be intrigued and moved by someone else's. This is storybook love..." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- kathryn schulz, 'being wrong'" ]
         ])
     Tags = [ Electronic ; SingerSongwriter ]
     Tracks =
@@ -317,7 +319,7 @@ let cmprssd1010 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...in a wholly different sense of the phrase. It is not about living idyllically in our similarities, but about living peacefully and pleasurably in our differences. It is not bestowed from beyond the normal human realm but struggled for and gained, slowly and with effort. And it is not about unchanging love. It is about letting love change us." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Kathryn Schulz, 'Being Wrong'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- kathryn schulz, 'being wrong'" ]
         ])
     Tags = [ Dub ; Electronic ; HipHop ; House ]
     Tracks =
@@ -347,11 +349,11 @@ let cmprssd1011 = {
     Key = "cmprssd-1011"
     Name = "cmprssd-1011"
     MixedBy = None
-    Dedication = "for yvonne (sleep is not an option tonight)"
+    Dedication = "for yvonne | sleep is not an option tonight"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Night's getting worn out with use. Not worn out up above, where the stars are. It's worn out like a dress trailing along the ground, among stones and trees, right down to the depths of unwholesome tunnels and damp caves..." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Jules Renard ['Histoires naturelles']" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- jules renard, 'histoires naturelles'" ]
         ])
     Tags = [ SingerSongwriter ]
     Tracks =
@@ -387,11 +389,11 @@ let cmprssd1100 = {
     Key = "cmprssd-1100"
     Name = "cmprssd-1100"
     MixedBy = None
-    Dedication = "for emma (drift away from bone and skin)"
+    Dedication = "for emma | drift away from bone and skin"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Shards of night penetrate every nook and cranny. Thorns puncture it, frosts crack it, mud besmirches it. And every morning, when night recedes, a few tatters break loose and get caught here and there. That's how bats are born." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Jules Renard ['Histoires naturelles']" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- jules renard, 'histoires naturelles'" ]
         ])
     Tags = [ SingerSongwriter ]
     Tracks =
@@ -426,11 +428,11 @@ let cmprssd1101 = {
     Key = "cmprssd-1101"
     Name = "cmprssd-1101"
     MixedBy = None
-    Dedication = "for alice (a clotted sky)"
+    Dedication = "for alice | a clotted sky"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "They give me my daily lesson. They stipple the air with little cries. They draw a straight line, place a comma at the end, and, suddenly, start a new paragraph. They put the house where I live between wild parentheses. Too swift for the garden pond to make a copy of their flight, they soar from cellar to garret..." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Jules Renard ['Histoires naturelles']" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- jules renard, 'histoires naturelles'" ]
         ])
     Tags = [ SingerSongwriter ]
     Tracks =
@@ -465,11 +467,11 @@ let cmprssd1110 = {
     Key = "cmprssd-1110"
     Name = "cmprssd-1110"
     MixedBy = None
-    Dedication = "for emma (an indisguisable shade of twilight)"
+    Dedication = "for emma | an indisguisable shade of twilight"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...With their light feather quills, they inscribe matchless signatures. Then, in pairs, entwined, they mingle and spatter ink against the blue of the sky. But only the eye of a friend can follow them; you may know Latin and Greek, but I can read the unknown language these chimney swallows trace on the air." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Jules Renard ['Histoires naturelles']" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- jules renard, 'histoires naturelles'" ]
         ])
     Tags = [ SingerSongwriter ]
     Tracks =
@@ -506,7 +508,7 @@ let cmprssd1111 = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "No, what sex is about is more than a twitch in the loins; it's a celebration of spiritual union, of mutual trust. We say to each other in bed, here, I give myself to you in the expectation that you'll give me pleasure, and I will attempt to give you pleasure too. The social contract, let's call it. And the thrill lies in the contract, not in the pleasure that is its payoff." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Robert Silverberg ['Up the Line']" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- robert silverberg, 'up the line'" ]
         ])
     Tags = [ Classical ; ModernClassical ; Piano ]
     Tracks =
@@ -535,11 +537,11 @@ let cmprssdneph = {
     Key = "cmprssd-neph"
     Name = "cmprssd-neph"
     MixedBy = None
-    Dedication = "for me (a postlude)"
+    Dedication = "for me | a postlude"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "No! I am not Prince Hamlet, nor was meant to be; / Am an attendant lord, one that will do / To swell a progress, start a scene or two, / Advise the prince; no doubt, an easy tool, / Deferential, glad to be of use, / Politic, cautious and meticulous; / Full of high sentence, but a bit obtuse; / At times, indeed, almost ridiculous - / Almost, at times, the Fool." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- T. S. Eliot ['The Love Song of J. Alfred Prufrock']" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- t. s. eliot, 'the love song of j. alfred prufrock'" ]
         ])
     Tags = [ Ambient ; Choral ; Classical ;  Electronic ; Folk ; ModernClassical ; Piano ]
     Tracks =

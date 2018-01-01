@@ -15,7 +15,7 @@ let sss0011a = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "That's true, Mother. The English are frightfully conservative. I used to know a butler from the English Legation, and he for the Lord God wouldn't put a Czech sausage in his mouth. People don't eat them in our country, he said, and so he wouldn't eat one either, he said." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Karel Capek, 'War With The Newts'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- karel capek, 'war with the newts'" ]
         ])
     Tags = [ KitchenSink ; SingerSongwriter ]
     Tracks =
@@ -56,7 +56,7 @@ let sss0011b = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "And to be human, to be anything like human, is to know what one lacks, to know what one needs, to know what one must look for to find some semblance of completeness amongst strangers, all alone in the darkness." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Iain M. Banks, 'Matter'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- iain m. banks, 'matter'" ]
         ])
     Tags = [ Ambient ; Electronic ; KitchenSink ; SingerSongwriter ]
     Tracks =
@@ -92,7 +92,7 @@ let sss0012a = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Nowadays people abdicate their democratic responsibilities: elect representatives to rule on their behalf. Once they're elected they have years and years when they can do whatever they like; that's the nature of representative democracy..." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Adam Roberts, 'New Model Army'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- adam roberts, 'new model army'" ]
         ])
     Tags = [ Electronic ; KitchenSink ]
     Tracks =
@@ -127,7 +127,7 @@ let sss0012b = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...We don't have democracy in the world of politics today; we have oligarchy punctuated by occasional contests to determine who has the most effective control of the media." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Adam Roberts, 'New Model Army'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- adam roberts, 'new model army'" ]
         ])
     Tags = [ Dub ; Jazz ; SingerSongwriter ]
     Tracks =
@@ -168,7 +168,7 @@ let sss0012c = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "They were all young and soft, and they had no time, and so they hated the silence, the silence in themselves that had yet to be filled by experience. Some of them were driven to make noise, were kept jumping by something that was alive inside them..." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Geoff Ryman, 'The Child Garden'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- geoff ryman, 'the child garden'" ]
         ])
     Tags = [ Electronic ; House ; Techno ]
     Tracks =
@@ -201,7 +201,7 @@ let sss0012d = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Others like Milena, cleared the decks and waited for something to happen, something worthwhile to do or to say. They loathed the silence in themselves, not knowing that out of that silence would come all the things that were individual to them." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Geoff Ryman, 'The Child Garden'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- geoff ryman, 'the child garden'" ]
         ])
     Tags = [ Electronic ; House ; Techno ]
     Tracks =
@@ -234,7 +234,7 @@ let sss0013a = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Other people are disconcertingly quick to change their faces, one after another, and they wear them out. At first they suppose they have enough to last forever, but hardly have they reached forty when they come to the last of them. There is of course a tragic side to this..." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Rainer Maria Rilke, 'The Notebooks of Malte Laurids Brigge'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- rainer maria rilke, 'the notebooks of malte laurids brigge'" ]
         ])
     Tags = [ KitchenSink ; SingerSongwriter ]
     Tracks =
@@ -269,7 +269,7 @@ let sss0013b = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...They are not used to looking after their faces; the last is worn out in a week, holed and paper-thin in numerous places, and little by little the underlay shows through, the non-face, and they go about wearing that." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Rainer Maria Rilke, 'The Notebooks of Malte Laurids Brigge'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- rainer maria rilke, 'the notebooks of malte laurids brigge'" ]
         ])
     Tags = [ Dub ; HipHop ; KitchenSink ; Piano ]
     Tracks =
@@ -386,7 +386,7 @@ let sss0015a = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Physical pleasure is a sensual experience no different from pure seeing or the pure sensation with which a fine fruit fills the tongue; it is a great unending experience, which is given us, a knowing of the world, the fullness and the glory of all knowing." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Rainer Maria Rilke, 'Letter To A Young Poet [4]'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- rainer maria rilke, 'letters to a young poet [4]'" ]
         ])
     Tags = [ SingerSongwriter ]
     Tracks =
@@ -426,7 +426,7 @@ let sss0015b = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "I was asked by the record company to sum up \"my\" philosophy of life and music. \"My\" philosophy is quite simple: soul first, technique later, or \"Better to drink wine from the hands than water from a pretty cup\"; of course the ultimate is wine from a pretty cup. Amen." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Robbie Basho" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- robbie basho" ]
         ])
     Tags = [ Ambient ; Classical ; Electronic ; World ]
     Tracks =
@@ -459,7 +459,7 @@ let sss0016a = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "And the people who choose to try to be able to do as they like, to look for what it is that they like, who discover that this often involves them in difficult (but pleasurable?) rejections of that to which that have been accustomed – these are people held with little social honour in the modern world; who perhaps on some level are envied..." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Nicholas Mosley" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- nicholas mosley, 'catastrophe practice'" ]
         ])
     Tags = [ Dub ; KitchenSink; Techno ]
     Tracks =
@@ -494,7 +494,7 @@ let sss0016b = {
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...but not always enough to stop them making themselves and others happy. For the ability to be in a relationship with oneself is the ability to be happy – in this sense to have an area in common with others who are happy – but still, to be often solitary, which is a hard happiness and takes courage." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Nicholas Mosley" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- nicholas mosley, 'catastrophe practice'" ]
         ])
     Tags = [ Ambient ; Dub ; Electronic ; House ; Jazz ; Techno ]
     Tracks =

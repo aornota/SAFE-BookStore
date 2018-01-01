@@ -9,9 +9,9 @@ let forYourEarsOnlyi = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-i-for-emma/"
     Key = "for-your-ears-only-part-i"
-    Name = "for your ears only -- the concert (part i)"
+    Name = "for your ears only - the concert (part i)"
     MixedBy = None
-    Dedication = "for emma (fluttering a chinese fan in a knoxville fashion)"
+    Dedication = "for emma | fluttering a chinese fan in a knoxville fashion"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "The last piano in the world" ]
@@ -56,9 +56,9 @@ let forYourEarsOnlyii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-ii-for-tom-mizuno/"
     Key = "for-your-ears-only-part-ii"
-    Name = "for your ears only -- the concert (part ii)"
+    Name = "for your ears only - the concert (part ii)"
     MixedBy = None
-    Dedication = "for tom & mizuno (how small a thought...)"
+    Dedication = "for tom & mizuno | how small a thought..."
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...And the room fills with people," ]
@@ -88,9 +88,9 @@ let forYourEarsOnlyiii = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-iii-for-will/"
     Key = "for-your-ears-only-part-iii"
-    Name = "for your ears only -- the concert (part iii)"
+    Name = "for your ears only - the concert (part iii)"
     MixedBy = None
-    Dedication = "for will... (i love you more than the world can contain in its lonely and ramshackle head)"
+    Dedication = "for will... | i love you more than the world can contain in its lonely and ramshackle head"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Latecomers sit outside in the long grass," ]
@@ -131,9 +131,9 @@ let forYourEarsOnlyiv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-iv-and-priya/"
     Key = "for-your-ears-only-part-iv"
-    Name = "for your ears only -- the concert (part iv)"
+    Name = "for your ears only - the concert (part iv)"
     MixedBy = None
-    Dedication = "...and priya (all is a blank before us; all waits, undream'd of)"
+    Dedication = "...and priya | all is a blank before us; all waits, undream'd of"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...The old ones of the audience" ]
@@ -170,9 +170,9 @@ let forYourEarsOnlyv = {
     MixSeries = ForYourEarsOnly
     MixcloudUrl = "/djnarration/for-your-ears-only-the-concert-part-v-for-chad-babs/"
     Key = "for-your-ears-only-part-v"
-    Name = "for your ears only -- the concert (part v)"
+    Name = "for your ears only - the concert (part v)"
     MixedBy = None
-    Dedication = "for chad & babs (i touch your tears with pearls of love / oh take my heart to wed)"
+    Dedication = "for chad & babs | i touch your tears with pearls of love / oh take my heart to wed"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...And the pianist sits down," ]
@@ -180,7 +180,7 @@ let forYourEarsOnlyv = {
             para theme paraDefaultSmallest [ str "Then the old pianist weeps." ]
             para theme paraDefaultSmallest [ str "For all he can remember" ]
             para theme paraDefaultSmallest [ str "Is " ; italic "Three Blind Mice" ; str "." ]
-            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- Douglas Dunn, 'The Concert'" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- douglas dunn, 'the concert'" ]
         ])
     Tags = [ Guitar ; SingerSongwriter ]
     Tracks =
