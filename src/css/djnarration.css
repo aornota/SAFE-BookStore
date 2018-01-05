@@ -37,10 +37,10 @@ hr.dark { background-color : #202020 }
 .table { margin-bottom : 0.75rem }
 .table.default { background-color : white }
 .table.default td { color : #393939 ; border-bottom-color : #cfcfcf }
-.table.default tr:not(.is-selected):hover { background-color : #f3f3f3 } 
+.table.default tr:hover { background-color : #f3f3f3 } 
 .table.dark { background-color : black }
 .table.dark td { color : #c6c6c6 ; border-bottom-color : #303030 }
-.table.dark tr:not(.is-selected):hover { background-color : #0a0a0a }
+.table.dark tr:hover { background-color : #0a0a0a }
 
 .tabs.default a { color : #600060 ; background-color : #b3b3b3 /* custom $light */ ; border-bottom-color : #d9d9d9 }
 .tabs.default a:hover { color : #a000a0 ; border-bottom-color : #a000a0 }
