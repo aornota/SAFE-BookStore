@@ -16,7 +16,7 @@
     <Compile Include="../data/cmprssd.fs" />
     <Compile Include="../data/for-your-ears-only.fs" />
     <Compile Include="../data/now-we-are-n.fs" />
-    <Compile Include="../data/data.fs" />
+    <Compile Include="../data/all.fs" />
     <Compile Include="ui-navigation.fs" />
     <Compile Include="ui-common.fs" />
     <Compile Include="ui-state.fs" />

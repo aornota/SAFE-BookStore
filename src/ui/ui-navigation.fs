@@ -2,7 +2,7 @@ module Aornota.DJNarration.UI.Navigation
 
 open System
 
-open Aornota.DJNarration.Data
+open Aornota.DJNarration.Data.All
 open Aornota.DJNarration.Data.Common
 
 open Elmish.Browser.UrlParser

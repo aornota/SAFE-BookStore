@@ -1,4 +1,4 @@
-module Aornota.DJNarration.Data
+module Aornota.DJNarration.Data.All
 
 open Aornota.DJNarration.Data.Buncemixes
 open Aornota.DJNarration.Data.Cmprssd
