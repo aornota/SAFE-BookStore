@@ -7,9 +7,9 @@ open Aornota.DJNarration.Data.Common
 
 open Elmish.Browser.UrlParser
 
-let private encodeUrl (text:string) = ((text.Replace (" ", "%20")).Replace ("/", "%2f")).Replace ("-", "%2d") // TODO-NMB: Encode more characters?...
-
 let private decodeUrl (url:string) = ((url.Replace ("%20", " ")).Replace ("%2f", "/")).Replace ("%2d", "-") // TODO-NMB: Decode more characters?...
+
+let encodeUrl (text:string) = ((text.Replace (" ", "%20")).Replace ("/", "%2f")).Replace ("-", "%2d") // TODO-NMB: Encode more characters?...
 
 type ValidRoute =
     | Home

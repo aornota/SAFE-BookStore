@@ -48,11 +48,15 @@ let private renderHeader theme state dispatch =
                 yield navbarItem [
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
                         link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str DJ_NARRATION ] ] ]
-                yield navbarItem [ tabs theme { tabsDefault with Tabs = seriesTabs } ]
-                // TODO-NMB: Search textbox...
-                // TODO-NMB: Tags drop-down (highlighted selected?)...
+                let tooltip = { tooltipDefaultBottom with TooltipText = "Search for artist / title / label" }
+                yield navbarItem [
+                    searchBox theme state.SearchId state.SearchText tooltip (SearchTextChanged >> dispatch) (fun _ -> dispatch RequestSearch) ]
+                (* TODO-NMB: allTags drop-down with *links* [and highlight specific Tag if ValidRoute (Tag...), cf. IsActive for seriesTabs?]...
+                yield navbarItem [ para theme paraCentredSmallest [ str "TODO-NMB: Tags drop-down..." ] ] *)
                 yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) state.NavbarBurgerIsActive ]
-            navbarMenu theme navbarData state.NavbarBurgerIsActive [ navbarEnd [ navbarItem [ button theme toggleThemeButton [] ] ] ] ] ]
+            navbarMenu theme navbarData state.NavbarBurgerIsActive [ 
+                navbarStart [ navbarItem [ tabs theme { tabsDefault with Tabs = seriesTabs } ] ]
+                navbarEnd [ navbarItem [ button theme toggleThemeButton [] ] ] ] ] ]
 
 let private renderMixcloudPlayer isMini isDefault mixcloudUrl =
     let height = if isMini then "60" else "120"

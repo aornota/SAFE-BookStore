@@ -17,10 +17,13 @@ hr.default { background-color : #dfdfdf }
 hr.dark { background-color : #202020 }
 
 .footer { padding-top : 0.5rem ; padding-left : 0.5rem ; padding-bottom : 0.5rem ; padding-right : 0.5rem }
-.footer.default { color : #262626 ; background-color : white }
+.footer.default { color : #393939 ; background-color : white }
 .footer.default.alternative { color : #262626 ; background-color : #b3b3b3 /* custom $light */ }
-.footer.dark { color : #d9d9d9 ; background-color : black }
+.footer.dark { color : #c6c6c6 ; background-color : black }
 .footer.dark.alternative { color : #d9d9d9 ; background-color : #4c4c4c /* custom $dark */ }
+
+.input.default { color : #393939 ; background-color : white ; border-color : #4c4c4c /* custom $dark */ }
+.input.dark { color : #c6c6c6 ; background-color : black ; border-color : #b3b3b3 /* custom $light */ }
 
 .level:not(:last-child) { margin-bottom : 1.0rem }
 .level.hasContinuation:not(:last-child) { margin-bottom : 0.5rem }
@@ -42,10 +45,13 @@ hr.dark { background-color : #202020 }
 .table.dark td { color : #c6c6c6 ; border-bottom-color : #303030 }
 .table.dark tr:hover { background-color : #0a0a0a }
 
-.tabs.default a { color : #600060 ; background-color : #b3b3b3 /* custom $light */ ; border-bottom-color : #d9d9d9 }
+.tabs.default { background-color : #b3b3b3 /* custom $light */ }
+.tabs.default ul { border-bottom-color : #b3b3b3 /* custom $light */ }
+.tabs.default a { color : #600060 ; border-bottom-color : #d9d9d9 }
 .tabs.default a:hover { color : #a000a0 ; border-bottom-color : #a000a0 }
 .tabs.default li.is-active a { color : #a000a0 ; border-bottom-color : #393939 }
-.tabs.dark a { color : #ffbfbf ; background-color : #4c4c4c /* custom $dark */ ; border-bottom-color : #262626 }
+.tabs.dark { background-color : #4c4c4c /* custom $dark */ }
+.tabs.dark ul { border-bottom-color : #4c4c4c /* custom $dark */ }
+.tabs.dark a { color : #ffbfbf ; border-bottom-color : #262626 }
 .tabs.dark a:hover { color : #ff8f8f ; border-bottom-color : #ff8f8f }
 .tabs.dark li.is-active a { color : #ff8f8f ; border-bottom-color : #c6c6c6 }
-

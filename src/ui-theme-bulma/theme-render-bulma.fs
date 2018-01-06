@@ -1,9 +1,12 @@
 module Aornota.UI.Theme.Render.Bulma
 
+open System
+
 open Aornota.UI.Render.Bulma
 open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 
+open Fable.Core.JsInterop
 module Rct = Fable.Helpers.React
 open Fable.Helpers.React.Props
 
@@ -54,6 +57,8 @@ let private getTooltipProps tooltipData = Tooltip.dataTooltip tooltipData.Toolti
 
 let private getClassName theme useAlternativeClass = if useAlternativeClass then getAlternativeClass theme.AlternativeClass else getThemeClass theme.ThemeClass
 
+let fieldDefault = { AddOns = None ; Grouped = None ; TooltipData = None }
+
 let box theme useAlternativeClass children =
     let className = getClassName theme useAlternativeClass
     Box.box' [ Box.customClass className ] children
@@ -91,9 +96,9 @@ let button theme buttonData children =
             match tooltipData with | Some tooltipData -> yield getTooltipProps tooltipData | None -> ()
             yield Disabled (match buttonData.Interaction with | NotEnabled _ -> true | _ -> false) :> IHTMLProp ]
     ] [
-        match buttonData.IconLeft with | Some iconDataLeft -> yield icon iconDataLeft | None -> ()
+        match buttonData.IconLeft with | Some iconDataLeft -> yield icon { iconDataLeft with IconAlignment = Some LeftAligned } | None -> ()
         yield! children
-        match buttonData.IconRight with | Some iconDataRight -> yield icon iconDataRight | None -> () ]
+        match buttonData.IconRight with | Some iconDataRight -> yield icon { iconDataRight with IconAlignment = Some RightAligned } | None -> () ]
 
 let field theme fieldData children =
     let tooltipData = match fieldData.TooltipData with | Some tooltipData -> Some (theme.TransformTooltipData tooltipData) | None -> None
@@ -260,6 +265,22 @@ let progress theme useAlternativeClass progressData =
         yield Progress.max progressData.MaxValue
     ] []
 
+// TODO-NMB: "Genericize"?...
+let searchBox theme (searchId:Guid) searchText tooltip (onChange:string -> unit) onEnter =
+    let className = getClassName theme false
+    field theme { fieldDefault with TooltipData = Some tooltip } [
+        Control.control_div [ Control.hasIconLeft ] [
+            Input.input [
+                yield Input.customClass className
+                yield Input.isSmall
+                yield Input.typeIsText
+                yield Input.defaultValue searchText
+                yield Input.props [
+                    Key (searchId.ToString ())
+                    OnChange (fun ev -> !!ev.target?value |> onChange)
+                    onEnterPressed onEnter ] ]
+            icon { iconFindSmall with IconAlignment = Some LeftAligned } ] ]
+
 let span theme spanData children =
     let spanData = theme.TransformSpanData spanData
     let customClasses = [
@@ -323,6 +344,4 @@ let tag theme tagData children =
     ] [
         yield! children
         match tagData.OnDismiss with | Some onDismiss -> yield delete onDismiss | None -> () ]
-
-let fieldDefault = { AddOns = None ; Grouped = None ; TooltipData = None }
 

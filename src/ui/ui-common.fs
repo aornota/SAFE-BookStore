@@ -35,10 +35,8 @@ type Input =
     | ToggleNavbarBurger
     | SearchTextChanged of searchText : string
     | RequestSearch
-    | ProcessSearch
     | SearchProcessed of matches : (Mix * MatchInfo list) list
     | ErrorProcessingSearch of exn : exn
-    | ProcessTag of tag : Tag
     | TagProcessed of tag : Tag * matches : Mix list
     | ErrorProcessingTag of exn : exn
 
@@ -55,6 +53,7 @@ type State = {
     NavbarBurgerIsActive : bool
     ValidRoute : ValidRoute
     SearchText : string
+    SearchId : Guid
     SearchResults : (Mix * MatchInfo list) list
     TagResults : Mix list }
 

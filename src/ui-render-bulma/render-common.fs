@@ -2,6 +2,10 @@ module Aornota.UI.Render.Common
 
 module Rct = Fable.Helpers.React
 open Fable.Helpers.React.Props
+open Fable.Import.React
+open Fable.PowerPack
+
+type Alignment = | Centred | LeftAligned | RightAligned | Justified | FullWidth
 
 type DivData = {
     DivCustomClass : string option
@@ -41,4 +45,12 @@ let divDefault = { DivCustomClass = None ; IsCentred = false ; PadV = None ; Pad
 let divCentred = { divDefault with IsCentred = true }
 
 let divVerticalSpace height = div { divDefault with PadV = Some (height / 2) } [ str SPACE ]
+
+let onEnterPressed onEnter =
+    OnKeyDown (fun (ev:KeyboardEvent) ->
+        match ev with
+        | _ when ev.keyCode = Keyboard.Codes.enter ->
+            ev.preventDefault ()
+            onEnter ()
+        | _ -> ())
 

@@ -1,6 +1,7 @@
 module Aornota.UI.Theme.Common
 
 open Aornota.UI.Render.Bulma
+open Aornota.UI.Render.Common
 
 open Fable.Import.React
 
@@ -11,8 +12,6 @@ type AlternativeClass = | AlternativeClass of alternativeClass : string
 type Semantic = | Primary | Info | Link | Success | Warning | Danger | Dark | Light | Black | White
 
 type Greyscale = | BlackBis | BlackTer | GreyDarker | GreyDark | Grey | GreyLight | GreyLighter | WhiteTer | WhiteBis
-
-type Alignment = | Centred | LeftAligned | RightAligned | Justified | FullWidth
 
 type TooltipPosition = | TooltipTop | TooltipRight | TooltipBottom | TooltipLeft
 

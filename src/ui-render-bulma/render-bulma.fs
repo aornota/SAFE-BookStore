@@ -19,6 +19,7 @@ type Icon = | SpinnerPulse | Theme | Checked | Unchecked | ExpandDown | Collapse
 
 type IconData = {
     IconSize : Size
+    IconAlignment : Alignment option
     Icon : Icon }
 
 type FixedSize = | Square16 | Square24 | Square32 | Square48 | Square64 | Square96 | Square128
@@ -29,7 +30,7 @@ type ImageSize =
     | FixedSize of fixedSize : FixedSize
     | Ratio of ratio: Ratio
 
-let private iconDefault = { IconSize = Normal ; Icon = Theme }
+let private iconDefault = { IconSize = Normal ; IconAlignment = None ; Icon = Theme }
 
 let private columns isMobile children = Columns.columns [ if isMobile then yield Columns.customClass "is-mobile" ] children
 
@@ -53,6 +54,7 @@ let icon iconData =
     let size, faSize =
         match iconData.IconSize with
         | Large -> Some Icon.isLarge, "fa-3x" | Medium -> Some Icon.isMedium, "fa-2x" | Normal -> None, "fa-lg" | Small -> Some Icon.isSmall, ""
+    let alignment = match iconData.IconAlignment with | Some LeftAligned -> Some Icon.isLeft | Some RightAligned -> Some Icon.isRight | _ -> None
     let iconClass =
         match iconData.Icon with
         | SpinnerPulse -> "fa-spinner fa-pulse"
@@ -66,7 +68,10 @@ let icon iconData =
         | Notes -> "fa-pencil"
         | File -> "fa-file-o"
         | Find -> "fa-search"
-    Icon.icon [ match size with Some size -> yield size | None -> () ] [ Rct.i [ ClassName (sprintf "fa %s %s" iconClass faSize) ] [] ]
+    Icon.icon [
+        match size with Some size -> yield size | None -> ()
+        match alignment with Some alignment -> yield alignment | None -> ()
+    ] [ Rct.i [ ClassName (sprintf "fa %s %s" iconClass faSize) ] [] ]
 
 let image source size =
     let option =
