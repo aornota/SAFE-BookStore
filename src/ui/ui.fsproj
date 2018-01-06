@@ -11,13 +11,16 @@
     <Compile Include="../ui-theme-bulma/theme-render-bulma.fs" />
     <Compile Include="../ui-common/debug-messages.fs" />
     <Compile Include="../ui-common/local-storage.fs" />
-    <Compile Include="domain.fs" />
-    <Compile Include="buncemixes.fs" />
-    <Compile Include="cmprssd.fs" />
-    <Compile Include="for-your-ears-only.fs" />
-    <Compile Include="now-we-are-n.fs" />
-    <Compile Include="data.fs" />
+    <Compile Include="../data/common.fs" />
+    <Compile Include="../data/buncemixes.fs" />
+    <Compile Include="../data/cmprssd.fs" />
+    <Compile Include="../data/for-your-ears-only.fs" />
+    <Compile Include="../data/now-we-are-n.fs" />
+    <Compile Include="../data/data.fs" />
     <Compile Include="ui-navigation.fs" />
+    <Compile Include="ui-common.fs" />
+    <Compile Include="ui-state.fs" />
+    <Compile Include="ui-render.fs" />
     <Compile Include="ui-app.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />

@@ -1,6 +1,7 @@
-module Aornota.DJNarration.NowWeAreN
+module Aornota.DJNarration.Data.NowWeAreN
 
-open Aornota.DJNarration.Domain
+open Aornota.DJNarration.Data.Common
+
 open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 open Aornota.UI.Theme.Render.Bulma
@@ -119,5 +120,5 @@ let nowWeAre02 = {
     ]
 }
 
-let nowWeAreN = [ nowWeAre01i ; nowWeAre01ii ; nowWeAre02 ]
+let nowWeAreN = [ nowWeAre01i ; nowWeAre01ii ; nowWeAre02 (* TODO-NMB: nowWeAre03..nowWeAre18... *) ]
 

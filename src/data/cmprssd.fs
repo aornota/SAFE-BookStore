@@ -1,6 +1,7 @@
-module Aornota.DJNarration.Cmprssd
+module Aornota.DJNarration.Data.Cmprssd
 
-open Aornota.DJNarration.Domain
+open Aornota.DJNarration.Data.Common
+
 open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 open Aornota.UI.Theme.Render.Bulma
