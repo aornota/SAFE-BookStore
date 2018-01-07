@@ -6,17 +6,16 @@ open Fable.Import.React
 
 type [<Measure>] second
 
+type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
+
+type Tag = // TODO-NMB: More?...
+    | Ambient | Calypso | Choral | Classical | Dub | Electronic | Fado | Folk | Guitar | HipHop | House | Jazz | KitchenSink | ModernClassical | Piano | SingerSongwriter | Techno | World
+
 type Track = {
     Artist : string
     Title : string
     Label : string option
     Duration : float<second> }
-
-type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
-
-// TODO-NMB: More?...
-type Tag =
-    | Ambient | Calypso | Choral | Classical | Dub | Electronic | Fado | Folk | Guitar | HipHop | House | Jazz | KitchenSink | ModernClassical | Piano | SingerSongwriter | Techno | World
 
 type Mix = {
     MixSeries : MixSeries
@@ -29,11 +28,16 @@ type Mix = {
     Tags : Tag list
     Tracks : Track list }
 
+let [<Literal>] BUNCEMIXES = "buncemixes"
+let [<Literal>] CMPRSSD = "cmprssd"
+let [<Literal>] FOR_YOUR_EARS_ONLY = "for your ears only"
+let [<Literal>] NOW_WE_ARE_N = "now we are n"
+
 let allMixSeries = [ Buncemixes ; Cmprssd ; ForYourEarsOnly ; NowWeAreN ]
 
-let mixSeriesTabText mixSeries = match mixSeries with | Buncemixes -> "buncemixes" | Cmprssd -> "cmprssd" | ForYourEarsOnly -> "for your ears only" | NowWeAreN -> "now we are n"
-let mixSeriesText mixSeries =
-    match mixSeries with | ForYourEarsOnly -> "for your ears only - the concert" | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesTabText mixSeries
+let mixSeriesText mixSeries = match mixSeries with | Buncemixes -> BUNCEMIXES | Cmprssd -> CMPRSSD | ForYourEarsOnly -> FOR_YOUR_EARS_ONLY | NowWeAreN -> NOW_WE_ARE_N
+let mixSeriesFullText mixSeries =
+    match mixSeries with | ForYourEarsOnly -> sprintf "%s - the concert" FOR_YOUR_EARS_ONLY | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesText mixSeries
 
 let tagText tag =
     match tag with

@@ -12,8 +12,10 @@ open Fable.Core.JsInterop
 
 importSideEffects "babel-polyfill" // TODO-NMB: Is this necessary?...
 
+let urlUpdate route state = State.urlUpdate route state true
+
 Program.mkProgram State.initialize State.transition Render.render
-|> Program.toNavigable (parseHash Navigation.fromUrlHash) State.urlUpdate
+|> Program.toNavigable (parseHash Navigation.fromUrlHash) urlUpdate
 #if DEBUG
 |> Program.withConsoleTrace
 |> Program.withHMR

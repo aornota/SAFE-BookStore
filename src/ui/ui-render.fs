@@ -35,7 +35,7 @@ let private renderHeader theme state dispatch =
         allMixSeries
         |> List.map (fun mixSeries ->
             let isActive = match state.ValidRoute with | MixSeries mixSeries' when mixSeries' = mixSeries -> true | _ -> false
-            { IsActive = isActive ; TabText = mixSeriesTabText mixSeries ; TabLink = toUrlHash (MixSeries mixSeries) })
+            { IsActive = isActive ; TabText = mixSeriesText mixSeries ; TabLink = toUrlHash (MixSeries mixSeries) })
     let tooltipText = match state.UseDefaultTheme with | true -> "Switch to dark theme" | false -> "Switch to light theme"           
     let tooltipData = if state.NavbarBurgerIsActive then tooltipDefaultRight else tooltipDefaultLeft    
     let toggleThemeInteraction = Clickable ((fun _ -> dispatch ToggleTheme), Some { tooltipData with TooltipText = tooltipText })
@@ -48,9 +48,9 @@ let private renderHeader theme state dispatch =
                 yield navbarItem [
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
                         link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str DJ_NARRATION ] ] ]
-                let tooltip = { tooltipDefaultBottom with TooltipText = "Search for artist / title / label" }
+                let tooltip = { tooltipDefaultBottom with TooltipText = "Search for tracks" }
                 yield navbarItem [
-                    searchBox theme state.SearchId state.SearchText tooltip (SearchTextChanged >> dispatch) (fun _ -> dispatch RequestSearch) ]
+                    searchBox theme state.SearchId state.SearchBoxText tooltip (SearchBoxTextChanged >> dispatch) (fun _ -> dispatch RequestSearch) ]
                 (* TODO-NMB: allTags drop-down with *links* [and highlight specific Tag if ValidRoute (Tag...), cf. IsActive for seriesTabs?]...
                 yield navbarItem [ para theme paraCentredSmallest [ str "TODO-NMB: Tags drop-down..." ] ] *)
                 yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) state.NavbarBurgerIsActive ]
@@ -70,7 +70,7 @@ let private renderMixcloudPlayer isMini isDefault mixcloudUrl =
         Rct.Props.Width "100%"
         Rct.Props.Height height
         Rct.Props.Src src
-        Rct.Props.FrameBorder "0" ] []
+        Rct.Props.FrameBorder 0 ] []
 
 let private renderTracklisting theme mix =
     let durations = mix.Tracks |> List.map (fun track -> track.Duration)
@@ -101,7 +101,7 @@ let private renderMatches theme (searchText:string) matchInfos =
         words text
         |> List.ofArray
         |> List.map highlighted
-        |> List.mapi (fun i word -> if i = 0 then word else [ str " " ] @ word)
+        |> List.mapi (fun i word -> if i = 0 then word else [ str SPACE ] @ word)
         |> List.collect id
     let matchRow matchInfo =
         tr false [
@@ -122,7 +122,7 @@ let private renderMixContent theme state mix renderMode =
         match renderMode with
         | RenderMix | RenderSearch _ | RenderTag _ ->
             Some (para theme paraDefaultSmallest
-                [ link theme { LinkUrl = toUrlHash (MixSeries mix.MixSeries) ; LinkType = SameWindow } [ str (mixSeriesTabText mix.MixSeries) ] ])
+                [ link theme { LinkUrl = toUrlHash (MixSeries mix.MixSeries) ; LinkType = SameWindow } [ str (mixSeriesText mix.MixSeries) ] ])
         | RenderMixSeries -> None
     let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
     let narrative =
@@ -176,7 +176,7 @@ let private renderMixSeries theme state mixSeries =
         divVerticalSpace 10
         columnContent [
             div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "%s | %s" (mixSeriesText mixSeries) (mixOrMixes mixes.Length)) ]
+                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "%s | %s" (mixSeriesFullText mixSeries) (mixOrMixes mixes.Length)) ]
                 yield hr theme false
                 for mix in mixes do yield! renderMixContent theme state mix RenderMixSeries ] ]
     ]
@@ -194,7 +194,7 @@ let private renderMix theme state mix =
 let private renderSearch theme state searchText =
     let searchResults =
         state.SearchResults
-        |> List.sortBy (fun (mix, matchInfos) -> -(matchInfos |> List.maxBy (fun matchInfo -> matchInfo.MatchScore)).MatchScore, mixSeriesTabText mix.MixSeries, mix.Name)
+        |> List.sortBy (fun (mix, matchInfos) -> -(matchInfos |> List.maxBy (fun matchInfo -> matchInfo.MatchScore)).MatchScore, mixSeriesText mix.MixSeries, mix.Name)
     [
         divVerticalSpace 10
         columnContent [
@@ -208,13 +208,13 @@ let private renderSearch theme state searchText =
     ]
 
 let private renderTag theme state tag =
-    let tagResults = state.TagResults |> List.sortBy (fun mix -> mixSeriesTabText mix.MixSeries, mix.Name)
+    let tagResults = state.TagResults |> List.sortBy (fun mix -> mixSeriesText mix.MixSeries, mix.Name)
     [
         divVerticalSpace 10
         columnContent [
             div divDefault [
                 yield para theme { paraCentredMedium with Weight = SemiBold } [
-                    str "tag results for "
+                    str "mixes tagged "
                     italic (tagText tag)
                     str (sprintf " | %s" (mixOrMixes tagResults.Length)) ]
                 yield hr theme false

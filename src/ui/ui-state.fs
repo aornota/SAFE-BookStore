@@ -19,27 +19,25 @@ open Fable.Import
 
 let [<Literal>] private APP_PREFERENCES_KEY = "djnarration-ui-app-preferences"
 
-let private invalidRouteMessage invalidRoute isLastRoute =
-    let routeText = if isLastRoute then "last route" else "route"
-    match invalidRoute with
-    | UnknownMix key -> debugMessage (sprintf "Invalid %s: mix '#mix/%s' not found" routeText key)
-    | EmptySearch -> debugMessage (sprintf "Invalid %s: '#search/' does not specify search text" routeText)
-    | UnknownTag tagText -> debugMessage (sprintf "Invalid %s: tag '#tag/%s' not found" routeText tagText)
-    | Unrecognized hash -> debugMessage (sprintf "Invalid %s: '#%s' not recognized" routeText hash)
-
-let private unableToParseRouteMessage = debugMessage (sprintf "Unable to parse route: '%s'" Browser.location.hash)
+let [<Literal>] private ERROR_PARSING_ROUTE = "error parsing route"
 
 let private setBodyClass useDefaultTheme = Browser.document.body.className <- getThemeClass (getTheme useDefaultTheme).ThemeClass
 
-let private setTitle validRoute =
-    let title =
+let private setTitle text = Browser.document.title <- sprintf "%s | %s" DJ_NARRATION text
+
+let private setValidTitle validRoute =
+    let text =
         match validRoute with
-        | Home -> DJ_NARRATION
-        | MixSeries mixSeries -> sprintf "%s | %s" DJ_NARRATION (mixSeriesTabText mixSeries)
-        | Mix mix -> sprintf "%s | %s" DJ_NARRATION mix.Name
-        | Search searchText -> sprintf "%s | search results for '%s'" DJ_NARRATION searchText
-        | Tag tag -> sprintf "%s | tag results for '%s'" DJ_NARRATION (tagText tag)
-    Browser.document.title <- title
+        | Home -> HOME
+        | MixSeries mixSeries -> mixSeriesText mixSeries
+        | Mix mix -> mix.Name
+        | Search searchText -> sprintf "search results for '%s'" searchText
+        | Tag tag -> sprintf "mixes tagged '%s'" (tagText tag)
+    setTitle text
+
+let private setInvalidTitle invalidRoute = setTitle (invalidRouteText invalidRoute)
+
+let private unableToParseRouteMessage = debugMessage (sprintf "Unable to parse route: '%s'" Browser.location.hash)
 
 let private readPreferencesCmd =
     let readPreferences () = async { return Option.map ofJson<Preferences> (readJson APP_PREFERENCES_KEY) }
@@ -50,7 +48,7 @@ let private writePreferencesCmd state =
     let lastRoute =
         match state.ValidRoute with
         | Home -> LastWasHome
-        | MixSeries mixSeries -> LastWasMixSeries mixSeries
+        | MixSeries mixSeries -> LastWasMixSeries (mixSeriesText mixSeries)
         | Mix mix -> LastWasMix mix.Key
         | Search searchText -> LastWasSearch searchText
         | Tag tag -> LastWasTag (tagText tag)
@@ -76,9 +74,38 @@ let private processSearchCmd searchText =
 let private processTagCmd tag =
     let processTag tag = async {
         do! Async.Sleep 1
-        let matches = allMixes |> List.filter (fun mix -> mix.Tags |> List.contains tag)
-        return tag, matches }
+        return tag, allMixes |> List.filter (fun mix -> mix.Tags |> List.contains tag) }
     Cmd.ofAsync processTag tag TagProcessed ErrorProcessingTag
+
+let urlUpdate route state updateTitle =
+    match route with
+    // Note: Special handling for Search | Tag [compared with other ValidRoutes, i.e. Home | MixSeries | Mix].
+    | Some (ValidRoute (Search searchText)) ->
+        if String.IsNullOrWhiteSpace searchText then // note: should never happen
+            let state = { state with DebugMessages = debugMessage "searchText is null-or-white-space" :: state.DebugMessages }
+            if updateTitle then setInvalidTitle EmptySearch
+            state, Cmd.none
+        else
+            let state = { state with Status = ProcessingSearch ; SearchBoxText = searchText ; SearchId = Guid.NewGuid () ; Tag = None }
+            state, processSearchCmd state.SearchBoxText
+    | Some (ValidRoute (Tag tag)) ->
+        let state = { state with Status = ProcessingTag ; SearchBoxText = "" ; SearchId = Guid.NewGuid () ; Tag = Some tag }
+        state, processTagCmd tag
+    | Some (ValidRoute validRoute) ->
+        let state = { state with ValidRoute = validRoute ; SearchBoxText = "" ; SearchId = Guid.NewGuid () ; Tag = None }
+        if updateTitle then setValidTitle state.ValidRoute
+        state, writePreferencesCmd state        
+    | Some (InvalidRoute invalidRoute) ->
+        let state = { state with DebugMessages = invalidRouteMessage invalidRoute false :: state.DebugMessages }
+        if updateTitle then setInvalidTitle invalidRoute
+        state, Cmd.none
+    | Some Empty ->
+        if updateTitle then setValidTitle state.ValidRoute
+        state, Cmd.none
+    | None -> // note: should never happen
+        let state = { state with DebugMessages = unableToParseRouteMessage :: state.DebugMessages }
+        if updateTitle then setTitle ERROR_PARSING_ROUTE
+        state, Cmd.none
 
 let initialize route =
     let duplicateKeyMessages =
@@ -92,79 +119,49 @@ let initialize route =
         UseDefaultTheme = true
         NavbarBurgerIsActive = false
         ValidRoute = Home
-        SearchText = ""
+        SearchBoxText = ""
         SearchId = Guid.NewGuid ()
         SearchResults = []
+        Tag = None
         TagResults = [] }
     setBodyClass state.UseDefaultTheme
     state, readPreferencesCmd
 
-let urlUpdate route state =
-    let modifyUrlCmd = Navigation.modifyUrl (match state.ValidRoute with | Home -> "#" | _ -> toUrlHash state.ValidRoute)
-    match route with
-    // Note: Special handling for Search | Tag.
-    | Some (ValidRoute (Search searchText)) ->
-        if String.IsNullOrWhiteSpace searchText then // note: should never happen
-            let state = { state with DebugMessages = debugMessage "searchText is null-or-white-space" :: state.DebugMessages }
-            state, modifyUrlCmd
-        else
-            let state = { state with Status = ProcessingSearch ; SearchText = searchText ; SearchId = Guid.NewGuid () }
-            state, processSearchCmd state.SearchText
-    | Some (ValidRoute (Tag tag)) ->
-        let state = { state with Status = ProcessingTag ; SearchText = "" ; SearchId = Guid.NewGuid () }
-        state, processTagCmd tag
-    | Some (ValidRoute validRoute) ->
-        let state = { state with ValidRoute = validRoute ; SearchText = "" ; SearchId = Guid.NewGuid () }
-        setTitle state.ValidRoute
-        state, writePreferencesCmd state        
-    | Some (InvalidRoute invalidRoute) ->
-        let state = { state with DebugMessages = invalidRouteMessage invalidRoute false :: state.DebugMessages }
-        state, modifyUrlCmd
-    | Some Empty ->
-        state, modifyUrlCmd
-    | None ->
-        let state = { state with DebugMessages = unableToParseRouteMessage :: state.DebugMessages }
-        state, modifyUrlCmd
-
 let transition input state =
     let initRoute state = match state.Status with | ReadingPreferences initRoute -> initRoute | _ -> None
-    let modifyUrlCmd validRoute = Navigation.modifyUrl (toUrlHash validRoute)
     match input with
     | DismissDebugMessage debugId ->
         let state = { state with DebugMessages = state.DebugMessages |> removeDebugMessage debugId }
         state, Cmd.none
     | PreferencesRead (Some preferences) ->
-        let initRoute = initRoute state
+        let modifyUrlCmd validRoute = Navigation.modifyUrl (toUrlHash validRoute)
         let lastRoute =
             match preferences.LastRoute with
             | LastWasHome -> ValidRoute Home
-            | LastWasMixSeries mixSeries -> ValidRoute (MixSeries mixSeries)
-            | LastWasMix key -> Route.FromMix key
+            | LastWasMixSeries mixSeriesKey -> Route.FromMixSeries mixSeriesKey
+            | LastWasMix mixKey -> Route.FromMix mixKey
             | LastWasSearch searchText -> ValidRoute (Search searchText)
-            | LastWasTag tagText -> Route.FromTag tagText
-        let lastRoute, lastRouteMessage =
+            | LastWasTag tagKey -> Route.FromTag tagKey
+        let lastRoute, lastRouteMessage, modifyUrlCmd =
             match lastRoute with
-            | ValidRoute _ -> Some lastRoute, []
-            | InvalidRoute invalidRoute -> Some (ValidRoute Home), [ invalidRouteMessage invalidRoute true ]
-            | Empty -> Some (ValidRoute Home), []
-        let modifyUrlCmd =
-            match lastRoute with
-            | Some (ValidRoute validRoute) -> Some (modifyUrlCmd validRoute)
-            | _ -> None
-        let route, messages, modifyUrlCmd =
-            match initRoute with
-            | Some (ValidRoute _) -> initRoute, [], None
-            | Some (InvalidRoute invalidRoute) -> lastRoute, invalidRouteMessage invalidRoute false :: lastRouteMessage, modifyUrlCmd
-            | Some Empty -> lastRoute, lastRouteMessage, modifyUrlCmd
-            | None -> lastRoute, unableToParseRouteMessage :: lastRouteMessage, modifyUrlCmd
+            | ValidRoute validRoute -> Some (ValidRoute validRoute), [], Some (modifyUrlCmd validRoute)
+            | InvalidRoute invalidRoute -> Some (ValidRoute Home), [ invalidRouteMessage invalidRoute true ], Some (modifyUrlCmd Home)
+            | Empty -> None, [], None
+        let route, messages, setTitle, modifyUrlCmd =
+            match initRoute state with
+            | Some (ValidRoute validRoute) -> Some (ValidRoute validRoute), [], None, None
+            | Some (InvalidRoute invalidRoute) -> lastRoute, invalidRouteMessage invalidRoute false :: lastRouteMessage, Some (fun _ -> setInvalidTitle invalidRoute), None
+            | Some Empty -> lastRoute, lastRouteMessage, None, modifyUrlCmd
+            | None -> (* note: should never happen *) lastRoute, unableToParseRouteMessage :: lastRouteMessage, Some (fun _ -> setTitle ERROR_PARSING_ROUTE), None
         let state = { state with DebugMessages = messages @ state.DebugMessages ; Status = Ready ; UseDefaultTheme = preferences.UseDefaultTheme }
         setBodyClass state.UseDefaultTheme
-        let state, cmd = urlUpdate route state
+        match setTitle with | Some setTitle -> setTitle () | None -> ()
+        let state, cmd = urlUpdate route state (match setTitle with | Some _ -> false | None -> true)
         state, Cmd.batch [ yield cmd ; match modifyUrlCmd with | Some modifyUrlCmd -> yield modifyUrlCmd | None -> () ]
     | PreferencesRead None ->
         let initRoute = initRoute state
         let state = { state with Status = Ready }
-        urlUpdate initRoute state
+        urlUpdate initRoute state true
     | ErrorReadingPreferences exn ->
         let state = { state with DebugMessages = debugMessage (sprintf "Error reading preferences from local storage -> %s" exn.Message) :: state.DebugMessages }
         state, Cmd.ofMsg (PreferencesRead None)
@@ -180,31 +177,29 @@ let transition input state =
     | ToggleNavbarBurger ->
         let state = { state with NavbarBurgerIsActive = not state.NavbarBurgerIsActive }
         state, Cmd.none
-    | SearchTextChanged searchText ->
-        let state = { state with SearchText = searchText }
+    | SearchBoxTextChanged searchBoxText ->
+        let state = { state with SearchBoxText = searchBoxText }
         state, Cmd.none
     | RequestSearch ->
-        if String.IsNullOrWhiteSpace state.SearchText then // e.g. if Enter key pressed in empty search textbox
+        if String.IsNullOrWhiteSpace state.SearchBoxText then // e.g. if Enter key pressed in empty search textbox
             state, Cmd.none
         else
-            state, Navigation.newUrl (toUrlHash (Search state.SearchText))
+            state, Navigation.newUrl (toUrlHash (Search state.SearchBoxText))
     | SearchProcessed matches ->
-        let state = { state with Status = Ready ; ValidRoute = Search state.SearchText ; SearchResults = matches }
-        setTitle state.ValidRoute
+        let state = { state with Status = Ready ; ValidRoute = Search state.SearchBoxText ; SearchResults = matches }
+        setValidTitle state.ValidRoute
         state, writePreferencesCmd state
     | ErrorProcessingSearch exn ->
-        let state = {
-            state with
-                DebugMessages = debugMessage (sprintf "Error processing search -> %s" exn.Message) :: state.DebugMessages
-                Status = Ready
-                SearchText = ""
-                SearchId = Guid.NewGuid () }
-        state, modifyUrlCmd state.ValidRoute
+        let state = { state with DebugMessages = debugMessage (sprintf "Error processing search -> %s" exn.Message) :: state.DebugMessages ; Status = Ready }
+        setTitle (sprintf "error searching for '%s'" state.SearchBoxText)
+        state, Cmd.none
     | TagProcessed (tag, matches) ->
         let state = { state with Status = Ready ; ValidRoute = Tag tag ; TagResults = matches }
-        setTitle state.ValidRoute
+        setValidTitle state.ValidRoute
         state, writePreferencesCmd state
     | ErrorProcessingTag exn ->
         let state = { state with DebugMessages = debugMessage (sprintf "Error processing tag -> %s" exn.Message) :: state.DebugMessages ; Status = Ready }
-        state, modifyUrlCmd state.ValidRoute
+        let text = match state.Tag with | Some tag -> sprintf "error processing tag '%s'" (tagText tag) | None -> "error processing tag"
+        setTitle text
+        state, Cmd.none
 

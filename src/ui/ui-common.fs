@@ -6,15 +6,16 @@ open Aornota.DJNarration.Data.Common
 open Aornota.DJNarration.UI.Navigation
 
 open Aornota.UI.Common.DebugMessages
+open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Dark
 open Aornota.UI.Theme.Default
 
 type LastRoute =
     | LastWasHome
-    | LastWasMixSeries of mixSeries : MixSeries
-    | LastWasMix of key : string
+    | LastWasMixSeries of mixSeriesKey : string
+    | LastWasMix of mixKey : string
     | LastWasSearch of searchText : string
-    | LastWasTag of tagText : string
+    | LastWasTag of tagKey : string
 
 type Preferences = {
     UseDefaultTheme : bool
@@ -33,7 +34,7 @@ type Input =
     | ErrorWritingPreferences of exn : exn
     | ToggleTheme
     | ToggleNavbarBurger
-    | SearchTextChanged of searchText : string
+    | SearchBoxTextChanged of searchBoxText : string
     | RequestSearch
     | SearchProcessed of matches : (Mix * MatchInfo list) list
     | ErrorProcessingSearch of exn : exn
@@ -52,14 +53,15 @@ type State = {
     UseDefaultTheme : bool
     NavbarBurgerIsActive : bool
     ValidRoute : ValidRoute
-    SearchText : string
+    SearchBoxText : string
     SearchId : Guid
     SearchResults : (Mix * MatchInfo list) list
+    Tag : Tag option
     TagResults : Mix list }
 
 let [<Literal>] DJ_NARRATION = "dj narration"
 
 let getTheme useDefaultTheme = if useDefaultTheme then themeDefault else themeDark
 
-let words (text:string) = text.Split ([| " " |], StringSplitOptions.RemoveEmptyEntries)
+let words (text:string) = text.Split ([| SPACE |], StringSplitOptions.RemoveEmptyEntries)
 
