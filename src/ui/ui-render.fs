@@ -252,7 +252,7 @@ let private renderFooter theme =
                 link theme { LinkUrl = "https://code.visualstudio.com/" ; LinkType = NewWindow } [ str "Visual Studio Code" ]
                 str ". Best viewed with "
                 link theme { LinkUrl = "https://www.google.com/chrome/index.html" ; LinkType = NewWindow } [ str "Chrome" ]
-                str "." ] ] ]
+                str ". Vaguely mobile-friendly." ] ] ]
 
 let render state dispatch =
     let theme = getTheme state.UseDefaultTheme
