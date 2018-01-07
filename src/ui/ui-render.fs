@@ -131,20 +131,12 @@ let private renderMixContent theme state mix renderMode =
                 [ link theme { LinkUrl = toUrlHash (MixSeries mix.MixSeries) ; LinkType = SameWindow } [ str (mixSeriesText mix.MixSeries) ] ])
         | RenderMixSeries -> None
     let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
-    let narrative =
-        match renderMode with
-        | RenderMix -> divVerticalSpace 10 :: mix.Narrative theme
-        | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> []
     let tags =
         let highlightTag = match renderMode with | RenderTag tag -> Some tag | RenderAll | RenderMixSeries | RenderMix | RenderSearch _ -> None
         mix.Tags
         |> List.map (fun tag -> tagText tag, match highlightTag with | Some highlightTag -> highlightTag = tag | None -> false)
         |> List.sortBy fst
         |> List.map (fun (tagText, highlight) -> tag theme { (if highlight then tagBlack else tagDark) with IsRounded = false } [ str tagText ])
-    let embedded =
-        match renderMode with
-        | RenderMix -> Some (renderMixcloudPlayer false state.UseDefaultTheme mix.MixcloudUrl)
-        | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> None
     let totals = sprintf "%i tracks | %s" mix.Tracks.Length (formatTime (mix.Tracks |> List.sumBy (fun track -> track.Duration)))
     let mixcloudLink =
         match renderMode with
@@ -157,13 +149,8 @@ let private renderMixContent theme state mix renderMode =
         yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
         match mixSeriesLink with | Some mixSeriesLink -> yield mixSeriesLink | None -> ()
         yield para theme { paraDefaultSmallest with Weight = SemiBold } [ str additional]
-        yield! narrative
         yield divVerticalSpace 10
-        yield divTags tags
-        match embedded with | Some embedded -> yield embedded | None -> ()
-        match renderMode with
-        | RenderSearch (searchText, matchInfos) -> yield renderMatches theme searchText matchInfos
-        | RenderAll | RenderMixSeries | RenderMix | RenderTag _ -> () ]
+        yield divTags tags ]
     let right = [
         yield para theme { paraDefaultSmallest with ParaAlignment = RightAligned ; Weight = SemiBold } [ str totals ]
         match mixcloudLink with | Some mixcloudLink -> yield mixcloudLink | None -> () ]
@@ -171,8 +158,15 @@ let private renderMixContent theme state mix renderMode =
         yield media theme left content right
         match renderMode with
         | RenderMix ->
-            yield divVerticalSpace 15
+            yield divVerticalSpace 10
+            yield! mix.Narrative theme
+            yield divVerticalSpace 10
+            yield renderMixcloudPlayer false state.UseDefaultTheme mix.MixcloudUrl
+            yield divVerticalSpace 5
             yield renderTracklisting theme mix
+        | RenderSearch (searchText, matchInfos) ->
+            yield divVerticalSpace 10
+            yield renderMatches theme searchText matchInfos
         | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> ()
     ]
 
@@ -220,8 +214,9 @@ let private renderSearch theme state searchText =
                     str "search results for "
                     italic searchText
                     str (sprintf " | %s" (mixOrMixes searchResults.Length)) ]
-                yield hr theme false
-                for (mix, matchInfos) in searchResults do yield! renderMixContent theme state mix (RenderSearch (searchText, matchInfos)) ] ]
+                for (mix, matchInfos) in searchResults do
+                    yield hr theme false
+                    yield! renderMixContent theme state mix (RenderSearch (searchText, matchInfos)) ] ]
     ]
 
 let private renderTag theme state tag =

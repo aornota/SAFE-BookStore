@@ -13,8 +13,8 @@ div.default { color : #393939 ; background-color : white }
 div.dark { color : #c6c6c6 ; background-color : black }
 
 hr { margin-top : 0.75rem ; margin-bottom : 0.75rem }
-hr.default { background-color : #dfdfdf }
-hr.dark { background-color : #202020 }
+hr.default { background-color : #b3b3b3 }
+hr.dark { background-color : #4c4c4c }
 
 .footer { padding-top : 0.5rem ; padding-left : 0.5rem ; padding-bottom : 0.5rem ; padding-right : 0.5rem }
 .footer.default { color : #393939 ; background-color : white }
@@ -28,8 +28,8 @@ hr.dark { background-color : #202020 }
 .level:not(:last-child) { margin-bottom : 1.0rem }
 .level.hasContinuation:not(:last-child) { margin-bottom : 0.5rem }
 
-.media+.media.default { border-top-color : #dfdfdf }
-.media+.media.dark { border-top-color : #202020 }
+.media+.media.default { border-top-color : #b3b3b3 }
+.media+.media.dark { border-top-color : #4c4c4c }
 
 .navbar-dropdown { border-top-width : 0px }
 .navbar-dropdown.default { background-color : #a0a0a0 }
@@ -51,10 +51,10 @@ hr.dark { background-color : #202020 }
 
 .table { margin-bottom : 0.75rem }
 .table.default { background-color : white }
-.table.default td { color : #393939 ; border-bottom-color : #cfcfcf }
+.table.default td { color : #393939 ; border-bottom-color : #d9d9d9 }
 .table.default tr:hover { background-color : #f3f3f3 } 
 .table.dark { background-color : black }
-.table.dark td { color : #c6c6c6 ; border-bottom-color : #303030 }
+.table.dark td { color : #c6c6c6 ; border-bottom-color : #262626 }
 .table.dark tr:hover { background-color : #0a0a0a }
 
 .tabs.default { background-color : #b3b3b3 /* custom $light */ }
