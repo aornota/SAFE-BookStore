@@ -12,6 +12,7 @@ open Aornota.UI.Theme.Default
 
 type LastRoute =
     | LastWasHome
+    | LastWasAll
     | LastWasMixSeries of mixSeriesKey : string
     | LastWasMix of mixKey : string
     | LastWasSearch of searchText : string

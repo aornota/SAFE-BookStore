@@ -17,6 +17,7 @@ module Btn = Fulma.Elements.Button.Types
 open Fulma.Elements.Form
 open Fulma.Extensions
 open Fulma.Layouts
+open Fulma.BulmaClasses.Bulma
 
 type FieldData = {
     AddOns : Alignment option
@@ -178,6 +179,17 @@ let navbar theme navbarData children =
         match semantic with | Some semantic -> yield semantic | None -> ()
         match customClass with | Some customClass -> yield customClass | None -> ()
     ] children
+
+let navbarDropDown theme text children =
+    let className = getClassName theme false
+    Navbar.item_div [ Navbar.Item.hasDropdown ; Navbar.Item.isHoverable ] [
+        // Note: Navbar.Link.customClass | Navbar.Dropdown.customClass do not work, so handle manually.
+        Rct.div [ ClassName (sprintf "navbar-link %s" className) ] [ text ]
+        Rct.div [ ClassName (sprintf "navbar-dropdown %s" className) ] children ]
+
+let navbarDropDownItem theme isActive children =
+    let className = getClassName theme false
+    Navbar.item_div [ yield Navbar.Item.customClass className ; if isActive then yield Navbar.Item.isActive ] children
 
 let navbarMenu theme navbarData isActive children =
     let navbarData = theme.TransformNavbarData navbarData

@@ -12,6 +12,7 @@ open Elmish.Browser.UrlParser
 module Js = Fable.Import.JS
 
 let [<Literal>] HOME = "home"
+let [<Literal>] ALL = "all"
 let [<Literal>] private MIX = "mix"
 let [<Literal>] private SEARCH = "search"
 let [<Literal>] private TAG = "tag"
@@ -25,6 +26,7 @@ let private encodeUrl (url:string) = (Js.encodeURI url).Replace (FORWARD_SLASH, 
 
 type ValidRoute =
     | Home
+    | All
     | MixSeries of mixSeries : MixSeries
     | Mix of mix : Mix
     | Search of searchText : string
@@ -62,6 +64,7 @@ type Route =
 let fromUrlHash : Parser<Route->Route,Route> =
     oneOf [
         map (ValidRoute Home) (s HOME)
+        map (ValidRoute All) (s ALL)
         map (Route.FromMix) (s MIX </> str)
         map (Route.FromSearch) (s SEARCH </> str)
         map (Route.FromTag) (s TAG </> str)
@@ -72,6 +75,7 @@ let toUrlHash validRoute =
     let postHash =
         match validRoute with
         | Home -> HOME
+        | All -> ALL
         | MixSeries mixSeries -> encodeUrl (mixSeriesText mixSeries)
         | Mix mix -> sprintf "%s/%s" MIX (encodeUrl mix.Key)
         | Search searchText -> sprintf "%s/%s" SEARCH (encodeUrl searchText)

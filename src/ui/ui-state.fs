@@ -29,6 +29,7 @@ let private setValidTitle validRoute =
     let text =
         match validRoute with
         | Home -> HOME
+        | All -> ALL
         | MixSeries mixSeries -> mixSeriesText mixSeries
         | Mix mix -> mix.Name
         | Search searchText -> sprintf "search results for '%s'" searchText
@@ -48,6 +49,7 @@ let private writePreferencesCmd state =
     let lastRoute =
         match state.ValidRoute with
         | Home -> LastWasHome
+        | All -> LastWasAll
         | MixSeries mixSeries -> LastWasMixSeries (mixSeriesText mixSeries)
         | Mix mix -> LastWasMix mix.Key
         | Search searchText -> LastWasSearch searchText
@@ -138,6 +140,7 @@ let transition input state =
         let lastRoute =
             match preferences.LastRoute with
             | LastWasHome -> ValidRoute Home
+            | LastWasAll -> ValidRoute All
             | LastWasMixSeries mixSeriesKey -> Route.FromMixSeries mixSeriesKey
             | LastWasMix mixKey -> Route.FromMix mixKey
             | LastWasSearch searchText -> ValidRoute (Search searchText)
