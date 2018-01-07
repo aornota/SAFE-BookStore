@@ -172,22 +172,24 @@ let private renderMixContent theme state mix renderMode =
 
 let private renderAll theme state =
     let mixes = allMixes |> List.sortBy (fun mix -> mixSeriesText mix.MixSeries, mix.Name)
+    let trackCount = mixes |> List.sumBy (fun mix -> mix.Tracks.Length)
     [
         divVerticalSpace 10
         columnContent [
             div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "all | %s" (mixOrMixes mixes.Length)) ]
+                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "all | %s | %i tracks" (mixOrMixes mixes.Length) trackCount) ]
                 yield hr theme false
                 for mix in mixes do yield! renderMixContent theme state mix RenderAll ] ]
     ]
 
 let private renderMixSeries theme state mixSeries =
     let mixes = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.sortBy (fun mix -> mix.Name)
+    let trackCount = mixes |> List.sumBy (fun mix -> mix.Tracks.Length)
     [
         divVerticalSpace 10
         columnContent [
             div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "%s | %s" (mixSeriesFullText mixSeries) (mixOrMixes mixes.Length)) ]
+                yield para theme { paraCentredMedium with Weight = SemiBold } [ str (sprintf "%s | %s | %i tracks" (mixSeriesFullText mixSeries) (mixOrMixes mixes.Length) trackCount) ]
                 yield hr theme false
                 for mix in mixes do yield! renderMixContent theme state mix RenderMixSeries ] ]
     ]
