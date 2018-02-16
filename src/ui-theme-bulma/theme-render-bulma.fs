@@ -10,14 +10,12 @@ open Fable.Core.JsInterop
 module Rct = Fable.Helpers.React
 open Fable.Helpers.React.Props
 
-open Fulma.Common
+open Fulma
 open Fulma.Components
 open Fulma.Elements
-module Btn = Fulma.Elements.Button.Types
 open Fulma.Elements.Form
 open Fulma.Extensions
 open Fulma.Layouts
-open Fulma.BulmaClasses.Bulma
 
 type FieldData = {
     AddOns : Alignment option
@@ -35,7 +33,7 @@ type LinkData = {
 
 let [<Literal>] private IS_LINK = "is-link"
 
-let private delete onClick = Delete.delete [ Delete.onClick onClick ] []
+let private delete onClick = Delete.delete [ Delete.OnClick onClick ] []
 
 let private semanticText semantic =
     match semantic with
@@ -62,38 +60,39 @@ let fieldDefault = { AddOns = None ; Grouped = None ; TooltipData = None }
 
 let box theme useAlternativeClass children =
     let className = getClassName theme useAlternativeClass
-    Box.box' [ Box.customClass className ] children
+    Box.box' [ CustomClass className ] children
 
 let button theme buttonData children =
     let buttonData = theme.TransformButtonData buttonData
     let tooltipData = match buttonData.Interaction with | Clickable (_, Some tooltipData) -> Some tooltipData | NotEnabled (Some tooltipData) -> Some tooltipData | _ -> None
     let tooltipData = match tooltipData with | Some tooltipData -> Some (theme.TransformTooltipData tooltipData) | None -> None
-    // TODO-NMB: Rework Link | IsText hack/s once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match buttonData.ButtonSemantic with
-        | Some Primary -> Some Button.isPrimary | Some Info -> Some Button.isInfo | Some Link -> None (* Some Button.isLink *) | Some Success -> Some Button.isSuccess
-        | Some Warning -> Some Button.isWarning | Some Danger -> Some Button.isDanger | Some Dark -> Some Button.isDark | Some Light -> Some Button.isLight
-        | Some Black -> Some Button.isBlack | Some White -> Some Button.isWhite | None -> None
-    let size = match buttonData.ButtonSize with | Large -> Some Button.isLarge | Medium -> Some Button.isMedium | Normal -> None | Small -> Some Button.isSmall
+        | Some Primary -> Some (Button.Color IsPrimary) | Some Info -> Some (Button.Color IsInfo) | Some Link -> None (* Some (Button.Color IsLink) *)
+        | Some Success -> Some (Button.Color IsSuccess) | Some Warning -> Some (Button.Color IsWarning) | Some Danger -> Some (Button.Color IsDanger)
+        | Some Dark -> Some (Button.Color IsDark) | Some Light -> Some (Button.Color IsLight) | Some Black -> Some (Button.Color IsBlack) | Some White -> Some (Button.Color IsWhite)
+        | None -> None
+    let size = match buttonData.ButtonSize with | Large -> Some (Button.Size IsLarge) | Medium -> Some (Button.Size IsMedium) | Normal -> None | Small -> Some (Button.Size IsSmall)
     let customClasses = [
         match buttonData.ButtonSemantic with | Some Link -> yield IS_LINK | _ -> ()
-        if buttonData.IsText then yield "is-text"
         match tooltipData with 
         | Some tooltipData -> match getTooltipCustomClass tooltipData with | Some tooltipCustomClass -> yield tooltipCustomClass | None -> ()
         | None -> () ]
-    let customClass = match customClasses with | _ :: _ -> Some (Button.customClass (String.concat SPACE customClasses)) | _ -> None
-    Button.button_a [
+    let customClass = match customClasses with | _ :: _ -> Some (Button.CustomClass (String.concat SPACE customClasses)) | _ -> None
+    Button.button [
         match customClass with | Some customClass -> yield customClass | None -> ()
         match semantic with | Some semantic -> yield semantic | None -> ()
         match size with | Some size -> yield size | None -> ()
-        if buttonData.IsOutlined then yield Button.isOutlined
-        if buttonData.IsInverted then yield Button.isInverted
+        if buttonData.IsText then yield Button.IsText
+        if buttonData.IsOutlined then yield Button.IsOutlined
+        if buttonData.IsInverted then yield Button.IsInverted
         match buttonData.Interaction with
-        | Clickable (onClick, _) -> yield Button.onClick onClick
-        | Loading -> yield Button.isLoading
-        | Static -> yield Button.isStatic
+        | Clickable (onClick, _) -> yield Button.OnClick onClick
+        | Loading -> yield Button.IsLoading true
+        | Static -> yield Button.IsStatic true
         | _ -> ()
-        yield Button.props [
+        yield Button.Props [
             match tooltipData with | Some tooltipData -> yield getTooltipProps tooltipData | None -> ()
             yield Disabled (match buttonData.Interaction with | NotEnabled _ -> true | _ -> false) :> IHTMLProp ]
     ] [
@@ -103,28 +102,28 @@ let button theme buttonData children =
 
 let field theme fieldData children =
     let tooltipData = match fieldData.TooltipData with | Some tooltipData -> Some (theme.TransformTooltipData tooltipData) | None -> None
-    Field.field_div [
+    Field.div [
         match fieldData.AddOns with
-        | Some Centred -> yield Field.hasAddonsCentered
-        | Some LeftAligned -> yield Field.hasAddons
-        | Some RightAligned -> yield Field.hasAddonsRight
-        | Some FullWidth -> yield Field.hasAddonsFullWidth
+        | Some Centred -> yield Field.HasAddonsCentered
+        | Some LeftAligned -> yield Field.HasAddons
+        | Some RightAligned -> yield Field.HasAddonsRight
+        | Some FullWidth -> yield Field.HasAddonsFullWidth
         | _ -> ()
         match fieldData.Grouped with 
-        | Some Centred -> yield Field.isGroupedCentered
-        | Some LeftAligned -> yield Field.isGrouped
-        | Some RightAligned -> yield Field.isGroupedRight
+        | Some Centred -> yield Field.IsGroupedCentered
+        | Some LeftAligned -> yield Field.IsGrouped
+        | Some RightAligned -> yield Field.IsGroupedRight
         | _ -> ()
         match tooltipData with
         | Some tooltipData ->
-            match getTooltipCustomClass tooltipData with | Some tooltipCustomClass -> yield Field.customClass tooltipCustomClass | None -> ()
-            yield Field.props [ getTooltipProps tooltipData ]
+            match getTooltipCustomClass tooltipData with | Some tooltipCustomClass -> yield Field.CustomClass tooltipCustomClass | None -> ()
+            yield Field.Props [ getTooltipProps tooltipData ]
         | None -> ()
     ] children
 
 let footer theme useAlternativeClass children =
     let className = getClassName theme useAlternativeClass
-    Footer.footer [ Footer.customClass className ] children
+    Footer.footer [ CustomClass className ] children
 
 let hr theme useAlternativeClass =
     let className = getClassName theme useAlternativeClass
@@ -140,23 +139,25 @@ let link theme linkData children =
 
 let media theme left content right =
     let className = getClassName theme false
-    Media.media [ CustomClass className ] [
+    // Note: Media.CustomClass does not work, so handled via Media.Props [ ClassName ... ] ].
+    Media.media [ Media.Props [ ClassName (sprintf "media %s" className) ] ] [
         Media.left [] left
         Media.content [] content
         Media.right [] right ]
 
 let message theme messageData headerChildren bodyChildren =
     let messageData = theme.TransformMessageData messageData
-    // TODO-NMB: Rework Link hack once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match messageData.MessageSemantic with
-        | Some Primary -> Some Message.isPrimary | Some Info -> Some Message.isInfo | Some Link -> None (* Some Message.isLink *) | Some Success -> Some Message.isSuccess
-        | Some Warning -> Some Message.isWarning | Some Danger -> Some Message.isDanger | Some Dark -> Some Message.isDark | Some Light -> Some Message.isLight
-        | Some Black -> Some Message.isBlack | Some White -> Some Message.isWhite | None -> None
-    let size = match messageData.MessageSize with | Large -> Some Message.isLarge | Medium -> Some Message.isMedium | Normal -> None | Small -> Some Message.isSmall
+        | Some Primary -> Some (Message.Color IsPrimary) | Some Info -> Some (Message.Color IsInfo) | Some Link -> None (* Some (Message.Color IsLink) *)
+        | Some Success -> Some (Message.Color IsSuccess) | Some Warning -> Some (Message.Color IsWarning) | Some Danger -> Some (Message.Color IsDanger)
+        | Some Dark -> Some (Message.Color IsDark) | Some Light -> Some (Message.Color IsLight) | Some Black -> Some (Message.Color IsBlack) | Some White -> Some (Message.Color IsWhite)
+        | None -> None
+    let size = match messageData.MessageSize with | Large -> Some (Message.Size IsLarge) | Medium -> Some (Message.Size IsMedium) | Normal -> None | Small -> Some (Message.Size IsSmall)
     Message.message [ 
         match semantic with | Some semantic -> yield semantic | None -> ()
-        match messageData.MessageSemantic with | Some Link -> yield Message.Types.CustomClass IS_LINK | _ -> ()
+        match messageData.MessageSemantic with | Some Link -> yield Message.CustomClass IS_LINK | _ -> ()
         match size with | Some size -> yield size | None -> ()
     ] [
         Message.header [] [
@@ -166,15 +167,16 @@ let message theme messageData headerChildren bodyChildren =
 
 let navbar theme navbarData children =
     let navbarData = theme.TransformNavbarData navbarData
-    // TODO-NMB: Rework Link hack once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match navbarData.NavbarSemantic with
-        | Some Primary -> Some Navbar.isPrimary | Some Info -> Some Navbar.isInfo | Some Link -> None (* Some Navbar.isLink *) | Some Success -> Some Navbar.isSuccess
-        | Some Warning -> Some Navbar.isWarning | Some Danger -> Some Navbar.isDanger | Some Dark -> Some Navbar.isDark | Some Light -> Some Navbar.isLight
-        | Some Black -> Some Navbar.isBlack | Some White -> Some Navbar.isWhite | None -> None
+        | Some Primary -> Some (Navbar.Color IsPrimary) | Some Info -> Some (Navbar.Color IsInfo) | Some Link -> None (* Some (Navbar.Color IsLink) *)
+        | Some Success -> Some (Navbar.Color IsSuccess) | Some Warning -> Some (Navbar.Color IsWarning) | Some Danger -> Some (Navbar.Color IsDanger)
+        | Some Dark -> Some (Navbar.Color IsDark) | Some Light -> Some (Navbar.Color IsLight) | Some Black -> Some (Navbar.Color IsBlack) | Some White -> Some (Navbar.Color IsWhite)
+        | None -> None
     let customClasses = [
         match navbarData.NavbarFixed with | Some FixedTop -> yield "is-fixed-top" | Some FixedBottom -> yield "is-fixed-bottom" | None -> () ]
-    let customClass = match customClasses with | _ :: _ -> Some (Navbar.customClass (String.concat SPACE customClasses)) | _ -> None
+    let customClass = match customClasses with | _ :: _ -> Some (Navbar.CustomClass (String.concat SPACE customClasses)) | _ -> None
     Navbar.navbar [
         match semantic with | Some semantic -> yield semantic | None -> ()
         match customClass with | Some customClass -> yield customClass | None -> ()
@@ -182,52 +184,53 @@ let navbar theme navbarData children =
 
 let navbarDropDown theme text children =
     let className = getClassName theme false
-    Navbar.item_div [ Navbar.Item.hasDropdown ; Navbar.Item.isHoverable ] [
-        // Note: Navbar.Link.customClass | Navbar.Dropdown.customClass do not work, so handle manually.
+    Navbar.Item.div [ Navbar.Item.HasDropdown ; Navbar.Item.IsHoverable ] [
+        // Note: Navbar.Link.CustomClass | Navbar.Dropdown.CustomClass do not work, so handle manually.
         Rct.div [ ClassName (sprintf "navbar-link %s" className) ] [ text ]
         Rct.div [ ClassName (sprintf "navbar-dropdown %s" className) ] children ]
 
 let navbarDropDownItem theme isActive children =
     let className = getClassName theme false
-    Navbar.item_div [ yield Navbar.Item.customClass className ; if isActive then yield Navbar.Item.isActive ] children
+    Navbar.Item.div [ yield Navbar.Item.CustomClass className ; yield Navbar.Item.IsActive isActive ] children
 
 let navbarMenu theme navbarData isActive children =
     let navbarData = theme.TransformNavbarData navbarData
     let semantic = match navbarData.NavbarSemantic with | Some semantic -> Some (semanticText semantic) | None -> None
     Navbar.menu
         [
-            match semantic with | Some semantic -> yield Navbar.Menu.customClass semantic | None -> ()
-            if isActive then yield Navbar.Menu.isActive
+            match semantic with | Some semantic -> yield Navbar.Menu.CustomClass semantic | None -> ()
+            yield Navbar.Menu.IsActive isActive
         ] children
 
 let notification theme notificationData children =
     let notificationData = theme.TransformNotificationData notificationData
-    // TODO-NMB: Rework Link hack once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match notificationData.NotificationSemantic with
-        | Some Primary -> Some Notification.isPrimary | Some Info -> Some Notification.isInfo | Some Link -> None (* Some Notification.isLink *)
-        | Some Success -> Some Notification.isSuccess | Some Warning -> Some Notification.isWarning | Some Danger -> Some Notification.isDanger
-        | Some Dark -> Some Notification.isDark | Some Light -> Some Notification.isLight | Some Black -> Some Notification.isBlack | Some White -> Some Notification.isWhite
+        | Some Primary -> Some (Notification.Color IsPrimary) | Some Info -> Some (Notification.Color IsInfo) | Some Link -> None (* Some (Notification.Color IsLink) *)
+        | Some Success -> Some (Notification.Color IsSuccess) | Some Warning -> Some (Notification.Color IsWarning) | Some Danger -> Some (Notification.Color IsDanger)
+        | Some Dark -> Some (Notification.Color IsDark) | Some Light -> Some (Notification.Color IsLight) | Some Black -> Some (Notification.Color IsBlack)
+        | Some White -> Some (Notification.Color IsWhite)
         | None -> None
     Notification.notification [ 
         match semantic with | Some semantic -> yield semantic | None -> ()
-        match notificationData.NotificationSemantic with | Some Link -> yield Notification.Types.CustomClass IS_LINK | _ -> ()
+        match notificationData.NotificationSemantic with | Some Link -> yield Notification.CustomClass IS_LINK | _ -> ()
     ] [
         match notificationData.OnDismissNotification with | Some onDismissNotification -> yield delete onDismissNotification | None -> ()
         yield! children ]
 
 let pageLoader theme pageLoaderData =
     let pageLoaderData = theme.TransformPageLoaderData pageLoaderData
-    // TODO-NMB: Rework Link hack once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match pageLoaderData.PageLoaderSemantic with
-        | Primary -> Some PageLoader.isPrimary | Info -> Some PageLoader.isInfo | Link -> None (* Some PageLoader.isLink *) | Success -> Some PageLoader.isSuccess
-        | Warning -> Some PageLoader.isWarning | Danger -> Some PageLoader.isDanger | Dark -> Some PageLoader.isDark | Light -> Some PageLoader.isLight
-        | Black -> Some PageLoader.isBlack | White -> Some PageLoader.isWhite
+        | Primary -> Some (PageLoader.Color IsPrimary) | Info -> Some (PageLoader.Color IsInfo) | Link -> None (* Some (PageLoader.Color IsLink) *)
+        | Success -> Some (PageLoader.Color IsSuccess) | Warning -> Some (PageLoader.Color IsWarning) | Danger -> Some (PageLoader.Color IsDanger)
+        | Dark -> Some (PageLoader.Color IsDark) | Light -> Some (PageLoader.Color IsLight) | Black -> Some (PageLoader.Color IsBlack) | White -> Some (PageLoader.Color IsWhite)
     PageLoader.pageLoader [
         match semantic with | Some semantic -> yield semantic | None -> ()
-        match pageLoaderData.PageLoaderSemantic with | Link -> yield PageLoader.Types.CustomClass IS_LINK | _ -> ()
-        yield PageLoader.isActive 
+        match pageLoaderData.PageLoaderSemantic with | Link -> yield PageLoader.CustomClass IS_LINK | _ -> ()
+        yield PageLoader.IsActive true
     ] []
 
 let para theme paraData children =
@@ -258,36 +261,36 @@ let para theme paraData children =
 let progress theme useAlternativeClass progressData =
     let className = getClassName theme useAlternativeClass
     let progressData = theme.TransformProgressData progressData
-    // TODO-NMB: Rework Link hack once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match progressData.ProgressSemantic with
-        | Some Primary -> Some Progress.isPrimary | Some Info -> Some Progress.isInfo | Some Link -> None (* Some Progress.isLink *) | Some Success -> Some Progress.isSuccess
-        | Some Warning -> Some Progress.isWarning | Some Danger -> Some Progress.isDanger | Some Dark -> Some Progress.isDark | Some Light -> Some Progress.isLight
-        | Some Black -> Some Progress.isBlack | Some White -> Some Progress.isWhite | None -> None
-    let size = match progressData.ProgressSize with | Large -> Some Progress.isLarge | Medium -> Some Progress.isMedium | Normal -> None | Small -> Some Progress.isSmall
+        | Some Primary -> Some (Progress.Color IsPrimary) | Some Info -> Some (Progress.Color IsInfo) | Some Link -> None (* Some (Progress.Color IsLink) *)
+        | Some Success -> Some (Progress.Color IsSuccess) | Some Warning -> Some (Progress.Color IsWarning) | Some Danger -> Some (Progress.Color IsDanger)
+        | Some Dark -> Some (Progress.Color IsDark) | Some Light -> Some (Progress.Color IsLight) | Some Black -> Some (Progress.Color IsBlack) | Some White -> Some (Progress.Color IsWhite)
+        | None -> None
+    let size = match progressData.ProgressSize with | Large -> Some (Progress.Size IsLarge) | Medium -> Some (Progress.Size IsMedium) | Normal -> None | Small -> Some (Progress.Size IsSmall)
     let customClasses = [
         yield className
         match progressData.ProgressSemantic with | Some Link -> yield IS_LINK | _ -> () ]
-    let customClass = match customClasses with | _ :: _ -> Some (Progress.customClass (String.concat SPACE customClasses)) | _ -> None
+    let customClass = match customClasses with | _ :: _ -> Some (Progress.CustomClass (String.concat SPACE customClasses)) | _ -> None
     Progress.progress [
         match customClass with | Some customClass -> yield customClass | None -> ()
         match semantic with | Some semantic -> yield semantic | None -> ()
         match size with | Some size -> yield size | None -> ()
-        yield Progress.value progressData.Value
-        yield Progress.max progressData.MaxValue
+        yield Progress.Value progressData.Value
+        yield Progress.Max progressData.MaxValue
     ] []
 
 // TODO-NMB: "Genericize"?...
 let searchBox theme (searchId:Guid) searchText tooltip (onChange:string -> unit) onEnter =
     let className = getClassName theme false
     field theme { fieldDefault with TooltipData = Some tooltip } [
-        Control.control_div [ Control.hasIconLeft ] [
-            Input.input [
-                yield Input.customClass className
-                yield Input.isSmall
-                yield Input.typeIsText
-                yield Input.defaultValue searchText
-                yield Input.props [
+        Control.div [ Control.HasIconLeft ] [
+            Input.text [
+                yield Input.CustomClass className
+                yield Input.Size IsSmall
+                yield Input.DefaultValue searchText
+                yield Input.Props [
                     Key (searchId.ToString ())
                     OnChange (fun ev -> !!ev.target?value |> onChange)
                     onEnterPressed onEnter ] ]
@@ -303,7 +306,7 @@ let span theme spanData children =
 let tabs theme tabsData =
     let className = getClassName theme false
     let tabsData = theme.TransformTabsData tabsData
-    // Note: Tabs.customClass does not work, so handle manually.
+    // Note: Tabs.CustomClass does not work, so handle manually.
     let customClasses = [
         yield "tabs"
         yield className
@@ -316,39 +319,34 @@ let tabs theme tabsData =
     Rct.div [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ]
         [ Rct.ul [] [
             for tab in tabsData.Tabs do
-                yield Tabs.tab
-                    [ if tab.IsActive then yield Tabs.Tab.isActive ]
-                    [ Rct.a [ Href tab.TabLink ] [ str tab.TabText ] ]
+                yield Tabs.tab [ Tabs.Tab.IsActive tab.IsActive ] [ Rct.a [ Href tab.TabLink ] [ str tab.TabText ] ]
         ] ]
 
 let table theme useAlternativeClass tableData children =
     let className = getClassName theme useAlternativeClass
     let tableData = theme.TransformTableData tableData
-    // Note: Table.isStripped (sic) does not work, so handled via Table.customClass.
-    let customClasses = [
-        yield className
-        if tableData.IsStriped then yield "is-striped" ]
-    let customClass = match customClasses with | _ :: _ -> Some (Table.customClass (String.concat SPACE customClasses)) | _ -> None
     Table.table [
-        match customClass with | Some customClass -> yield customClass | None -> ()
-        if tableData.IsBordered then yield Table.isBordered
-        if tableData.IsNarrow then yield Table.isNarrow
-        if tableData.IsFullWidth then yield Table.isFullwidth
+        yield Table.CustomClass className
+        if tableData.IsBordered then yield Table.IsBordered
+        if tableData.IsNarrow then yield Table.IsNarrow
+        if tableData.IsStriped then yield Table.IsStriped
+        if tableData.IsFullWidth then yield Table.IsFullwidth
     ] children
 
 let tag theme tagData children =
     let tagData = theme.TransformTagData tagData
-    // TODO-NMB: Rework Link hack once Fulma supports Bulma 0.60...
+    // TODO-NMB: Rework Link hack once supported by Fulma...
     let semantic =
         match tagData.TagSemantic with
-        | Some Primary -> Some Tag.isPrimary | Some Info -> Some Tag.isInfo | Some Link -> None (* Some Tag.isLink *) | Some Success -> Some Tag.isSuccess
-        | Some Warning -> Some Tag.isWarning | Some Danger -> Some Tag.isDanger | Some Dark -> Some Tag.isDark | Some Light -> Some Tag.isLight
-        | Some Black -> Some Tag.isBlack | Some White -> Some Tag.isWhite | None -> None
-    let size = match tagData.TagSize with | Large -> Some Tag.isLarge | Medium -> Some Tag.isMedium | Normal | Small -> None
+        | Some Primary -> Some (Tag.Color IsPrimary) | Some Info -> Some (Tag.Color IsInfo) | Some Link -> None (* Some (Tag.Color IsLink) *)
+        | Some Success -> Some (Tag.Color IsSuccess) | Some Warning -> Some (Tag.Color IsWarning) | Some Danger -> Some (Tag.Color IsDanger)
+        | Some Dark -> Some (Tag.Color IsDark) | Some Light -> Some (Tag.Color IsLight) | Some Black -> Some (Tag.Color IsBlack) | Some White -> Some (Tag.Color IsWhite)
+        | None -> None
+    let size = match tagData.TagSize with | Large -> Some (Tag.Size IsLarge) | Medium -> Some (Tag.Size IsMedium) | Normal | Small -> None
     let customClasses = [
         match tagData.TagSemantic with | Some Link -> yield IS_LINK | _ -> ()
         if tagData.IsRounded then yield "is-rounded" ]
-    let customClass = match customClasses with | _ :: _ -> Some (Tag.customClass (String.concat SPACE customClasses)) | _ -> None
+    let customClass = match customClasses with | _ :: _ -> Some (Tag.CustomClass (String.concat SPACE customClasses)) | _ -> None
     Tag.tag [
         match semantic with | Some semantic -> yield semantic | None -> ()
         match customClass with | Some customClass -> yield customClass | None -> ()

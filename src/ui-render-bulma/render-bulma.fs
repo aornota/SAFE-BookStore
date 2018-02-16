@@ -5,11 +5,11 @@ open Aornota.UI.Render.Common
 module Rct = Fable.Helpers.React
 open Fable.Helpers.React.Props
 
+open Fulma
 open Fulma.Components
 open Fulma.Elements
 open Fulma.Elements.Form
 open Fulma.Layouts
-open Fulma.BulmaClasses.Bulma
 
 type ContainerWidth = | Fluid | Widescreen | FullHD
 
@@ -32,7 +32,7 @@ type ImageSize =
 
 let private iconDefault = { IconSize = Normal ; IconAlignment = None ; Icon = Theme }
 
-let private columns isMobile children = Columns.columns [ if isMobile then yield Columns.customClass "is-mobile" ] children
+let private columns isMobile children = Columns.columns [ if isMobile then yield Columns.CustomClass "is-mobile" ] children
 
 let private columnEmpty = Column.column [] []
 
@@ -40,21 +40,21 @@ let private columnEmpty = Column.column [] []
 let columnContent children =
     columns true [
         columnEmpty
-        Column.column [ Column.customClass "is-four-fifths-mobile is-four-fifths-tablet is-three-quarters-desktop is-three-fifths-widescreen is-half-fullhd" ] children
+        Column.column [ Column.CustomClass "is-four-fifths-mobile is-four-fifths-tablet is-three-quarters-desktop is-three-fifths-widescreen is-half-fullhd" ] children
         columnEmpty ]
 
 let container width children =
     let width =
-        match width with | Some Fluid -> Some Container.isFluid | Some Widescreen -> Some Container.isWideScreen | Some FullHD -> Some Container.isFullHD | None -> None
+        match width with | Some Fluid -> Some Container.IsFluid | Some Widescreen -> Some Container.IsWideScreen | Some FullHD -> Some Container.IsFullHD | None -> None
     Container.container [ match width with | Some width -> yield width | None -> () ] children
 
-let control children = Control.control_div [] children
+let control children = Control.div [] children
 
 let icon iconData =
     let size, faSize =
         match iconData.IconSize with
-        | Large -> Some Icon.isLarge, "fa-3x" | Medium -> Some Icon.isMedium, "fa-2x" | Normal -> None, "fa-lg" | Small -> Some Icon.isSmall, ""
-    let alignment = match iconData.IconAlignment with | Some LeftAligned -> Some Icon.isLeft | Some RightAligned -> Some Icon.isRight | _ -> None
+        | Large -> Some (Icon.Size IsLarge), "fa-3x" | Medium -> Some (Icon.Size IsMedium), "fa-2x" | Normal -> None, "fa-lg" | Small -> Some (Icon.Size IsSmall), ""
+    let alignment = match iconData.IconAlignment with | Some LeftAligned -> Some Icon.IsLeft | Some RightAligned -> Some Icon.IsRight | _ -> None
     let iconClass =
         match iconData.Icon with
         | SpinnerPulse -> "fa-spinner fa-pulse"
@@ -78,24 +78,24 @@ let image source size =
         match size with
         | Some (FixedSize fixedSize) ->
             match fixedSize with
-            | Square16 -> Some Image.is16x16 | Square24 -> Some Image.is24x24 | Square32 -> Some Image.is32x32 | Square48 -> Some Image.is48x48
-            | Square64 -> Some Image.is64x64 | Square96 -> Some Image.is96x96 | Square128 -> Some Image.is128x128
+            | Square16 -> Some Image.Is16x16 | Square24 -> Some Image.Is24x24 | Square32 -> Some Image.Is32x32 | Square48 -> Some Image.Is48x48
+            | Square64 -> Some Image.Is64x64 | Square96 -> Some Image.Is96x96 | Square128 -> Some Image.Is128x128
         | Some (Ratio ratio) ->
             match ratio with
-            | Square -> Some Image.is1by1 | FourByThree -> Some Image.is4by3 | ThreeByTwo -> Some Image.is3by2 | SixteenByNine -> Some Image.is16by9
-            | TwoByOne -> Some Image.is2by1
+            | Square -> Some Image.Is1by1 | FourByThree -> Some Image.Is4by3 | ThreeByTwo -> Some Image.Is3by2 | SixteenByNine -> Some Image.Is16by9
+            | TwoByOne -> Some Image.Is2by1
         | None -> None
     Image.image [
-        yield Image.props [ Key source ]
+        yield Image.Props [ Key source ]
         match option with | Some option -> yield option | None -> () ] [ Rct.img [ Src source] ]
 
-let level hasContinuation children = Level.level [ if hasContinuation then yield Level.Types.Level.CustomClass "hasContinuation" ] children
+let level hasContinuation children = Level.level [ if hasContinuation then yield Level.Level.CustomClass "hasContinuation" ] children
 
 let levelLeft children = Level.left [] children
 let levelRight children = Level.right [] children
 let levelItem children = Level.item [] children
 
-let navbarBrand children = Navbar.brand_div [] children
+let navbarBrand children = Navbar.Brand.div [] children
 let navbarBurger onClick isActive =
     Navbar.burger
         [
@@ -103,13 +103,13 @@ let navbarBurger onClick isActive =
             yield Fulma.Common.Props [ OnClick onClick ]
         ]
         [ for _ in 1..3 do yield Rct.span [] [] ]
-let navbarItem children = Navbar.item_div [] children
-let navbarStart children = Navbar.start_div [] children
-let navbarEnd children = Navbar.end_div [] children
+let navbarItem children = Navbar.Item.div [] children
+let navbarStart children = Navbar.Start.div [] children
+let navbarEnd children = Navbar.End.div [] children
 
 let thead children = Rct.thead [] children
 let tbody children = Rct.tbody [] children
-let tr isSelected children = Rct.tr [ if isSelected then yield Table.Row.isSelected :> IHTMLProp ] children
+let tr isSelected children = Rct.tr [ if isSelected then yield ClassName "is-selected" :> IHTMLProp ] children
 let td children = Rct.td [] children
 
 let divTags children = div { divDefault with DivCustomClass = Some "tags" } children
