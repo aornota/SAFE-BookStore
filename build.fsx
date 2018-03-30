@@ -42,12 +42,12 @@ do if not isWindows then
     let frameworkPath = IO.Path.GetDirectoryName (mono) </> ".." </> "lib" </> "mono" </> "4.5"
     setEnvironVar "FrameworkPathOverride" frameworkPath
 
+Target "install-dot-net-core" (fun _ -> dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion)
+
 Target "clean" (fun _ ->
     CleanDir (uiDir </> "bin")
     DeleteFiles !! @".\src\ui\obj\*.nuspec"
     CleanDir (uiDir </> "public"))
-
-Target "install-dot-net-core" (fun _ -> dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion)
 
 Target "copy-resources" (fun _ ->
     let publicResourcesDir = uiDir </> @"public\resources"
@@ -65,11 +65,11 @@ Target "install" (fun _ ->
 Target "build" (fun _ -> runDotnet uiDir "fable webpack -- -p")
 
 Target "run" (fun _ ->
-    let fablewatch = async { runDotnet uiDir "fable webpack-dev-server" }
+    let ui = async { runDotnet uiDir "fable webpack-dev-server" }
     let openBrowser = async {
-        System.Threading.Thread.Sleep (5000)
+        do! Async.Sleep 5000
         Diagnostics.Process.Start (sprintf "http://%s:%d" ipAddress port) |> ignore }
-    Async.Parallel [| fablewatch ; openBrowser |] |> Async.RunSynchronously |> ignore)
+    Async.Parallel [| ui ; openBrowser |] |> Async.RunSynchronously |> ignore)
 
 Target "publish" (fun _ ->
     let tempDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
