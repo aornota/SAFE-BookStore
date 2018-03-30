@@ -79,7 +79,7 @@ let private processTagCmd tag =
         return tag, allMixes |> List.filter (fun mix -> mix.Tags |> List.contains tag) }
     Cmd.ofAsync processTag tag TagProcessed ErrorProcessingTag
 
-let urlUpdate route state updateTitle =
+let urlUpdate updateTitle route state =
     match route with
     // Note: Special handling for Search | Tag [compared with other ValidRoutes, i.e. Home | MixSeries | Mix].
     | Some (ValidRoute (Search searchText)) ->
@@ -159,12 +159,12 @@ let transition input state =
         let state = { state with DebugMessages = messages @ state.DebugMessages ; Status = Ready ; UseDefaultTheme = preferences.UseDefaultTheme }
         setBodyClass state.UseDefaultTheme
         match setTitle with | Some setTitle -> setTitle () | None -> ()
-        let state, cmd = urlUpdate route state (match setTitle with | Some _ -> false | None -> true)
+        let state, cmd = urlUpdate (match setTitle with | Some _ -> false | None -> true) route state
         state, Cmd.batch [ yield cmd ; match modifyUrlCmd with | Some modifyUrlCmd -> yield modifyUrlCmd | None -> () ]
     | PreferencesRead None ->
         let initRoute = initRoute state
         let state = { state with Status = Ready }
-        urlUpdate initRoute state true
+        urlUpdate true initRoute state
     | ErrorReadingPreferences exn ->
         let state = { state with DebugMessages = debugMessage (sprintf "Error reading preferences from local storage -> %s" exn.Message) :: state.DebugMessages }
         state, Cmd.ofMsg (PreferencesRead None)
@@ -205,4 +205,3 @@ let transition input state =
         let text = match state.Tag with | Some tag -> sprintf "error processing tag '%s'" (tagText tag) | None -> "error processing tag"
         setTitle text
         state, Cmd.none
-

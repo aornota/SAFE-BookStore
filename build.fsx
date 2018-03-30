@@ -104,4 +104,3 @@ Target "help" (fun _ ->
 "install" ==> "run"
 
 RunTargetOrDefault "build"
-

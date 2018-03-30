@@ -285,4 +285,3 @@ let render state dispatch =
             | Tag tag ->
                 yield! renderTag theme state tag
             yield renderFooter theme ]
-

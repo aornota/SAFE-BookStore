@@ -65,4 +65,3 @@ let [<Literal>] DJ_NARRATION = "dj narration"
 let getTheme useDefaultTheme = if useDefaultTheme then themeDefault else themeDark
 
 let words (text:string) = text.Split ([| SPACE |], StringSplitOptions.RemoveEmptyEntries)
-
