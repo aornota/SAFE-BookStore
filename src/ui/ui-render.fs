@@ -72,9 +72,9 @@ let private renderMixcloudPlayer isMini isDefault mixcloudUrl =
         | true, false -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&hide_artwork=1&feed=%s" mixcloudUrl
         | false, true -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&hide_artwork=1&feed=%s" mixcloudUrl
         | false, false -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&feed=%s" mixcloudUrl
-    Rct.iframe [ 
-        Rct.Props.Width "100%"
-        Rct.Props.Height height
+    Rct.iframe [
+        Rct.Props.HTMLAttr.Width "100%"
+        Rct.Props.HTMLAttr.Height height
         Rct.Props.Src src
         Rct.Props.FrameBorder 0 ] []
 

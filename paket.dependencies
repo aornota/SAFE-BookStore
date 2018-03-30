@@ -1,18 +1,21 @@
-source https://nuget.org/api/v2
-storage:none
+group ui
 
-nuget FSharp.Core redirects: force
-nuget Fable.Core
-nuget Fable.Elmish.Browser
-nuget Fable.Elmish.Debugger
-nuget Fable.Elmish.React
-nuget Fable.Elmish.HMR
-nuget Fulma
-nuget Fulma.Extensions
+	source https://api.nuget.org/v3/index.json
+	storage:none
 
-clitool dotnet-fable
+	nuget FSharp.Core redirects: force
+	nuget Fable.Core
+	nuget Fable.Elmish.Browser
+	nuget Fable.Elmish.Debugger
+	nuget Fable.Elmish.React
+	nuget Fable.Elmish.HMR
+	nuget Fulma
+	nuget Fulma.Extensions
 
-group Build
-  source https://nuget.org/api/v2
-  framework >= net461
-  nuget FAKE
+	clitool dotnet-fable
+
+group build
+
+	source https://api.nuget.org/v3/index.json
+
+	nuget FAKE
