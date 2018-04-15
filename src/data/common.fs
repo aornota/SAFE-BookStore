@@ -8,6 +8,8 @@ type [<Measure>] second
 
 type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
 
+type MixKey = | MixKey of key : string
+
 type Tag = // TODO-NMB: More?...
     | Ambient | Calypso | Choral | Classical | Dub | Electronic | Fado | Folk | Guitar | HipHop | House | Jazz | KitchenSink | ModernClassical | Piano | SingerSongwriter | Techno | World
 
@@ -20,7 +22,7 @@ type Track = {
 type Mix = {
     MixSeries : MixSeries
     MixcloudUrl : string
-    Key : string
+    Key : MixKey
     Name : string
     MixedBy : string option
     Dedication : string

@@ -10,6 +10,7 @@ open Aornota.DJNarration.UI.Navigation
 open Aornota.UI.Common.DebugMessages
 open Aornota.UI.Common.LocalStorage
 open Aornota.UI.Theme.Common
+open Aornota.UI.Theme.Shared
 
 open Elmish
 open Elmish.Browser.Navigation
@@ -70,13 +71,13 @@ let private processSearchCmd searchText =
     let processSearch (searchText:string) = async {
         do! Async.Sleep 1
         let searchWords = words (searchText.ToLower ()) |> Array.groupBy id |> Array.map fst // note: limit to unique words
-        return allMixes |> List.choose (fun mix -> match matches mix searchWords with | h :: t -> Some (mix, h :: t) | [] -> None) }
+        return allMixes |> List.choose (fun mix -> match matches mix searchWords with | h :: t -> Some (mix.Key, h :: t) | [] -> None) }
     Cmd.ofAsync processSearch searchText SearchProcessed ErrorProcessingSearch
 
 let private processTagCmd tag =
     let processTag tag = async {
         do! Async.Sleep 1
-        return tag, allMixes |> List.filter (fun mix -> mix.Tags |> List.contains tag) }
+        return tag, allMixes |> List.filter (fun mix -> mix.Tags |> List.contains tag) |> List.map (fun mix -> mix.Key) }
     Cmd.ofAsync processTag tag TagProcessed ErrorProcessingTag
 
 let urlUpdate updateTitle route state =
@@ -114,7 +115,7 @@ let initialize route =
         allMixes
         |> List.groupBy (fun mix -> mix.Key)
         |> List.filter (fun (_, mixes) -> mixes.Length > 1)
-        |> List.map (fun (key, _) -> debugMessage (sprintf "Key '%s' is being used by more than one mix" key))
+        |> List.map (fun (MixKey key, _) -> debugMessage (sprintf "Key '%s' is being used by more than one mix" key))
     let state = {
         DebugMessages = duplicateKeyMessages
         Status = ReadingPreferences route
@@ -142,7 +143,7 @@ let transition input state =
             | LastWasHome -> ValidRoute Home
             | LastWasAll -> ValidRoute All
             | LastWasMixSeries mixSeriesKey -> Route.FromMixSeries mixSeriesKey
-            | LastWasMix mixKey -> Route.FromMix mixKey
+            | LastWasMix (MixKey mixKey) -> Route.FromMix mixKey
             | LastWasSearch searchText -> ValidRoute (Search searchText)
             | LastWasTag tagKey -> Route.FromTag tagKey
         let lastRoute, lastRouteMessage, modifyUrlCmd =

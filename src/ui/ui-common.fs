@@ -7,18 +7,16 @@ open Aornota.DJNarration.UI.Navigation
 
 open Aornota.UI.Common.DebugMessages
 open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Dark
-open Aornota.UI.Theme.Default
 
 type LastRoute =
     | LastWasHome
     | LastWasAll
     | LastWasMixSeries of mixSeriesKey : string
-    | LastWasMix of mixKey : string
+    | LastWasMix of mixKey : MixKey
     | LastWasSearch of searchText : string
     | LastWasTag of tagKey : string
 
-type Preferences = {
+type Preferences = { 
     UseDefaultTheme : bool
     LastRoute : LastRoute }
 
@@ -37,9 +35,9 @@ type Input =
     | ToggleNavbarBurger
     | SearchBoxTextChanged of searchBoxText : string
     | RequestSearch
-    | SearchProcessed of matches : (Mix * MatchInfo list) list
+    | SearchProcessed of matches : (MixKey * MatchInfo list) list
     | ErrorProcessingSearch of exn : exn
-    | TagProcessed of tag : Tag * matches : Mix list
+    | TagProcessed of tag : Tag * matches : MixKey list
     | ErrorProcessingTag of exn : exn
 
 type Status =
@@ -56,12 +54,10 @@ type State = {
     ValidRoute : ValidRoute
     SearchBoxText : string
     SearchId : Guid
-    SearchResults : (Mix * MatchInfo list) list
+    SearchResults : (MixKey * MatchInfo list) list
     Tag : Tag option
-    TagResults : Mix list }
+    TagResults : MixKey list }
 
 let [<Literal>] DJ_NARRATION = "dj narration"
-
-let getTheme useDefaultTheme = if useDefaultTheme then themeDefault else themeDark
 
 let words (text:string) = text.Split ([| SPACE |], StringSplitOptions.RemoveEmptyEntries)

@@ -10,8 +10,17 @@ open Aornota.UI.Render.Bulma
 open Aornota.UI.Render.Common
 open Aornota.UI.Theme.Common
 open Aornota.UI.Theme.Render.Bulma
+open Aornota.UI.Theme.Shared
+
+open System
+
+open Elmish.React.Common
 
 module Rct = Fable.Helpers.React
+
+type private ValidRouteHS = | HomeHS | AllHS | MixSeriesHS of mixSeries : MixSeries | MixHS | SearchHS | TagHS of tag : Tag
+
+type private HeaderState = { UseDefaultThemeHS : bool ; NavbarBurgerIsActiveHS : bool ; ValidRouteHS : ValidRouteHS ; SearchBoxTextHS : string ; SearchIdHS : Guid }
 
 type private MixRenderMode =
     | RenderAll
@@ -19,6 +28,10 @@ type private MixRenderMode =
     | RenderMix
     | RenderSearch of searchText : string * matchInfos : MatchInfo list
     | RenderTag of tag : Tag
+
+let private headerState useDefaultTheme navbarBurgerIsActive validRoute searchBoxText searchId =
+    let validRouteHS = match validRoute with | Home -> HomeHS | All -> AllHS | MixSeries mixSeries -> MixSeriesHS mixSeries | Mix _ -> MixHS | Search _ -> SearchHS | Tag tag -> TagHS tag
+    { UseDefaultThemeHS = useDefaultTheme ; NavbarBurgerIsActiveHS = navbarBurgerIsActive ; ValidRouteHS = validRouteHS ; SearchBoxTextHS = searchBoxText ; SearchIdHS = searchId }
 
 let private formatTime (time:float<second>) =
     let pad2 i = if i < 10 then sprintf "0%i" i else sprintf "%i" i
@@ -31,20 +44,23 @@ let private formatTime (time:float<second>) =
 
 let private mixOrMixes count = sprintf "%i %s" count (if count = 1 then "mix" else "mixes")
 
-let private renderHeader theme state dispatch =
+let private tryFindMix key = allMixes |> List.tryFind (fun mix -> mix.Key = key)
+
+let private renderHeader (headerState:HeaderState) dispatch =
+    let theme = getTheme headerState.UseDefaultThemeHS
     let tags =
-        let isActive tag = match state.ValidRoute with | Tag tag' when tag' = tag -> true | _ -> false
+        let isActive tag = match headerState.ValidRouteHS with | TagHS tag' when tag' = tag -> true | _ -> false
         allTags
         |> List.map (fun (tag, tagText) ->
             navbarDropDownItem theme (isActive tag) [ para theme paraDefaultSmallest [ link theme { LinkUrl = toUrlHash (Tag tag) ; LinkType = SameWindow } [ str tagText ] ] ])
     let seriesTabs =
-        let all = { IsActive = (match state.ValidRoute with | All -> true | _ -> false) ; TabText = ALL ; TabLink = toUrlHash All }
+        let all = { IsActive = (match headerState.ValidRouteHS with | AllHS -> true | _ -> false) ; TabText = ALL ; TabLink = toUrlHash All }
         let mixSeriesTabs = 
-            let isActive mixSeries = match state.ValidRoute with | MixSeries mixSeries' when mixSeries' = mixSeries -> true | _ -> false
+            let isActive mixSeries = match headerState.ValidRouteHS with | MixSeriesHS mixSeries' when mixSeries' = mixSeries -> true | _ -> false
             allMixSeries |> List.map (fun mixSeries -> { IsActive = isActive mixSeries ; TabText = mixSeriesText mixSeries ; TabLink = toUrlHash (MixSeries mixSeries) })
         all :: mixSeriesTabs
-    let toggleTooltipText = match state.UseDefaultTheme with | true -> "Switch to dark theme" | false -> "Switch to light theme"           
-    let toggleTooltipData = if state.NavbarBurgerIsActive then tooltipDefaultRight else tooltipDefaultLeft    
+    let toggleTooltipText = match headerState.UseDefaultThemeHS with | true -> "Switch to dark theme" | false -> "Switch to light theme"           
+    let toggleTooltipData = if headerState.NavbarBurgerIsActiveHS then tooltipDefaultRight else tooltipDefaultLeft    
     let toggleThemeInteraction = Clickable ((fun _ -> dispatch ToggleTheme), Some { toggleTooltipData with TooltipText = toggleTooltipText })
     let toggleThemeButton = { buttonDarkSmall with IsOutlined = true ; Interaction = toggleThemeInteraction ; IconLeft = Some iconTheme }
     let navbarData = { navbarDefault with NavbarSemantic = Some Light }
@@ -56,9 +72,9 @@ let private renderHeader theme state dispatch =
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
                         link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str DJ_NARRATION ] ] ]
                 let searchTooltip = { tooltipDefaultBottom with TooltipText = "Search for tracks" }
-                yield navbarItem [ searchBox theme state.SearchId state.SearchBoxText searchTooltip (SearchBoxTextChanged >> dispatch) (fun _ -> dispatch RequestSearch) ]
-                yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) state.NavbarBurgerIsActive ]
-            navbarMenu theme navbarData state.NavbarBurgerIsActive [ 
+                yield navbarItem [ searchBox theme headerState.SearchIdHS headerState.SearchBoxTextHS searchTooltip (SearchBoxTextChanged >> dispatch) (fun _ -> dispatch RequestSearch) ]
+                yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) headerState.NavbarBurgerIsActiveHS ]
+            navbarMenu theme navbarData headerState.NavbarBurgerIsActiveHS [ 
                 navbarStart [
                     navbarItem [ tabs theme { tabsDefault with Tabs = seriesTabs } ]
                     navbarDropDown theme (para theme paraDefaultSmallest [ str "tags" ]) tags ]
@@ -119,7 +135,8 @@ let private renderMatches theme (searchText:string) matchInfos =
         ]
     table theme false { tableFullWidth with IsNarrow = true} [ tbody (matchInfos |> List.map matchRow) ]
 
-let private renderMixContent theme state mix renderMode =
+let private renderMixContent useDefaultTheme mix renderMode =
+    let theme = getTheme useDefaultTheme
     let title =
         match renderMode with
         | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> link theme { LinkUrl = toUrlHash (Mix mix) ; LinkType = SameWindow } [ str mix.Name ]
@@ -144,7 +161,8 @@ let private renderMixContent theme state mix renderMode =
         | RenderMix ->
             Some (para theme { paraDefaultSmallest with ParaAlignment = RightAligned }
                 [ link theme { LinkUrl = sprintf "https://www.mixcloud.com%s" mix.MixcloudUrl ; LinkType = NewWindow } [ str "view on mixcloud.com" ] ])
-    let left = [ image (sprintf "public/resources/%s-128x128.png" mix.Key) (Some (FixedSize Square128)) ]
+    let (MixKey key) = mix.Key
+    let left = [ image (sprintf "public/resources/%s-128x128.png" key) (Some (FixedSize Square128)) ]
     let content = [
         yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
         match mixSeriesLink with | Some mixSeriesLink -> yield mixSeriesLink | None -> ()
@@ -161,7 +179,7 @@ let private renderMixContent theme state mix renderMode =
             yield divVerticalSpace 10
             yield! mix.Narrative theme
             yield divVerticalSpace 10
-            yield renderMixcloudPlayer false state.UseDefaultTheme mix.MixcloudUrl
+            yield renderMixcloudPlayer false useDefaultTheme mix.MixcloudUrl
             yield divVerticalSpace 5
             yield renderTracklisting theme mix
         | RenderSearch (searchText, matchInfos) ->
@@ -170,76 +188,74 @@ let private renderMixContent theme state mix renderMode =
         | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> ()
     ]
 
-let private renderAll theme state =
+let private renderAll useDefaultTheme =
+    let theme = getTheme useDefaultTheme
     let mixes = allMixes |> List.sortBy (fun mix -> mixSeriesText mix.MixSeries, mix.Name)
     let trackCount = mixes |> List.sumBy (fun mix -> mix.Tracks.Length)
     let totalDuration = mixes |> List.sumBy (fun mix -> mix.Tracks |> List.sumBy (fun track -> track.Duration))
-    [
-        divVerticalSpace 10
-        columnContent [
-            div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [
-                    str (sprintf "all | %s | %i tracks | %s" (mixOrMixes mixes.Length) trackCount (formatTime totalDuration)) ]
-                yield hr theme false
-                for mix in mixes do yield! renderMixContent theme state mix RenderAll ] ]
-    ]
+    columnContent [
+        div divDefault [
+            yield para theme { paraCentredMedium with Weight = SemiBold } [
+                str (sprintf "all | %s | %i tracks | %s" (mixOrMixes mixes.Length) trackCount (formatTime totalDuration)) ]
+            yield hr theme false
+            for mix in mixes do yield! renderMixContent useDefaultTheme mix RenderAll ] ]
 
-let private renderMixSeries theme state mixSeries =
+let private renderMixSeries (useDefaultTheme, mixSeries) =
+    let theme = getTheme useDefaultTheme
     let mixes = allMixes |> List.filter (fun mix -> mix.MixSeries = mixSeries) |> List.sortBy (fun mix -> mix.Name)
     let trackCount = mixes |> List.sumBy (fun mix -> mix.Tracks.Length)
     let totalDuration = mixes |> List.sumBy (fun mix -> mix.Tracks |> List.sumBy (fun track -> track.Duration))
-    [
-        divVerticalSpace 10
-        columnContent [
-            div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [
-                    str (sprintf "%s | %s | %i tracks | %s" (mixSeriesFullText mixSeries) (mixOrMixes mixes.Length) trackCount (formatTime totalDuration)) ]
-                yield hr theme false
-                for mix in mixes do yield! renderMixContent theme state mix RenderMixSeries ] ]
-    ]
+    columnContent [
+        div divDefault [
+            yield para theme { paraCentredMedium with Weight = SemiBold } [
+                str (sprintf "%s | %s | %i tracks | %s" (mixSeriesFullText mixSeries) (mixOrMixes mixes.Length) trackCount (formatTime totalDuration)) ]
+            yield hr theme false
+            for mix in mixes do yield! renderMixContent useDefaultTheme mix RenderMixSeries ] ]
 
-let private renderMix theme state mix =
-    [
-        divVerticalSpace 10
+let private renderMix (useDefaultTheme, key) =
+    let theme = getTheme useDefaultTheme
+    match tryFindMix key with
+    | Some mix ->
         columnContent [
             div divDefault [
                 yield para theme { paraCentredMedium with Weight = SemiBold } [ str mix.Name ]
                 yield hr theme false
-                yield! renderMixContent theme state mix RenderMix ] ]
-    ]
+                yield! renderMixContent useDefaultTheme mix RenderMix ] ]
+    | None -> divEmpty // note: should never happen
 
-let private renderSearch theme state searchText =
+let private renderSearch (useDefaultTheme, searchResults, searchText) =
+    let theme = getTheme useDefaultTheme
     let searchResults =
-        state.SearchResults
+        searchResults
+        |> List.choose (fun (key, matchInfos) -> match tryFindMix key with | Some mix -> Some (mix, matchInfos) | None -> None) // note: should always find mix
         |> List.sortBy (fun (mix, matchInfos) -> -(matchInfos |> List.maxBy (fun matchInfo -> matchInfo.MatchScore)).MatchScore, mixSeriesText mix.MixSeries, mix.Name)
-    [
-        divVerticalSpace 10
-        columnContent [
-            div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [
-                    str "search results for "
-                    italic searchText
-                    str (sprintf " | %s" (mixOrMixes searchResults.Length)) ]
-                for (mix, matchInfos) in searchResults do
-                    yield hr theme false
-                    yield! renderMixContent theme state mix (RenderSearch (searchText, matchInfos)) ] ]
-    ]
-
-let private renderTag theme state tag =
-    let tagResults = state.TagResults |> List.sortBy (fun mix -> mixSeriesText mix.MixSeries, mix.Name)
-    [
-        divVerticalSpace 10
-        columnContent [
-            div divDefault [
-                yield para theme { paraCentredMedium with Weight = SemiBold } [
-                    str "mixes tagged "
-                    italic (tagText tag)
-                    str (sprintf " | %s" (mixOrMixes tagResults.Length)) ]
+    columnContent [
+        div divDefault [
+            yield para theme { paraCentredMedium with Weight = SemiBold } [
+                str "search results for "
+                italic searchText
+                str (sprintf " | %s" (mixOrMixes searchResults.Length)) ]
+            for (mix, matchInfos) in searchResults do
                 yield hr theme false
-                for mix in tagResults do yield! renderMixContent theme state mix (RenderTag tag) ] ]
-    ]
+                yield! renderMixContent useDefaultTheme mix (RenderSearch (searchText, matchInfos)) ] ]
 
-let private renderFooter theme =
+let private renderTag (useDefaultTheme, tagResults, tag) =
+    let theme = getTheme useDefaultTheme
+    let tagResults =
+        tagResults
+        |> List.choose (fun key -> match tryFindMix key with | Some mix -> Some mix | None -> None) // note: should always find mix
+        |> List.sortBy (fun mix -> mixSeriesText mix.MixSeries, mix.Name)
+    columnContent [
+        div divDefault [
+            yield para theme { paraCentredMedium with Weight = SemiBold } [
+                str "mixes tagged "
+                italic (tagText tag)
+                str (sprintf " | %s" (mixOrMixes tagResults.Length)) ]
+            yield hr theme false
+            for mix in tagResults do yield! renderMixContent useDefaultTheme mix (RenderTag tag) ] ]
+
+let private renderFooter useDefaultTheme =
+    let theme = getTheme useDefaultTheme
     footer theme true [
         container (Some Fluid) [
             para theme paraCentredSmallest [
@@ -261,27 +277,34 @@ let private renderFooter theme =
                 str ". Vaguely mobile-friendly." ] ] ]
 
 let render state dispatch =
-    let theme = getTheme state.UseDefaultTheme
+    let empty () = divEmpty
+    let pageLoader useDefaultTheme = pageLoader (getTheme useDefaultTheme) pageLoaderDefault
+    let banner () = image "public/resources/banner-461x230.png" (Some (Ratio TwoByOne))
     match state.Status with
-    | ReadingPreferences _ ->
-        div divDefault [] // note: do *not* use pageLoader until we know the preferred theme
+    | ReadingPreferences _ -> // note: do *not* use pageLoader until we know the preferred theme
+        lazyView empty ()
     | ProcessingSearch | ProcessingTag ->
-        pageLoader theme pageLoaderDefault
+        lazyView pageLoader state.UseDefaultTheme
     | Ready ->
+        let headerState = headerState state.UseDefaultTheme state.NavbarBurgerIsActive state.ValidRoute state.SearchBoxText state.SearchId
         div divDefault [
-            yield renderHeader theme state dispatch
-            yield! renderDebugMessages theme DJ_NARRATION state.DebugMessages (DismissDebugMessage >> dispatch)
+            yield lazyView2 renderHeader headerState dispatch
+            // TEMP-NMB: To test rendering "special" [i.e. not from state] DebugMessage...
+            //yield lazyView renderDebugMessage (state.UseDefaultTheme, DJ_NARRATION, "Test")
+            // ...NMB-TEMP
+            yield lazyView2 renderDebugMessages (state.UseDefaultTheme, DJ_NARRATION, state.DebugMessages) (DismissDebugMessage >> dispatch)
+            yield lazyView divVerticalSpace 10
             match state.ValidRoute with
             | Home ->
-                yield image "public/resources/banner-461x230.png" (Some (Ratio TwoByOne))
+                yield lazyView banner ()
             | All ->
-                yield! renderAll theme state
+                yield lazyView renderAll state.UseDefaultTheme
             | MixSeries mixSeries ->
-                yield! renderMixSeries theme state mixSeries
+                yield lazyView renderMixSeries (state.UseDefaultTheme, mixSeries)
             | Mix mix ->
-                yield! renderMix theme state mix
+                yield lazyView renderMix (state.UseDefaultTheme, mix.Key)
             | Search searchText ->
-                yield! renderSearch theme state searchText
+                yield lazyView renderSearch (state.UseDefaultTheme, state.SearchResults, searchText)
             | Tag tag ->
-                yield! renderTag theme state tag
-            yield renderFooter theme ]
+                yield lazyView renderTag (state.UseDefaultTheme, state.TagResults, tag)
+            yield lazyView renderFooter state.UseDefaultTheme ]
