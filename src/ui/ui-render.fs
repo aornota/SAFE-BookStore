@@ -135,11 +135,11 @@ let private renderMatches theme (searchText:string) matchInfos =
         ]
     table theme false { tableFullWidth with IsNarrow = true} [ tbody (matchInfos |> List.map matchRow) ]
 
-let private renderMixContent useDefaultTheme mix renderMode =
+let private renderMixContent useDefaultTheme (mix:Mix) renderMode =
     let theme = getTheme useDefaultTheme
     let title =
         match renderMode with
-        | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> link theme { LinkUrl = toUrlHash (Mix mix) ; LinkType = SameWindow } [ str mix.Name ]
+        | RenderAll | RenderMixSeries | RenderSearch _ | RenderTag _ -> link theme { LinkUrl = toUrlHash (Mix (mix.Key, mix.Name)) ; LinkType = SameWindow } [ str mix.Name ]
         | RenderMix -> str mix.Name
     let mixSeriesLink =
         match renderMode with
@@ -301,8 +301,8 @@ let render state dispatch =
                 yield lazyView renderAll state.UseDefaultTheme
             | MixSeries mixSeries ->
                 yield lazyView renderMixSeries (state.UseDefaultTheme, mixSeries)
-            | Mix mix ->
-                yield lazyView renderMix (state.UseDefaultTheme, mix.Key)
+            | Mix (key, _) ->
+                yield lazyView renderMix (state.UseDefaultTheme, key)
             | Search searchText ->
                 yield lazyView renderSearch (state.UseDefaultTheme, state.SearchResults, searchText)
             | Tag tag ->

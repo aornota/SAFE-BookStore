@@ -28,7 +28,7 @@ type ValidRoute =
     | Home
     | All
     | MixSeries of mixSeries : MixSeries
-    | Mix of mix : Mix
+    | Mix of key : MixKey * name : string
     | Search of searchText : string
     | Tag of tag : Tag
 
@@ -53,7 +53,7 @@ type Route =
         | _ -> InvalidRoute (UnknownMixSeries mixSeriesKey)
     static member FromMix mixKey =
         let mixKey = decodeUrl mixKey
-        match allMixes |> List.tryFind (fun mix -> mix.Key = MixKey mixKey) with | Some mix -> ValidRoute (Mix mix) | None -> InvalidRoute (UnknownMix mixKey)
+        match allMixes |> List.tryFind (fun mix -> mix.Key = MixKey mixKey) with | Some mix -> ValidRoute (Mix (mix.Key, mix.Name)) | None -> InvalidRoute (UnknownMix mixKey)
     static member FromSearch searchText =
         let searchText = decodeUrl searchText
         if String.IsNullOrWhiteSpace searchText then InvalidRoute EmptySearch else ValidRoute (Search searchText)
@@ -77,9 +77,7 @@ let toUrlHash validRoute =
         | Home -> HOME
         | All -> ALL
         | MixSeries mixSeries -> encodeUrl (mixSeriesText mixSeries)
-        | Mix mix ->
-            let (MixKey key) = mix.Key
-            sprintf "%s/%s" MIX (encodeUrl key)
+        | Mix (MixKey key, _) -> sprintf "%s/%s" MIX (encodeUrl key)
         | Search searchText -> sprintf "%s/%s" SEARCH (encodeUrl searchText)
         | Tag tag -> sprintf "%s/%s" TAG (encodeUrl (tagText tag))
     sprintf "#%s" postHash

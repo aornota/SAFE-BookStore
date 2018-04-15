@@ -12,7 +12,7 @@ type LastRoute =
     | LastWasHome
     | LastWasAll
     | LastWasMixSeries of mixSeriesKey : string
-    | LastWasMix of mixKey : MixKey
+    | LastWasMix of key : MixKey
     | LastWasSearch of searchText : string
     | LastWasTag of tagKey : string
 

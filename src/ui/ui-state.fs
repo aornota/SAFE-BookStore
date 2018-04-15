@@ -32,7 +32,7 @@ let private setValidTitle validRoute =
         | Home -> HOME
         | All -> ALL
         | MixSeries mixSeries -> mixSeriesText mixSeries
-        | Mix mix -> mix.Name
+        | Mix (_, name) -> name
         | Search searchText -> sprintf "search results for '%s'" searchText
         | Tag tag -> sprintf "mixes tagged '%s'" (tagText tag)
     setTitle text
@@ -52,7 +52,7 @@ let private writePreferencesCmd state =
         | Home -> LastWasHome
         | All -> LastWasAll
         | MixSeries mixSeries -> LastWasMixSeries (mixSeriesText mixSeries)
-        | Mix mix -> LastWasMix mix.Key
+        | Mix (key, _) -> LastWasMix key
         | Search searchText -> LastWasSearch searchText
         | Tag tag -> LastWasTag (tagText tag)
     let preferences = { UseDefaultTheme = state.UseDefaultTheme ; LastRoute = lastRoute }
