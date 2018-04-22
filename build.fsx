@@ -71,7 +71,7 @@ Target "run" (fun _ ->
         Diagnostics.Process.Start (sprintf "http://%s:%d" ipAddress port) |> ignore }
     Async.Parallel [| ui ; openBrowser |] |> Async.RunSynchronously |> ignore)
 
-Target "publish" (fun _ ->
+Target "publish-gh-pages" (fun _ ->
     let tempDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
     CreateDir tempDir
     CleanDir tempDir
@@ -97,10 +97,10 @@ Target "help" (fun _ ->
     printfn "\nThe following build targets are defined:"
     printfn "\n\tbuild ... builds ui [which writes output to .\\src\\ui\\public]"
     printfn "\tbuild run ... builds and runs ui [using webpack dev-server]"
-    printfn "\tbuild publish ... builds ui, then pushes to gh-pages branch\n")
+    printfn "\tbuild publish-gh-pages ... builds ui, then pushes to gh-pages branch\n")
 
 "install-dot-net-core" ==> "install"
-"clean" ==> "copy-resources" ==> "install" ==> "build" ==> "publish"
+"clean" ==> "copy-resources" ==> "install" ==> "build" ==> "publish-gh-pages"
 "install" ==> "run"
 
 RunTargetOrDefault "build"
