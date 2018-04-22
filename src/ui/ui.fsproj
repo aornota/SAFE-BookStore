@@ -22,7 +22,7 @@
     <Compile Include="ui-common.fs" />
     <Compile Include="ui-state.fs" />
     <Compile Include="ui-render.fs" />
-    <Compile Include="ui-app.fs" />
+    <Compile Include="ui-run.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

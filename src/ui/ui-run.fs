@@ -1,4 +1,4 @@
-module Aornota.DJNarration.UI.App
+module Aornota.DJNarration.UI.Run
 
 open Elmish
 open Elmish.Browser.Navigation
