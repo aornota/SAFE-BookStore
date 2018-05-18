@@ -50,8 +50,8 @@ hr.dark { background-color : var(--dark) }
 .navbar-dropdown.dark { background-color : var(--darker) }
 
 .navbar-item { padding-left : 0.5rem ; padding-right : 0.5rem }
-.navbar-item.default.is-active a { color : black }
-.navbar-item.dark.is-active a { color : white }
+.navbar-item.default.is-active a { color : var(--link-default-hover) }
+.navbar-item.dark.is-active a { color : var(--link-dark-hover) }
 
 .navbar-menu.light { background-color : var(--light) }
 .navbar-menu.dark { background-color : var(--dark) }
