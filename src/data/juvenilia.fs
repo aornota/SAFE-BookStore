@@ -87,7 +87,86 @@ let sss0009b = {
     ]
 }
 
-// TODO-NMB: sss0010-[a|b]...
+let sss0010a = {
+    MixSeries = Juvenilia
+    MixcloudUrl = "/djnarration/sss0010-a-summerburn-2k5-part-i/"
+    Key = MixKey "sss0010-a"
+    Name = "sss0010-a | summerburn 2k5 (part i)"
+    MixedBy = None
+    Dedication = None
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "The front door glass is bashed in. A hand reaches through and fiddles with the lock. The door opens and a boy enters, trailing a guitar. He wanders into a room and strikes up a folk song..." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- simon ings, 'wolves'" ]
+        ])
+    Tags = [ Dub ; HipHop ; KitchenSink ; SingerSongwriter ; Techno ]
+    Tracks =
+    [
+        { Artist = "susan cadogan" ; Title = "congratulations" ; Label = None ; Duration = 185.893<second> }
+        { Artist = "early b" ; Title = "bible story" ; Label = None ; Duration = 186.573<second> }
+        { Artist = "hip-hop wieners feat. gruf" ; Title = "asleep at the wheel" ; Label = None ; Duration = 330.067<second> }
+        { Artist = "casino versus japan" ; Title = "it's very sunny" ; Label = None ; Duration = 257.920<second> }
+        { Artist = "mcenroe" ; Title = "the realest (instrumental)" ; Label = None ; Duration = 128.173<second> }
+        { Artist = "boogie down productions" ; Title = "stop the violence (extended mix)" ; Label = None ; Duration = 294.520<second> }
+        { Artist = "racialism" ; Title = "gorilla" ; Label = None ; Duration = 218.187<second> }
+        { Artist = "non-prophets" ; Title = "hey, bobby" ; Label = None ; Duration = 276.280<second> }
+        { Artist = "mcenroe" ; Title = "for service in english, press 2" ; Label = None ; Duration = 153.320<second> }
+        { Artist = "m.j. hibbert & the validators" ; Title = "hey hey 16k" ; Label = None ; Duration = 167.987<second> }
+        { Artist = "help she can't swim" ; Title = "knit 1, pearl 1" ; Label = None ; Duration = 92.327<second> }
+        { Artist = "bongwater" ; Title = "the porpoise song" ; Label = None ; Duration = 270.747<second> }
+        { Artist = "richard davis" ; Title = "bring me closer" ; Label = None ; Duration = 291.267<second> }
+        { Artist = "confutatis" ; Title = "obsession" ; Label = None ; Duration = 287.173<second> }
+        { Artist = "sage francis feat. alias, will oldham & saul williams" ; Title = "sea lion (extended mix)" ; Label = None ; Duration = 206.720<second> }
+        { Artist = "diane cluck" ; Title = "petite roses" ; Label = None ; Duration = 77.427<second> }
+        { Artist = "non phixion" ; Title = "drug music" ; Label = None ; Duration = 203.253<second> }
+        { Artist = "headcase ladz" ; Title = "she told me she was a boxer" ; Label = None ; Duration = 192.133<second> }
+        { Artist = "noah23" ; Title = "scream" ; Label = None ; Duration = 258.973<second> }
+        { Artist = "cyne" ; Title = "first person" ; Label = None ; Duration = 159.560<second> }
+        { Artist = "jel" ; Title = "a b-boys anxiety" ; Label = None ; Duration = 121.840<second> }
+        { Artist = "deadbeat" ; Title = "n'importe quoi" ; Label = None ; Duration = 412.680<second> }
+    ]
+}
 
-let juvenilia = [ sss0009a ; sss0009b ]
+let sss0010b = {
+    MixSeries = Juvenilia
+    MixcloudUrl = "/djnarration/sss0010-b-summerburn-2k5-part-ii/"
+    Key = MixKey "sss0010-b"
+    Name = "sss0010-b | summerburn 2k5 (part ii)"
+    MixedBy = None
+    Dedication = None
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "...Come the end times, we shall have no chairs, no beds, no blankets for our children. We shall have folk-singers, and we shall kill them with rocks and cook thin strips of their flesh over fires conjured from their smashed guitars." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- simon ings, 'wolves'" ]
+        ])
+    Tags = [ Dub ] // TODO...
+    Tracks =
+    [
+        { Artist = "m.i.a." ; Title = "hombre" ; Label = None ; Duration = 217.853<second> }
+        { Artist = "secondo" ; Title = "liber tango" ; Label = None ; Duration = 283.653<second> }
+        { Artist = "devendra banhart" ; Title = "the body breaks" ; Label = None ; Duration = 148.733<second> }
+        { Artist = "" ; Title = "the drugs song" ; Label = None ; Duration = 89.693<second> }
+        { Artist = "steinski" ; Title = "" ; Label = None ; Duration = 149.693<second> }
+        { Artist = "depeche mode" ; Title = "" ; Label = None ; Duration = 198.440<second> }
+        { Artist = "pulseprogramming" ; Title = "suck or run (schneider tm remix)" ; Label = None ; Duration = 323.160<second> }
+        { Artist = "warren zevon" ; Title = "excitable boy" ; Label = None ; Duration = 133.733<second> }
+        { Artist = "smokers die younger" ; Title = "customer advice" ; Label = None ; Duration = 277.680<second> }
+        { Artist = "" ; Title = "kite" ; Label = None ; Duration = 358.240<second> }
+        { Artist = "actress" ; Title = "credit da edit" ; Label = None ; Duration = 243.880<second> }
+        { Artist = "trinkwasser" ; Title = "veni, vidi, vici" ; Label = None ; Duration = 220.920<second> }
+        { Artist = "morphine" ; Title = "the night" ; Label = None ; Duration = 254.947<second> }
+        { Artist = "nostalgia 77" ; Title = "untitled" ; Label = None ; Duration = 211.987<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = 162.667<second> }
+        { Artist = "grant lee buffalo" ; Title = "the hook" ; Label = None ; Duration = 240.693<second> }
+        { Artist = "" ; Title = "heartbeats" ; Label = None ; Duration = 146.320<second> }
+        { Artist = "antony & the johnsons" ; Title = "just one star" ; Label = None ; Duration = 87.453<second> }
+        { Artist = "king cresote" ; Title = "twin tub twin" ; Label = None ; Duration = 193.320<second> }
+        { Artist = "qwel" ; Title = "vincent van gogh coke a.d." ; Label = None ; Duration = 223.267<second> }
+        { Artist = "production unit" ; Title = "ruskoline monster" ; Label = None ; Duration = 384.133<second> }
+        { Artist = "the go! team" ; Title = "huddle formation" ; Label = None ; Duration = 183.440<second> }
+    ]
+}
+
+
+let juvenilia = [ sss0009a ; sss0009b ]//; sss0010a ; sss0010b ]
 
