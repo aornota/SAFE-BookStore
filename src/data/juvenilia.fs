@@ -89,7 +89,7 @@ let sss0009b = {
 
 let sss0010a = {
     MixSeries = Juvenilia
-    MixcloudUrl = "/djnarration/sss0010-a-summerburn-2k5-part-i/"
+    MixcloudUrl = "/djnarration/sss0010-a-summerburn-2k5-part-ii/" // sic
     Key = MixKey "sss0010-a"
     Name = "sss0010-a | summerburn 2k5 (part i)"
     MixedBy = None
