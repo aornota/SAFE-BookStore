@@ -11,7 +11,8 @@ type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
 type MixKey = | MixKey of key : string
 
 type Tag = // TODO-NMB: More?...
-    | Ambient | Calypso | Choral | Classical | Dub | Electronic | Fado | Folk | Guitar | HipHop | House | Jazz | KitchenSink | ModernClassical | Piano | SingerSongwriter | Techno | World
+    | Ambient | Calypso | Choral | Classical | Dub | Electronic | Fado | Folk | Guitar | HipHop | House | Jazz | KitchenSink | ModernClassical
+    | Piano | SingerSongwriter | Ska | Techno | World
 
 type Track = {
     Artist : string
@@ -45,5 +46,5 @@ let tagText tag =
     match tag with
     | Ambient -> "ambient" | Calypso -> "calypso" | Choral -> "choral" | Classical -> "classical" | Dub -> "dub" | Electronic -> "electronic" | Fado -> "fado" | Folk -> "folk"
     | Guitar -> "guitar" | HipHop -> "hip-hop" | House -> "house" | Jazz -> "jazz" | KitchenSink -> "kitchen sink" | ModernClassical -> "modern classical" | Piano -> "piano"
-    | SingerSongwriter -> "singer/songwriter" | Techno -> "techno" | World -> "world"
+    | SingerSongwriter -> "singer/songwriter" | Ska -> "ska" | Techno -> "techno" | World -> "world"
 

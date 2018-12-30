@@ -531,7 +531,7 @@ let sss0017a = {
     Tags = [ Ambient ; Choral ; Folk ; Piano ; SingerSongwriter ; World ]
     Tracks =
     [
-        { Artist = "degenerate art ensemble" ; Title = "dreams from wounded mouth / filastine remix" ; Label = None ; Duration = 281.647<second> }
+        { Artist = "degenerate art ensemble | filastine" ; Title = "dreams from wounded mouth | remix" ; Label = None ; Duration = 281.647<second> }
         { Artist = "ian william craig" ; Title = "on the reach of explanation (live)" ; Label = None ; Duration = 506.706<second> }
         { Artist = "leoš janácek | christ church cathedral choir (oxford)" ; Title = "ave maria" ; Label = None ; Duration = 310.184<second> }
         { Artist = "stefano battaglia trio" ; Title = "ismaro" ; Label = None ; Duration = 301.546<second> }
@@ -551,9 +551,9 @@ let sss0017a = {
     ]
 }
 
-(*let sss0017b = {
+let sss0017b = {
     MixSeries = Buncemixes
-    MixcloudUrl = "/djnarration/sss0017-b-for-jamie-dj-narration/" // TBC
+    MixcloudUrl = "/djnarration/sss0017-b-dj-narration-for-jamie/"
     Key = MixKey "sss0017-b"
     Name = "sss0017-b"
     MixedBy = Some "dj narration"
@@ -563,31 +563,31 @@ let sss0017a = {
             para theme paraDefaultSmallest [ str "Men have always fought their misery with dreams. Although dreams were once powerful, they have been made puerile by the movies, radio and newspapers. Among many betrayals, this one is the worst." ]
             para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- nathanael west, 'miss lonelyhearts'" ]
         ])
-    Tags = [ Dub ; KitchenSink; Techno ] // TODO
+    Tags = [ Dub ; Electronic ; Jazz ; KitchenSink; SingerSongwriter ; Ska ; Techno ]
     Tracks =
     [
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "ill considered" ; Title = "opener (live)" ; Label = None ; Duration = 367.433<second> }
+        { Artist = "sufjan stevens" ; Title = "no shade in the shadow of the cross" ; Label = None ; Duration = 156.201<second> }
+        { Artist = "matt elliott" ; Title = "prepare for disappointment" ; Label = None ; Duration = 200.586<second> }
+        { Artist = "the waterboys" ; Title = "old england" ; Label = None ; Duration = 328.911<second> }
+        { Artist = "cornershop" ; Title = "6am jullandar shere" ; Label = None ; Duration = 379.533<second> }
+        { Artist = "calvin party" ; Title = "tell me about poverty" ; Label = None ; Duration = 198.391<second> }
+        { Artist = "nicky thomas" ; Title = "love of the common people" ; Label = None ; Duration = 144.173<second> }
+        { Artist = "the ethiopians" ; Title = "things a get bad to worse" ; Label = None ; Duration = 147.540<second> }
+        { Artist = "omar s" ; Title = "day (original mix)" ; Label = None ; Duration = 308.849<second> }
+        { Artist = "dance" ; Title = "still" ; Label = None ; Duration = 223.945<second> }
+        { Artist = "ngly" ; Title = "speechless tape" ; Label = None ; Duration = 294.742<second> }
+        { Artist = "dadawah" ; Title = "run come rally" ; Label = None ; Duration = 442.073<second> }
+        { Artist = "althea & donna" ; Title = "if you don't love jah" ; Label = None ; Duration = 173.116<second> }
+        { Artist = "the congos" ; Title = "solid foundation" ; Label = None ; Duration = 353.628<second> }
+        { Artist = "winston jarrett & the righteous flames" ; Title = "must be a revolution" ; Label = None ; Duration = 176.123<second> }
+        { Artist = "yally" ; Title = "dread risk" ; Label = None ; Duration = 373.539<second> }
+        { Artist = "anohni" ; Title = "4 degrees" ; Label = None ; Duration = 231.108<second> }
+        { Artist = "the range of light wilderness" ; Title = "into the abyss" ; Label = None ; Duration = 273.605<second> }
     ]
-}*)
+}
 
 let buncemixes = [ 
     sss0011a ; sss0011b ; sss0012a ; sss0012b ; sss0012c ; sss0012d ; sss0013a ; sss0013b
-    sss0014a ; sss0014b ; sss0015a ; sss0015b ; sss0016a ; sss0016b ; sss0017a (*; sss0017b*) ]
+    sss0014a ; sss0014b ; sss0015a ; sss0015b ; sss0016a ; sss0016b ; sss0017a ; sss0017b ]
 

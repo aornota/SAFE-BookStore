@@ -10,6 +10,7 @@ let allMixes = buncemixes @ cmprssd @ forYourEarsOnly @ nowWeAreN
 
 let allTags =
     [
-        Ambient ; Calypso ; Choral ; Classical ; Dub ; Electronic ; Fado ; Folk ; Guitar ; HipHop ; House ; Jazz ; KitchenSink ; ModernClassical ; Piano ; SingerSongwriter ; Techno ; World
+        Ambient ; Calypso ; Choral ; Classical ; Dub ; Electronic ; Fado ; Folk ; Guitar ; HipHop ; House ; Jazz ; KitchenSink ; ModernClassical
+        Piano ; SingerSongwriter ; Ska ; Techno ; World
     ] |> List.map (fun tag -> tag, tagText tag)
 
