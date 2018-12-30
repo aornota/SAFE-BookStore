@@ -75,7 +75,7 @@ let sss0009b = {
         { Artist = "funkstörung feat. carin" ; Title = "red shirt, white shoes" ; Label = None ; Duration = 240.573<second> }
         { Artist = "yunx" ; Title = "hoc" ; Label = None ; Duration = 74.853<second> }
         { Artist = "hey-o-hansen" ; Title = "shining commas" ; Label = None ; Duration = 252.360<second> }
-        { Artist = "steinksi" ; Title = "country grammar (hydro mix)" ; Label = None ; Duration = 141.547<second> }
+        { Artist = "steinski" ; Title = "country grammar ('hydro' mix)" ; Label = None ; Duration = 141.547<second> }
         { Artist = "poppa tollo" ; Title = "nuff stylee" ; Label = None ; Duration = 188.960<second> }
         { Artist = "sugar minott" ; Title = "sprinter stayer" ; Label = None ; Duration = 212.773<second> }
         { Artist = "horace andy" ; Title = "wise man" ; Label = None ; Duration = 186.133<second> }
@@ -145,20 +145,20 @@ let sss0010b = {
         { Artist = "m.i.a." ; Title = "hombre" ; Label = None ; Duration = 217.853<second> }
         { Artist = "secondo" ; Title = "liber tango" ; Label = None ; Duration = 283.653<second> }
         { Artist = "devendra banhart" ; Title = "the body breaks" ; Label = None ; Duration = 148.733<second> }
-        { Artist = "" ; Title = "the drugs song" ; Label = None ; Duration = 89.693<second> }
-        { Artist = "steinski" ; Title = "" ; Label = None ; Duration = 149.693<second> }
-        { Artist = "depeche mode" ; Title = "" ; Label = None ; Duration = 198.440<second> }
+        { Artist = "amateur transplants (adam kay & suman biswas)" ; Title = "the drugs song" ; Label = None ; Duration = 89.693<second> }
+        { Artist = "steinski" ; Title = "b-boy breakdown ('you got the job' mix)" ; Label = None ; Duration = 149.693<second> }
+        { Artist = "depeche mode" ; Title = "enjoy the silence (mike shinoda's reinterpretation)" ; Label = None ; Duration = 198.440<second> }
         { Artist = "pulseprogramming" ; Title = "suck or run (schneider tm remix)" ; Label = None ; Duration = 323.160<second> }
         { Artist = "warren zevon" ; Title = "excitable boy" ; Label = None ; Duration = 133.733<second> }
         { Artist = "smokers die younger" ; Title = "customer advice" ; Label = None ; Duration = 277.680<second> }
-        { Artist = "" ; Title = "kite" ; Label = None ; Duration = 358.240<second> }
+        { Artist = "corker / conboy" ; Title = "kite" ; Label = None ; Duration = 358.240<second> }
         { Artist = "actress" ; Title = "credit da edit" ; Label = None ; Duration = 243.880<second> }
         { Artist = "trinkwasser" ; Title = "veni, vidi, vici" ; Label = None ; Duration = 220.920<second> }
         { Artist = "morphine" ; Title = "the night" ; Label = None ; Duration = 254.947<second> }
         { Artist = "nostalgia 77" ; Title = "untitled" ; Label = None ; Duration = 211.987<second> }
-        { Artist = "" ; Title = "" ; Label = None ; Duration = 162.667<second> }
+        { Artist = "kuusumun profeeta" ; Title = "kynttilät syttyvät varhain" ; Label = None ; Duration = 162.667<second> }
         { Artist = "grant lee buffalo" ; Title = "the hook" ; Label = None ; Duration = 240.693<second> }
-        { Artist = "" ; Title = "heartbeats" ; Label = None ; Duration = 146.320<second> }
+        { Artist = "josé gonzález" ; Title = "heartbeats" ; Label = None ; Duration = 146.320<second> }
         { Artist = "antony & the johnsons" ; Title = "just one star" ; Label = None ; Duration = 87.453<second> }
         { Artist = "king cresote" ; Title = "twin tub twin" ; Label = None ; Duration = 193.320<second> }
         { Artist = "qwel" ; Title = "vincent van gogh coke a.d." ; Label = None ; Duration = 223.267<second> }
