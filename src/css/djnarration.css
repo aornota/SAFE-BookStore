@@ -11,9 +11,9 @@ body.default { background-color : white }
 body.dark { background-color : black }
 
 .default { color : var(--darker) }
-.default-alternative { color : var(--even-darker) ; background-color : var(--light) }
+.default.alternative { color : var(--even-darker) ; background-color : var(--light) }
 .dark { color : var(--lighter) }
-.dark-alternative { color : var(--even-lighter) ; background-color : var(--dark) }
+.dark.alternative { color : var(--even-lighter) ; background-color : var(--dark) }
 
 a.default { color : var(--link-default) }
 a.default:hover { color : var(--link-default-hover) }
@@ -30,7 +30,9 @@ hr.dark { background-color : var(--dark) }
 
 /* Note: Needed to prevent use of background-color/s defined for .footer (&c.) by Bulma. */
 .footer.default, .input.default, .table.default { background-color : white }
+.footer.default.alternative { background-color : var(--light) }
 .footer.dark, .input.dark, .table.dark { background-color : black }
+.footer.dark.alternative { background-color : var(--dark) }
 /* Note: Needed to prevent use of color/s defined for .table thead td (&c.) by Bulma. */
 .table.default thead td { color : var(--darker) }
 .table.dark thead td { color : var(--lighter) }

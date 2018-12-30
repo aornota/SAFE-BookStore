@@ -516,5 +516,78 @@ let sss0016b = {
     ]
 }
 
-let buncemixes = [ sss0011a ; sss0011b ; sss0012a ; sss0012b ; sss0012c ; sss0012d ; sss0013a ; sss0013b ; sss0014a ; sss0014b ; sss0015a ; sss0015b ; sss0016a ; sss0016b ]
+let sss0017a = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0017-a-dj-narration-for-georgia/"
+    Key = MixKey "sss0017-a"
+    Name = "sss0017-a"
+    MixedBy = Some "dj narration"
+    Dedication = "for georgia"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "\"You're old enough to know that everybody except very crazy people and very stupid people suspect themselves now and then - or whenever they happen to think about it - of not being exactly sane.\"" ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- dashiell hammett, 'the dain curse'" ]
+        ])
+    Tags = [ Ambient ; Choral ; Folk ; Piano ; SingerSongwriter ; World ]
+    Tracks =
+    [
+        { Artist = "degenerate art ensemble" ; Title = "dreams from wounded mouth / filastine remix" ; Label = None ; Duration = 281.647<second> }
+        { Artist = "ian william craig" ; Title = "on the reach of explanation (live)" ; Label = None ; Duration = 506.706<second> }
+        { Artist = "leoš janácek | christ church cathedral choir (oxford)" ; Title = "ave maria" ; Label = None ; Duration = 310.184<second> }
+        { Artist = "stefano battaglia trio" ; Title = "ismaro" ; Label = None ; Duration = 301.546<second> }
+        { Artist = "trio da kali & kronos quartet" ; Title = "lila bambo" ; Label = None ; Duration = 295.532<second> }
+        { Artist = "mdou moctar" ; Title = "nikali talit" ; Label = None ; Duration = 349.530<second> }
+        { Artist = "you are wolf" ; Title = "as sylvie was walking" ; Label = None ; Duration = 288.624<second> }
+        { Artist = "julia biel" ; Title = "summertime (live)" ; Label = None ; Duration = 340.370<second> }
+        { Artist = "paul simon" ; Title = "how the heart approaches what it yearns" ; Label = None ; Duration = 165.465<second> }
+        { Artist = "les filles de illighadad (fatou seidi ghali & alamnou akrouni)" ; Title = "eliss wan anas douban" ; Label = None ; Duration = 193.178<second> }
+        { Artist = "mr. mitch feat. palmistry" ; Title = "vpn" ; Label = None ; Duration = 259.959<second> }
+        { Artist = "noviciat de soeurs missionaires" ; Title = "yesu ka mkwebaze" ; Label = None ; Duration = 281.797<second> }
+        { Artist = "you are wolf" ; Title = "down in the river to pray (live)" ; Label = None ; Duration = 164.908<second> }
+        { Artist = "joan baez" ; Title = "man smart, woman smarter (live)" ; Label = None ; Duration = 188.976<second> }
+        { Artist = "mohamed karzo" ; Title = "c'est la vie" ; Label = None ; Duration = 281.658<second> }
+        { Artist = "ian william craig" ; Title = "arrive, arrive (live)" ; Label = None ; Duration = 208.863<second> }
+        { Artist = "nikolai medtner | steven osborne" ; Title = "skazki (op 20)" ; Label = None ; Duration = 380.656<second> }
+    ]
+}
+
+(*let sss0017b = {
+    MixSeries = Buncemixes
+    MixcloudUrl = "/djnarration/sss0017-b-for-jamie-dj-narration/" // TBC
+    Key = MixKey "sss0017-b"
+    Name = "sss0017-b"
+    MixedBy = Some "dj narration"
+    Dedication = "for jamie"
+    Narrative = (fun theme ->
+        [
+            para theme paraDefaultSmallest [ str "Men have always fought their misery with dreams. Although dreams were once powerful, they have been made puerile by the movies, radio and newspapers. Among many betrayals, this one is the worst." ]
+            para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- nathanael west, 'miss lonelyhearts'" ]
+        ])
+    Tags = [ Dub ; KitchenSink; Techno ] // TODO
+    Tracks =
+    [
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+        { Artist = "" ; Title = "" ; Label = None ; Duration = .<second> }
+    ]
+}*)
+
+let buncemixes = [ 
+    sss0011a ; sss0011b ; sss0012a ; sss0012b ; sss0012c ; sss0012d ; sss0013a ; sss0013b
+    sss0014a ; sss0014b ; sss0015a ; sss0015b ; sss0016a ; sss0016b ; sss0017a (*; sss0017b*) ]
 
