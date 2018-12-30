@@ -168,5 +168,5 @@ let sss0010b = {
 }
 
 
-let juvenilia = [ sss0009a ; sss0009b ]//; sss0010a ; sss0010b ]
+let juvenilia = [ sss0009a ; sss0009b ; sss0010a ; sss0010b ]
 
