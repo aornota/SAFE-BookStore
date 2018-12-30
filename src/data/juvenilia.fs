@@ -160,8 +160,8 @@ let sss0010b = {
         { Artist = "grant lee buffalo" ; Title = "the hook" ; Label = None ; Duration = 240.693<second> }
         { Artist = "josé gonzález" ; Title = "heartbeats" ; Label = None ; Duration = 146.320<second> }
         { Artist = "antony & the johnsons" ; Title = "just one star" ; Label = None ; Duration = 87.453<second> }
-        { Artist = "king cresote" ; Title = "twin tub twin" ; Label = None ; Duration = 193.320<second> }
-        { Artist = "qwel" ; Title = "vincent van gogh coke a.d." ; Label = None ; Duration = 223.267<second> }
+        { Artist = "king creosote" ; Title = "twin tub twin" ; Label = None ; Duration = 193.320<second> }
+        { Artist = "qwel" ; Title = "vincent van gogh coke ad" ; Label = None ; Duration = 223.267<second> }
         { Artist = "production unit" ; Title = "ruskoline monster" ; Label = None ; Duration = 384.133<second> }
         { Artist = "the go! team" ; Title = "huddle formation" ; Label = None ; Duration = 183.440<second> }
     ]
