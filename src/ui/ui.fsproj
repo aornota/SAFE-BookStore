@@ -16,7 +16,9 @@
     <Compile Include="../data/buncemixes.fs" />
     <Compile Include="../data/cmprssd.fs" />
     <Compile Include="../data/for-your-ears-only.fs" />
+    <Compile Include="../data/juvenilia.fs" />
     <Compile Include="../data/now-we-are-n.fs" />
+    <Compile Include="../data/rprssd.fs" />
     <Compile Include="../data/all.fs" />
     <Compile Include="ui-navigation.fs" />
     <Compile Include="ui-common.fs" />

@@ -12,7 +12,7 @@ let sss0011a = {
     Key = MixKey "sss0011-a"
     Name = "sss0011-a"
     MixedBy = Some "dj leah betts"
-    Dedication = "in memory of simon stocker (1967-2010)"
+    Dedication = Some "in memory of simon stocker (1967-2010)"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "That's true, Mother. The English are frightfully conservative. I used to know a butler from the English Legation, and he for the Lord God wouldn't put a Czech sausage in his mouth. People don't eat them in our country, he said, and so he wouldn't eat one either, he said." ]
@@ -53,7 +53,7 @@ let sss0011b = {
     Key = MixKey "sss0011-b"
     Name = "sss0011-b"
     MixedBy = Some "dj austerity"
-    Dedication = "for black farr"
+    Dedication = Some "for black farr"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "And to be human, to be anything like human, is to know what one lacks, to know what one needs, to know what one must look for to find some semblance of completeness amongst strangers, all alone in the darkness." ]
@@ -89,7 +89,7 @@ let sss0012a = {
     Key = MixKey "sss0012-a"
     Name = "sss0012-a"
     MixedBy = Some "dj open fold"
-    Dedication = "for steve..."
+    Dedication = Some "for steve..."
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Nowadays people abdicate their democratic responsibilities: elect representatives to rule on their behalf. Once they're elected they have years and years when they can do whatever they like; that's the nature of representative democracy..." ]
@@ -124,7 +124,7 @@ let sss0012b = {
     Key = MixKey "sss0012-b"
     Name = "sss0012-b"
     MixedBy = Some "dj metatron"
-    Dedication = "...and kate"
+    Dedication = Some "...and kate"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...We don't have democracy in the world of politics today; we have oligarchy punctuated by occasional contests to determine who has the most effective control of the media." ]
@@ -165,7 +165,7 @@ let sss0012c = {
     Key = MixKey "sss0012-c"
     Name = "sss0012-c"
     MixedBy = Some "dj stagflation"
-    Dedication = "in memory of polly"
+    Dedication = Some "in memory of polly"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "They were all young and soft, and they had no time, and so they hated the silence, the silence in themselves that had yet to be filled by experience. Some of them were driven to make noise, were kept jumping by something that was alive inside them..." ]
@@ -198,7 +198,7 @@ let sss0012d = {
     Key = MixKey "sss0012-d"
     Name = "sss0012-d"
     MixedBy = Some "dj oblong"
-    Dedication = "for rebekah"
+    Dedication = Some "for rebekah"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Others like Milena, cleared the decks and waited for something to happen, something worthwhile to do or to say. They loathed the silence in themselves, not knowing that out of that silence would come all the things that were individual to them." ]
@@ -231,7 +231,7 @@ let sss0013a = {
     Key = MixKey "sss0013-a"
     Name = "sss0013-a"
     MixedBy = Some "dj ning ning"
-    Dedication = "for chad & barbara"
+    Dedication = Some "for chad & barbara"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Other people are disconcertingly quick to change their faces, one after another, and they wear them out. At first they suppose they have enough to last forever, but hardly have they reached forty when they come to the last of them. There is of course a tragic side to this..." ]
@@ -266,7 +266,7 @@ let sss0013b = {
     Key = MixKey "sss0013-b"
     Name = "sss0013-b"
     MixedBy = Some "dj nom nom"
-    Dedication = "for josh & lisa"
+    Dedication = Some "for josh & lisa"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...They are not used to looking after their faces; the last is worn out in a week, holed and paper-thin in numerous places, and little by little the underlay shows through, the non-face, and they go about wearing that." ]
@@ -304,7 +304,7 @@ let sss0014a = {
     Key = MixKey "sss0014-a"
     Name = "sss0014-a"
     MixedBy = Some "dj kayhole"
-    Dedication = "for trol23"
+    Dedication = Some "for trol23"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "mr youse needn't be so spry / concernin questions arty / each has his tastes but as for i / i likes a certain party..." ]
@@ -345,7 +345,7 @@ let sss0014b = {
     Key = MixKey "sss0014-b"
     Name = "sss0014-b"
     MixedBy = Some "dj mandatorium"
-    Dedication = "for danny roiser"
+    Dedication = Some "for danny roiser"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...gimme the he-man's solid bliss / for youse ideas i'll match youse / a pretty girl who naked is / is worth a million statues" ]
@@ -383,7 +383,7 @@ let sss0015a = {
     Key = MixKey "sss0015-a"
     Name = "sss0015-a"
     MixedBy = Some "dj backdoor bastard"
-    Dedication = "for dave & kristen"
+    Dedication = Some "for dave & kristen"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Physical pleasure is a sensual experience no different from pure seeing or the pure sensation with which a fine fruit fills the tongue; it is a great unending experience, which is given us, a knowing of the world, the fullness and the glory of all knowing." ]
@@ -423,7 +423,7 @@ let sss0015b = {
     Key = MixKey "sss0015-b"
     Name = "sss0015-b"
     MixedBy = Some "dj seditious"
-    Dedication = "for darren & olga"
+    Dedication = Some "for darren & olga"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "I was asked by the record company to sum up \"my\" philosophy of life and music. \"My\" philosophy is quite simple: soul first, technique later, or \"Better to drink wine from the hands than water from a pretty cup\"; of course the ultimate is wine from a pretty cup. Amen." ]
@@ -456,7 +456,7 @@ let sss0016a = {
     Key = MixKey "sss0016-a"
     Name = "sss0016-a"
     MixedBy = Some "dj nepharious"
-    Dedication = "for rob & mandy"
+    Dedication = Some "for rob & mandy"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "And the people who choose to try to be able to do as they like, to look for what it is that they like, who discover that this often involves them in difficult (but pleasurable?) rejections of that to which that have been accustomed – these are people held with little social honour in the modern world; who perhaps on some level are envied..." ]
@@ -491,7 +491,7 @@ let sss0016b = {
     Key = MixKey "sss0016-b"
     Name = "sss0016-b"
     MixedBy = Some "dj veteran aryan"
-    Dedication = "for su & noah"
+    Dedication = Some "for su & noah"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...but not always enough to stop them making themselves and others happy. For the ability to be in a relationship with oneself is the ability to be happy – in this sense to have an area in common with others who are happy – but still, to be often solitary, which is a hard happiness and takes courage." ]
@@ -521,8 +521,8 @@ let sss0017a = {
     MixcloudUrl = "/djnarration/sss0017-a-dj-narration-for-georgia/"
     Key = MixKey "sss0017-a"
     Name = "sss0017-a"
-    MixedBy = Some "dj narration"
-    Dedication = "for georgia"
+    MixedBy = None
+    Dedication = Some "for georgia"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "\"You're old enough to know that everybody except very crazy people and very stupid people suspect themselves now and then - or whenever they happen to think about it - of not being exactly sane.\"" ]
@@ -556,8 +556,8 @@ let sss0017b = {
     MixcloudUrl = "/djnarration/sss0017-b-dj-narration-for-jamie/"
     Key = MixKey "sss0017-b"
     Name = "sss0017-b"
-    MixedBy = Some "dj narration"
-    Dedication = "for jamie"
+    MixedBy = None
+    Dedication = Some "for jamie"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Men have always fought their misery with dreams. Although dreams were once powerful, they have been made puerile by the movies, radio and newspapers. Among many betrayals, this one is the worst." ]

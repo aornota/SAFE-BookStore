@@ -12,7 +12,7 @@ let forYourEarsOnlyi = {
     Key = MixKey "for-your-ears-only-part-i"
     Name = "for your ears only (part i)"
     MixedBy = None
-    Dedication = "for emma | fluttering a chinese fan in a knoxville fashion"
+    Dedication = Some "for emma | fluttering a chinese fan in a knoxville fashion"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "The last piano in the world" ]
@@ -59,7 +59,7 @@ let forYourEarsOnlyii = {
     Key = MixKey "for-your-ears-only-part-ii"
     Name = "for your ears only (part ii)"
     MixedBy = None
-    Dedication = "for tom & mizuno | how small a thought..."
+    Dedication = Some "for tom & mizuno | how small a thought..."
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...And the room fills with people," ]
@@ -91,7 +91,7 @@ let forYourEarsOnlyiii = {
     Key = MixKey "for-your-ears-only-part-iii"
     Name = "for your ears only (part iii)"
     MixedBy = None
-    Dedication = "for will... | i love you more than the world can contain in its lonely and ramshackle head"
+    Dedication = Some "for will... | i love you more than the world can contain in its lonely and ramshackle head"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Latecomers sit outside in the long grass," ]
@@ -134,7 +134,7 @@ let forYourEarsOnlyiv = {
     Key = MixKey "for-your-ears-only-part-iv"
     Name = "for your ears only (part iv)"
     MixedBy = None
-    Dedication = "...and priya | all is a blank before us; all waits, undream'd of"
+    Dedication = Some "...and priya | all is a blank before us; all waits, undream'd of"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...The old ones of the audience" ]
@@ -173,7 +173,7 @@ let forYourEarsOnlyv = {
     Key = MixKey "for-your-ears-only-part-v"
     Name = "for your ears only (part v)"
     MixedBy = None
-    Dedication = "for chad & babs | i touch your tears with pearls of love / oh take my heart to wed"
+    Dedication = Some "for chad & babs | i touch your tears with pearls of love / oh take my heart to wed"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...And the pianist sits down," ]

@@ -8,6 +8,7 @@ open Aornota.DJNarration.Data.Common
 open Aornota.UI.Common.DebugMessages
 
 open Elmish.Browser.UrlParser
+open Aornota.DJNarration.Data
 
 module Js = Fable.Import.JS
 
@@ -49,7 +50,9 @@ type Route =
         | BUNCEMIXES -> ValidRoute (MixSeries Buncemixes)
         | CMPRSSD -> ValidRoute (MixSeries Cmprssd)
         | FOR_YOUR_EARS_ONLY -> ValidRoute (MixSeries ForYourEarsOnly)
+        | JUVENILIA -> ValidRoute (MixSeries Juvenilia)
         | NOW_WE_ARE_N -> ValidRoute (MixSeries NowWeAreN)
+        | RPRSSD -> ValidRoute (MixSeries Rprssd)
         | _ -> InvalidRoute (UnknownMixSeries mixSeriesKey)
     static member FromMix mixKey =
         let mixKey = decodeUrl mixKey

@@ -12,7 +12,7 @@ let cmprssd0001 = {
     Key = MixKey "cmprssd-0001"
     Name = "cmprssd-0001"
     MixedBy = None
-    Dedication = "for sam & rachel"
+    Dedication = Some "for sam & rachel"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "We do not believe in ourselves until someone reveals that deep inside us something is valuable, worth listening to, worthy of our trust, sacred to our touch..." ]
@@ -49,7 +49,7 @@ let cmprssd0010 = {
     Key = MixKey "cmprssd-0010"
     Name = "cmprssd-0010"
     MixedBy = None
-    Dedication = "for sam & rachel"
+    Dedication = Some "for sam & rachel"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Once we believe in ourselves, we can risk curiosity, wonder, spontaneous delight or any experience that reveals the human spirit." ]
@@ -83,7 +83,7 @@ let cmprssd0011 = {
     Key = MixKey "cmprssd-0011"
     Name = "cmprssd-0011"
     MixedBy = None
-    Dedication = "for tish"
+    Dedication = Some "for tish"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "The best advice I can give you is: Behave honorably, no matter what, even though there is nearly zero probability of an afterlife." ]
@@ -113,7 +113,7 @@ let cmprssd0100 = {
     Key = MixKey "cmprssd-0100"
     Name = "cmprssd-0100"
     MixedBy = None
-    Dedication = "for rosie"
+    Dedication = Some "for rosie"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "In this world, there are things you can only do alone, and things you can only do with somebody else. It's important to combine the two in just the right amount." ]
@@ -152,7 +152,7 @@ let cmprssd0101 = {
     Key = MixKey "cmprssd-0101"
     Name = "cmprssd-0101"
     MixedBy = None
-    Dedication = "for jamie & georgia"
+    Dedication = Some "for jamie & georgia"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "To live in a society is to create a society, to be in a relationship is to create a relationship, to desire one's wife is to create desire..." ]
@@ -183,7 +183,7 @@ let cmprssd0110 = {
     Key = MixKey "cmprssd-0110"
     Name = "cmprssd-0110"
     MixedBy = None
-    Dedication = "for jamie & georgia"
+    Dedication = Some "for jamie & georgia"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...to bring up a child is to create a person, to live is to create a life." ]
@@ -218,7 +218,7 @@ let cmprssd0111 = {
     Key = MixKey "cmprssd-0111"
     Name = "cmprssd-0111"
     MixedBy = None
-    Dedication = "for rick & jola"
+    Dedication = Some "for rick & jola"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "I would like to be the air / that inhabits you for a moment / only. I would like to be that unnoticed / & that necessary." ]
@@ -248,7 +248,7 @@ let cmprssd1000 = {
     Key = MixKey "cmprssd-1000"
     Name = "cmprssd-1000"
     MixedBy = None
-    Dedication = "for tom"
+    Dedication = Some "for tom"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "He had become something that he had never dared to dream he might become, something that he had been known, in his fear, to scorn: a man who could cut the cloth of his existence and turn it into a suit of clothes that he might wear." ]
@@ -278,7 +278,7 @@ let cmprssd1001 = {
     Key = MixKey "cmprssd-1001"
     Name = "cmprssd-1001"
     MixedBy = None
-    Dedication = "for hugh & lauren"
+    Dedication = Some "for hugh & lauren"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "What is true of a story is true of love: for either one to work, you'd better be good at talking and good at listening. Likewise, if stories only succeed when we consent to suspend disbelief, relationships require of us something similar: the ability to let go of our own worldview long enough to be intrigued and moved by someone else's. This is storybook love..." ]
@@ -316,7 +316,7 @@ let cmprssd1010 = {
     Key = MixKey "cmprssd-1010"
     Name = "cmprssd-1010"
     MixedBy = None
-    Dedication = "for hugh & lauren"
+    Dedication = Some "for hugh & lauren"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...in a wholly different sense of the phrase. It is not about living idyllically in our similarities, but about living peacefully and pleasurably in our differences. It is not bestowed from beyond the normal human realm but struggled for and gained, slowly and with effort. And it is not about unchanging love. It is about letting love change us." ]
@@ -350,7 +350,7 @@ let cmprssd1011 = {
     Key = MixKey "cmprssd-1011"
     Name = "cmprssd-1011"
     MixedBy = None
-    Dedication = "for yvonne | sleep is not an option tonight"
+    Dedication = Some "for yvonne | sleep is not an option tonight"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "Night's getting worn out with use. Not worn out up above, where the stars are. It's worn out like a dress trailing along the ground, among stones and trees, right down to the depths of unwholesome tunnels and damp caves..." ]
@@ -390,7 +390,7 @@ let cmprssd1100 = {
     Key = MixKey "cmprssd-1100"
     Name = "cmprssd-1100"
     MixedBy = None
-    Dedication = "for emma | drift away from bone and skin"
+    Dedication = Some "for emma | drift away from bone and skin"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...Shards of night penetrate every nook and cranny. Thorns puncture it, frosts crack it, mud besmirches it. And every morning, when night recedes, a few tatters break loose and get caught here and there. That's how bats are born." ]
@@ -429,7 +429,7 @@ let cmprssd1101 = {
     Key = MixKey "cmprssd-1101"
     Name = "cmprssd-1101"
     MixedBy = None
-    Dedication = "for alice | a clotted sky"
+    Dedication = Some "for alice | a clotted sky"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "They give me my daily lesson. They stipple the air with little cries. They draw a straight line, place a comma at the end, and, suddenly, start a new paragraph. They put the house where I live between wild parentheses. Too swift for the garden pond to make a copy of their flight, they soar from cellar to garret..." ]
@@ -468,7 +468,7 @@ let cmprssd1110 = {
     Key = MixKey "cmprssd-1110"
     Name = "cmprssd-1110"
     MixedBy = None
-    Dedication = "for emma | an indisguisable shade of twilight"
+    Dedication = Some "for emma | an indisguisable shade of twilight"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "...With their light feather quills, they inscribe matchless signatures. Then, in pairs, entwined, they mingle and spatter ink against the blue of the sky. But only the eye of a friend can follow them; you may know Latin and Greek, but I can read the unknown language these chimney swallows trace on the air." ]
@@ -505,7 +505,7 @@ let cmprssd1111 = {
     Key = MixKey "cmprssd-1111"
     Name = "cmprssd-1111"
     MixedBy = None
-    Dedication = "for jack & alice"
+    Dedication = Some "for jack & alice"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "No, what sex is about is more than a twitch in the loins; it's a celebration of spiritual union, of mutual trust. We say to each other in bed, here, I give myself to you in the expectation that you'll give me pleasure, and I will attempt to give you pleasure too. The social contract, let's call it. And the thrill lies in the contract, not in the pleasure that is its payoff." ]
@@ -538,7 +538,7 @@ let cmprssdneph = {
     Key = MixKey "cmprssd-neph"
     Name = "cmprssd-neph"
     MixedBy = None
-    Dedication = "for me | a postlude"
+    Dedication = Some "for me | a postlude"
     Narrative = (fun theme ->
         [
             para theme paraDefaultSmallest [ str "No! I am not Prince Hamlet, nor was meant to be; / Am an attendant lord, one that will do / To swell a progress, start a scene or two, / Advise the prince; no doubt, an easy tool, / Deferential, glad to be of use, / Politic, cautious and meticulous; / Full of high sentence, but a bit obtuse; / At times, indeed, almost ridiculous - / Almost, at times, the Fool." ]

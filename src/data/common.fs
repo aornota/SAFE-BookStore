@@ -6,7 +6,7 @@ open Fable.Import.React
 
 type [<Measure>] second
 
-type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | NowWeAreN
+type MixSeries = | Buncemixes | Cmprssd | ForYourEarsOnly | Juvenilia | NowWeAreN | Rprssd
 
 type MixKey = | MixKey of key : string
 
@@ -26,7 +26,7 @@ type Mix = {
     Key : MixKey
     Name : string
     MixedBy : string option
-    Dedication : string
+    Dedication : string option
     Narrative : Theme -> ReactElement list
     Tags : Tag list
     Tracks : Track list }
@@ -34,11 +34,15 @@ type Mix = {
 let [<Literal>] BUNCEMIXES = "buncemixes"
 let [<Literal>] CMPRSSD = "cmprssd"
 let [<Literal>] FOR_YOUR_EARS_ONLY = "for your ears only"
+let [<Literal>] JUVENILIA = "juvenilia"
 let [<Literal>] NOW_WE_ARE_N = "now we are n"
+let [<Literal>] RPRSSD = "rprssd"
 
-let allMixSeries = [ Buncemixes ; Cmprssd ; ForYourEarsOnly ; NowWeAreN ]
+let allMixSeries = [ Buncemixes ; Cmprssd ; ForYourEarsOnly ; Juvenilia ; NowWeAreN (* TODO-NMB: Once mix/es uploaded... ; Rprssd *) ]
 
-let mixSeriesText mixSeries = match mixSeries with | Buncemixes -> BUNCEMIXES | Cmprssd -> CMPRSSD | ForYourEarsOnly -> FOR_YOUR_EARS_ONLY | NowWeAreN -> NOW_WE_ARE_N
+let mixSeriesText mixSeries =
+    match mixSeries with
+    | Buncemixes -> BUNCEMIXES | Cmprssd -> CMPRSSD | ForYourEarsOnly -> FOR_YOUR_EARS_ONLY | Juvenilia -> JUVENILIA | NowWeAreN -> NOW_WE_ARE_N | Rprssd -> RPRSSD
 let mixSeriesFullText mixSeries =
     match mixSeries with | ForYourEarsOnly -> sprintf "%s - the concert" FOR_YOUR_EARS_ONLY | NowWeAreN -> "now we are { for n in 1..18 do yield n }" | _ -> mixSeriesText mixSeries
 

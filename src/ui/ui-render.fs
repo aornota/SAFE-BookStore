@@ -147,7 +147,9 @@ let private renderMixContent useDefaultTheme (mix:Mix) renderMode =
             Some (para theme paraDefaultSmallest
                 [ link theme { LinkUrl = toUrlHash (MixSeries mix.MixSeries) ; LinkType = SameWindow } [ str (mixSeriesText mix.MixSeries) ] ])
         | RenderMixSeries -> None
-    let additional = sprintf "%s | %s" (match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION) mix.Dedication
+    let additional =
+        let mixedBy = match mix.MixedBy with | Some mixedBy -> mixedBy | None -> DJ_NARRATION
+        match mix.Dedication with | Some dedication -> sprintf "%s | %s" mixedBy dedication | None -> mixedBy
     let tags =
         let highlightTag = match renderMode with | RenderTag tag -> Some tag | RenderAll | RenderMixSeries | RenderMix | RenderSearch _ -> None
         mix.Tags
