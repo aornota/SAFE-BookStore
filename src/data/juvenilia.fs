@@ -139,7 +139,7 @@ let sss0010b = {
             para theme paraDefaultSmallest [ str "...Come the end times, we shall have no chairs, no beds, no blankets for our children. We shall have folk-singers, and we shall kill them with rocks and cook thin strips of their flesh over fires conjured from their smashed guitars." ]
             para theme { paraDefaultSmallest with ParaAlignment = RightAligned } [ italic "-- simon ings, 'wolves'" ]
         ])
-    Tags = [ Dub ] // TODO...
+    Tags = [ Electronic ; Folk ; HipHop ; KitchenSink ; SingerSongwriter ]
     Tracks =
     [
         { Artist = "m.i.a." ; Title = "hombre" ; Label = None ; Duration = 217.853<second> }
