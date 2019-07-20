@@ -4,6 +4,7 @@
 node_modules/
 paket-files/
 publish/
+temp-gh-pages/
 bin/
 obj/
 yarn-error.log

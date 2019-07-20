@@ -22,10 +22,6 @@ open Fake.Tools.Git
 let private uiDir = Path.getFullName "./src/ui"
 let private uiPublishDir = uiDir </> "publish"
 
-let private gitRepo = "git@github.com:aornota/djnarration.git"
-let private ghPagesBranch = "gh-pages"
-let private tempGhPagesDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
-
 let private platformTool tool winTool =
     let tool = if Environment.isUnix then tool else winTool
     match ProcessUtils.tryFindFileOnPath tool with
@@ -76,8 +72,9 @@ Target.create "run" (fun _ ->
 Target.create "build" (fun _ -> runTool yarnTool "webpack-cli -p" __SOURCE_DIRECTORY__)
 
 Target.create "publish-gh-pages" (fun _ ->
+    let tempGhPagesDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
     Shell.cleanDir tempGhPagesDir
-    Repository.cloneSingleBranch "" gitRepo ghPagesBranch tempGhPagesDir
+    Repository.cloneSingleBranch "" "https://github.com/aornota/djnarration.git" "gh-pages" tempGhPagesDir
     Shell.copyRecursive uiPublishDir tempGhPagesDir true |> Trace.logfn "%A"
     Staging.stageAll tempGhPagesDir
     Commit.exec tempGhPagesDir (sprintf "Publish gh-pages (%s)" (DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
