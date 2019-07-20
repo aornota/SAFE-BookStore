@@ -1,10 +1,9 @@
 module Aornota.DJNarration.Data.Buncemixes
 
 open Aornota.DJNarration.Data.Common
-
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Render.Bulma
 
 let sss0011a = {
     MixSeries = Buncemixes
@@ -587,7 +586,6 @@ let sss0017b = {
     ]
 }
 
-let buncemixes = [ 
+let buncemixes = [
     sss0011a ; sss0011b ; sss0012a ; sss0012b ; sss0012c ; sss0012d ; sss0013a ; sss0013b
     sss0014a ; sss0014b ; sss0015a ; sss0015b ; sss0016a ; sss0016b ; sss0017a ; sss0017b ]
-

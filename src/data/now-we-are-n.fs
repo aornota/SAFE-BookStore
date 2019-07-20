@@ -1,10 +1,9 @@
 module Aornota.DJNarration.Data.NowWeAreN
 
 open Aornota.DJNarration.Data.Common
-
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Render.Bulma
 
 let nowWeAre01i = {
     MixSeries = NowWeAreN
@@ -121,4 +120,3 @@ let nowWeAre02 = {
 }
 
 let nowWeAreN = [ nowWeAre01i ; nowWeAre01ii ; nowWeAre02 (* TODO-NMB: nowWeAre03..nowWeAre18... *) ]
-

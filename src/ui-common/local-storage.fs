@@ -1,8 +1,7 @@
-module Aornota.UI.Common.LocalStorage
+module Aornota.DJNarration.Ui.Common.LocalStorage
 
-open Fable.Import
+open Browser
 
-let readJson key = Option.map string (unbox (Browser.localStorage.getItem key))
-let writeJson key json = Browser.localStorage.setItem (key, json)
-let delete key = Browser.localStorage.removeItem key
-
+let readJson key = unbox(localStorage.getItem key) |> Option.map string
+let writeJson key json = localStorage.setItem(key, json)
+let delete key = localStorage.removeItem key

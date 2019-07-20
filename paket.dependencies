@@ -1,21 +1,34 @@
-group ui
-
-	source https://api.nuget.org/v3/index.json
-	storage:none
-
-	nuget FSharp.Core redirects: force
-	nuget Fable.Core
-	nuget Fable.Elmish.Browser
-	nuget Fable.Elmish.Debugger
-	nuget Fable.Elmish.React
-	nuget Fable.Elmish.HMR
-	nuget Fulma
-	nuget Fulma.Extensions
-
-	clitool dotnet-fable
+version 5.215.0
 
 group build
 
-	source https://api.nuget.org/v3/index.json
+    source https://api.nuget.org/v3/index.json
+    framework: netstandard2.0
+    storage: none
 
-	nuget FAKE
+    nuget FSharp.Core
+    nuget Fake.Core.Environment
+    nuget Fake.Core.Target
+    nuget Fake.Core.Trace
+    nuget Fake.DotNet.Cli
+    nuget Fake.IO.FileSystem
+    nuget Fake.Tools.Git
+
+group ui
+
+	source https://api.nuget.org/v3/index.json
+    framework: netstandard2.0
+	storage:none
+
+    nuget Fable.Core prerelease
+    nuget Fable.Elmish prerelease
+	nuget Fable.Elmish.Browser prerelease
+    nuget Fable.Elmish.Debugger prerelease
+    nuget Fable.Elmish.HMR prerelease
+    nuget Fable.Elmish.React prerelease
+    nuget Fable.FontAwesome.Free prerelease
+    nuget Fable.React prerelease
+    nuget Fulma prerelease
+	nuget Fulma.Extensions.Wikiki.PageLoader prerelease
+	nuget Fulma.Extensions.Wikiki.Tooltip prerelease
+	nuget Thoth.Json prerelease

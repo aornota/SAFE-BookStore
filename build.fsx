@@ -1,106 +1,97 @@
-#r @"packages/build/FAKE/tools/FakeLib.dll"
+#r "paket: groupref build //"
+#if !FAKE
+// See https://github.com/ionide/ionide-vscode-fsharp/issues/839#issuecomment-396296095.
+#r "netstandard"
+#r "Facades/netstandard"
+#endif
+
+#load "./.fake/build.fsx/intellisense.fsx"
+
+#nowarn "52"
 
 open System
 
-open Fake
-open Fake.Git
+open Fake.Core
+open Fake.Core.TargetOperators
+open Fake.DotNet
+open Fake.IO
+open Fake.IO.FileSystemOperators
+open Fake.IO.Globbing.Operators
+open Fake.Tools.Git
 
-let uiDir = FullName @".\src\ui"
+let private uiDir = Path.getFullName "./src/ui"
+let private uiPublishDir = uiDir </> "publish"
 
-let dotnetcliVersion = DotNetCli.GetDotNetSDKVersionFromGlobalJson ()
+let private gitRepo = "git@github.com:aornota/djnarration.git"
+let private ghPagesBranch = "gh-pages"
+let private tempGhPagesDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
 
-let mutable dotnetExePath = "dotnet"
+let private platformTool tool winTool =
+    let tool = if Environment.isUnix then tool else winTool
+    match ProcessUtils.tryFindFileOnPath tool with
+    | Some t -> t
+    | None -> failwithf "%s not found in path. Please install it and make sure it's available from your path. See https://safe-stack.github.io/docs/quickstart/#install-pre-requisites for more info." tool
 
-let run' timeout cmd args dir =
-    if not (execProcess (fun info ->
-        info.FileName <- cmd
-        info.UseShellExecute <- cmd.Contains "yarn" && Console.OutputEncoding <> Text.Encoding.GetEncoding(850)
-        if not (String.IsNullOrWhiteSpace dir) then info.WorkingDirectory <- dir
-        info.Arguments <- args
-    ) timeout) then failwithf "Error while running '%s' with args: %s" cmd args
+let private yarnTool = platformTool "yarn" "yarn.cmd"
 
-let run = run' System.TimeSpan.MaxValue
+let private runTool cmd args workingDir =
+    let arguments = args |> String.split ' ' |> Arguments.OfArgs
+    RawCommand(cmd, arguments)
+    |> CreateProcess.fromCommand
+    |> CreateProcess.withWorkingDirectory workingDir
+    |> CreateProcess.ensureExitCode
+    |> Proc.run
+    |> ignore
 
-let runDotnet workingDir args =
-    let result = ExecProcess (fun info ->
-        info.FileName <- dotnetExePath
-        info.WorkingDirectory <- workingDir
-        info.Arguments <- args) TimeSpan.MaxValue
-    if result <> 0 then failwithf "dotnet %s failed" args
+let private runDotNet cmd workingDir =
+    let result = DotNet.exec (DotNet.Options.withWorkingDirectory workingDir) cmd String.Empty
+    if result.ExitCode <> 0 then failwithf "'dotnet %s' failed in %s." cmd workingDir
 
-let platformTool tool winTool = (if isUnix then tool else winTool) |> ProcessHelper.tryFindFileOnPath |> function Some t -> t | _ -> failwithf "%s not found" tool
+let private openBrowser url =
+    ShellCommand url
+    |> CreateProcess.fromCommand
+    |> CreateProcess.ensureExitCodeWithMessage "Unable to open browser."
+    |> Proc.run
+    |> ignore
 
-let nodeTool = platformTool "node" "node.exe"
-let yarnTool = platformTool "yarn" "yarn.cmd"
+Target.create "clean" (fun _ ->
+    !! (uiDir </> "bin")
+    ++ (uiDir </> "obj")
+    ++ uiPublishDir
+    |> Seq.iter Shell.cleanDir)
 
-let ipAddress = "localhost"
-let port = 8080
-
-do if not isWindows then
-    // We have to set the FrameworkPathOverride so that dotnet SDK invocations know where to look for full-framework base class libraries.
-    let mono = platformTool "mono" "mono"
-    let frameworkPath = IO.Path.GetDirectoryName (mono) </> ".." </> "lib" </> "mono" </> "4.5"
-    setEnvironVar "FrameworkPathOverride" frameworkPath
-
-Target "install-dot-net-core" (fun _ -> dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion)
-
-Target "clean" (fun _ ->
-    CleanDir (uiDir </> "bin")
-    DeleteFiles !! @".\src\ui\obj\*.nuspec"
-    CleanDir (uiDir </> "public"))
-
-Target "copy-resources" (fun _ ->
-    let publicResourcesDir = uiDir </> @"public\resources"
-    CreateDir publicResourcesDir
-    CopyFiles publicResourcesDir !! @".\src\resources\images\*.*")
-
-Target "install" (fun _ ->
-    printfn "Node version:"
-    run nodeTool "--version" __SOURCE_DIRECTORY__
+Target.create "restore" (fun _ ->
     printfn "Yarn version:"
-    run yarnTool "--version" __SOURCE_DIRECTORY__
-    run yarnTool "install --frozen-lockfile" __SOURCE_DIRECTORY__
-    runDotnet uiDir "restore")
+    runTool yarnTool "--version" __SOURCE_DIRECTORY__
+    runTool yarnTool "install --frozen-lockfile" __SOURCE_DIRECTORY__
+    runDotNet "restore" uiDir)
 
-Target "build" (fun _ -> runDotnet uiDir "fable webpack -- -p")
+Target.create "run" (fun _ ->
+    let client = async { runTool yarnTool "webpack-dev-server" __SOURCE_DIRECTORY__ }
+    let browser = async {
+        do! Async.Sleep 2500
+        openBrowser "http://localhost:8080" }
+    Async.Parallel [ client ; browser ] |> Async.RunSynchronously |> ignore)
 
-Target "run" (fun _ ->
-    let ui = async { runDotnet uiDir "fable webpack-dev-server" }
-    let openBrowser = async {
-        do! Async.Sleep 5000
-        Diagnostics.Process.Start (sprintf "http://%s:%d" ipAddress port) |> ignore }
-    Async.Parallel [| ui ; openBrowser |] |> Async.RunSynchronously |> ignore)
+Target.create "build" (fun _ -> runTool yarnTool "webpack-cli -p" __SOURCE_DIRECTORY__)
 
-Target "publish-gh-pages" (fun _ ->
-    let tempDir = __SOURCE_DIRECTORY__ </> "temp-gh-pages"
-    CreateDir tempDir
-    CleanDir tempDir
-    Repository.cloneSingleBranch "" "https://github.com/aornota/djnarration.git" "gh-pages" tempDir
-    CopyFile tempDir @".\src\ui\index.html"
-    let publicDir = tempDir </> "public"
-    CreateDir publicDir
-    let publicJsDir = publicDir </> "js"
-    CreateDir publicJsDir
-    CopyFiles publicJsDir !! @".\src\ui\public\js\*.js"
-    let publicStyleDir = publicDir </> "style"
-    CreateDir publicStyleDir
-    CopyFiles publicStyleDir !! @".\src\ui\public\style\*.css" 
-    let publicResourcesDir = publicDir </> "resources"
-    CreateDir publicResourcesDir
-    CopyFiles publicResourcesDir !! @".\src\ui\public\resources\*.*"
-    Staging.StageAll tempDir
-    Commit tempDir (sprintf "Publish gh-pages (%s)" (DateTime.Now.ToString ("yyyy-MM-dd HH:mm:ss")))
-    Branches.push tempDir
-    DeleteDir tempDir)
+Target.create "publish-gh-pages" (fun _ ->
+    Shell.cleanDir tempGhPagesDir
+    Repository.cloneSingleBranch "" gitRepo ghPagesBranch tempGhPagesDir
+    Shell.copyRecursive uiPublishDir tempGhPagesDir true |> Trace.logfn "%A"
+    Staging.stageAll tempGhPagesDir
+    Commit.exec tempGhPagesDir (sprintf "Publish gh-pages (%s)" (DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")))
+    Branches.push tempGhPagesDir)
 
-Target "help" (fun _ ->
-    printfn "\nThe following build targets are defined:"
-    printfn "\n\tbuild ... builds ui [which writes output to .\\src\\ui\\public]"
-    printfn "\tbuild run ... builds and runs ui [using webpack dev-server]"
-    printfn "\tbuild publish-gh-pages ... builds ui, then pushes to gh-pages branch\n")
+Target.create "help" (fun _ ->
+    printfn "\nThese useful build targets can be run via 'fake build -t {target}':"
+    printfn "\n\trun -> builds, runs and watches [non-production] ui (served via webpack-dev-server)"
+    printfn "\n\tbuild -> builds [production] ui (which writes output to .\\src\\ui\\publish)"
+    printfn "\n\tpublish-gh-pages -> builds [production] ui, then pushes to gh-pages branch"
+    printfn "\n\thelp -> shows this list of build targets\n")
 
-"install-dot-net-core" ==> "install"
-"clean" ==> "copy-resources" ==> "install" ==> "build" ==> "publish-gh-pages"
-"install" ==> "run"
+"clean" ==> "restore"
+"restore" ==> "run"
+"restore" ==> "build" ==> "publish-gh-pages"
 
-RunTargetOrDefault "build"
+Target.runOrDefaultWithArguments "help"

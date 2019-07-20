@@ -16,4 +16,3 @@ let allTags =
         Piano ; SingerSongwriter ; Ska ; Techno ; World
     ]
     |> List.map (fun tag -> tag, tagText tag)
-

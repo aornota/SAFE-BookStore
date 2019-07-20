@@ -1,6 +1,6 @@
-module Aornota.UI.Theme.Default
+module Aornota.DJNarration.Ui.Theme.Default
 
-open Aornota.UI.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Common
 
 let themeDefault = {
     ThemeClass = ThemeClass "default"
@@ -17,4 +17,3 @@ let themeDefault = {
     TransformTabsData = id
     TransformTagData = id
     TransformTooltipData = id }
-

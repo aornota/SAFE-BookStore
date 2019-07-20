@@ -1,30 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="../ui-render-bulma/render-common.fs" />
-    <Compile Include="../ui-render-bulma/render-bulma.fs" />
-    <Compile Include="../ui-theme-bulma/theme-common.fs" />
-    <Compile Include="../ui-theme-bulma/theme-default.fs" />
-    <Compile Include="../ui-theme-bulma/theme-dark.fs" />
-    <Compile Include="../ui-theme-bulma/theme-shared.fs" />
-    <Compile Include="../ui-theme-bulma/theme-render-bulma.fs" />
-    <Compile Include="../ui-common/local-storage.fs" />
-    <Compile Include="../ui-common/debug-messages.fs" />
-    <Compile Include="../data/common.fs" />
-    <Compile Include="../data/buncemixes.fs" />
-    <Compile Include="../data/cmprssd.fs" />
-    <Compile Include="../data/for-your-ears-only.fs" />
-    <Compile Include="../data/juvenilia.fs" />
-    <Compile Include="../data/now-we-are-n.fs" />
-    <Compile Include="../data/rprssd.fs" />
-    <Compile Include="../data/all.fs" />
-    <Compile Include="ui-navigation.fs" />
-    <Compile Include="ui-common.fs" />
-    <Compile Include="ui-state.fs" />
-    <Compile Include="ui-render.fs" />
-    <Compile Include="ui-run.fs" />
-  </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\ui-render\render-common.fs" />
+        <Compile Include="..\ui-render\render-bulma.fs" />
+        <Compile Include="..\ui-theme\theme-common.fs" />
+        <Compile Include="..\ui-theme\theme-default.fs" />
+        <Compile Include="..\ui-theme\theme-dark.fs" />
+        <Compile Include="..\ui-theme\theme-shared.fs" />
+        <Compile Include="..\ui-theme\theme-render-bulma.fs" />
+        <Compile Include="..\ui-common\local-storage.fs" />
+        <Compile Include="..\ui-common\debug-messages.fs" />
+        <Compile Include="..\data\common.fs" />
+        <Compile Include="..\data\buncemixes.fs" />
+        <Compile Include="..\data\cmprssd.fs" />
+        <Compile Include="..\data\for-your-ears-only.fs" />
+        <Compile Include="..\data\juvenilia.fs" />
+        <Compile Include="..\data\now-we-are-n.fs" />
+        <Compile Include="..\data\rprssd.fs" />
+        <Compile Include="..\data\all.fs" />
+        <Compile Include="program\router.fs" />
+        <Compile Include="program\common.fs" />
+        <Compile Include="program\state.fs" />
+        <Compile Include="program\render.fs" />
+        <Compile Include="program\run.fs" />
+    </ItemGroup>
+    <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

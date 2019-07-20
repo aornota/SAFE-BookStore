@@ -1,11 +1,14 @@
 group ui
 
-	FSharp.Core
-	Fable.Core
+    Fable.Core
+	Fable.Elmish
 	Fable.Elmish.Browser
-	Fable.Elmish.Debugger
-	Fable.Elmish.HMR
-	Fable.Elmish.React
-	Fulma
-	Fulma.Extensions
-	dotnet-fable
+    Fable.Elmish.Debugger
+    Fable.Elmish.HMR
+    Fable.Elmish.React
+    Fable.FontAwesome.Free
+	Fable.React
+    Fulma
+	Fulma.Extensions.Wikiki.PageLoader
+	Fulma.Extensions.Wikiki.Tooltip
+	Thoth.Json

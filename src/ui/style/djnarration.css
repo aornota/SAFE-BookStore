@@ -1,11 +1,11 @@
-/* Note: Some --colour variables correspond to $colour/s defined in ..\sass\custom-bulma.sass (e.g. --dark corresponds to $dark); others do not. */
-:root { 
+/* Note: Some --{colour} variables correspond to $colour/s defined in djnarration-bulma.sass (e.g. --dark corresponds to $dark); others do not. */
+:root {
     --dark : #4c4c4c ; --darker : #393939 ; --even-darker : #262626 ; --darkest : #131313 ;
     --light : #b3b3b3 ; --lighter : #c6c6c6 ; --even-lighter : #d9d9d9 ; --lightest : #ececec ;
     --link-default : #600060 ; --link-default-hover : #a000a0 ; --link-dark : #ffbfbf ; --link-dark-hover : #ff8f8f }
 
 html { height : 100% ; margin : 0px }
- 
+
 body { min-height : 100% ; margin : 0px }
 body.default { background-color : white }
 body.dark { background-color : black }
@@ -62,7 +62,7 @@ hr.dark { background-color : var(--dark) }
 
 .table { margin-bottom : 0.75rem }
 .table.default td { border-bottom-color : var(--even-lighter) }
-.table.default tr:hover { background-color : var(--lightest) } 
+.table.default tr:hover { background-color : var(--lightest) }
 .table.dark td { border-bottom-color : var(--even-darker) }
 .table.dark tr:hover { background-color : var(--darkest) }
 

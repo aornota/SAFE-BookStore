@@ -1,10 +1,9 @@
 module Aornota.DJNarration.Data.Cmprssd
 
 open Aornota.DJNarration.Data.Common
-
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Render.Bulma
 
 let cmprssd0001 = {
     MixSeries = Cmprssd
@@ -570,4 +569,3 @@ let cmprssdneph = {
 let cmprssd = [
     cmprssd0001 ; cmprssd0010 ; cmprssd0011 ; cmprssd0100 ; cmprssd0101 ; cmprssd0110 ; cmprssd0111 ; cmprssd1000
     cmprssd1001 ; cmprssd1010 ; cmprssd1011 ; cmprssd1100 ; cmprssd1101 ; cmprssd1110 ; cmprssd1111 ; cmprssdneph ]
-

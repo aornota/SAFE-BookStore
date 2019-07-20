@@ -1,6 +1,6 @@
-module Aornota.UI.Theme.Dark
+module Aornota.DJNarration.Ui.Theme.Dark
 
-open Aornota.UI.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Common
 
 let private transformSemantic semantic = match semantic with | Black -> White | Dark -> Light | Light -> Dark | White -> Black | _ -> semantic
 
@@ -36,4 +36,3 @@ let themeDark = {
     TransformTabsData = id
     TransformTagData = (fun tagData -> { tagData with TagSemantic = transformSemanticOption tagData.TagSemantic })
     TransformTooltipData = (fun tooltipData -> { tooltipData with TooltipSemantic = transformSemanticOption tooltipData.TooltipSemantic }) }
-

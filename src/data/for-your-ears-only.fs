@@ -1,10 +1,9 @@
 module Aornota.DJNarration.Data.ForYourEarsOnly
 
 open Aornota.DJNarration.Data.Common
-
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Render.Bulma
 
 let forYourEarsOnlyi = {
     MixSeries = ForYourEarsOnly
@@ -205,4 +204,3 @@ let forYourEarsOnlyv = {
 }
 
 let forYourEarsOnly = [ forYourEarsOnlyi ; forYourEarsOnlyii ; forYourEarsOnlyiii ; forYourEarsOnlyiv ; forYourEarsOnlyv ]
-

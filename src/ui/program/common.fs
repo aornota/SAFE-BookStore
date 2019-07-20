@@ -1,12 +1,11 @@
-module Aornota.DJNarration.UI.Common
+module Aornota.DJNarration.Ui.Program.Common
 
 open System
 
 open Aornota.DJNarration.Data.Common
-open Aornota.DJNarration.UI.Navigation
-
-open Aornota.UI.Common.DebugMessages
-open Aornota.UI.Render.Common
+open Aornota.DJNarration.Ui.Common.DebugMessages
+open Aornota.DJNarration.Ui.Program.Router
+open Aornota.DJNarration.Ui.Render.Common
 
 type LastRoute =
     | LastWasHome
@@ -16,7 +15,7 @@ type LastRoute =
     | LastWasSearch of searchText : string
     | LastWasTag of tagKey : string
 
-type Preferences = { 
+type Preferences = {
     UseDefaultTheme : bool
     LastRoute : LastRoute }
 
@@ -27,7 +26,7 @@ type MatchInfo = {
 
 type Input =
     | DismissDebugMessage of debugId : DebugId
-    | PreferencesRead of preferences : Preferences option
+    | PreferencesRead of preferences : Result<Preferences, string> option
     | ErrorReadingPreferences of exn : exn
     | PreferencesWritten
     | ErrorWritingPreferences of exn : exn

@@ -1,30 +1,30 @@
-module Aornota.DJNarration.UI.State
+module Aornota.DJNarration.Ui.Program.State
 
 open System
 
 open Aornota.DJNarration.Data.All
 open Aornota.DJNarration.Data.Common
-open Aornota.DJNarration.UI.Common
-open Aornota.DJNarration.UI.Navigation
+open Aornota.DJNarration.Ui.Common.DebugMessages
+open Aornota.DJNarration.Ui.Common.LocalStorage
+open Aornota.DJNarration.Ui.Program.Common
+open Aornota.DJNarration.Ui.Program.Router
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Shared
 
-open Aornota.UI.Common.DebugMessages
-open Aornota.UI.Common.LocalStorage
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Shared
+open Browser
 
 open Elmish
-open Elmish.Browser.Navigation
+open Elmish.Navigation
 
-open Fable.Core.JsInterop
-open Fable.Import
+open Thoth.Json
 
 let [<Literal>] private APP_PREFERENCES_KEY = "djnarration-ui-app-preferences"
-
 let [<Literal>] private ERROR_PARSING_ROUTE = "error parsing route"
+let [<Literal>] private SPACE_COUNT = 4
 
-let private setBodyClass useDefaultTheme = Browser.document.body.className <- getThemeClass (getTheme useDefaultTheme).ThemeClass
+let private setBodyClass useDefaultTheme = document.body.className <- getThemeClass (getTheme useDefaultTheme).ThemeClass
 
-let private setTitle text = Browser.document.title <- sprintf "%s | %s" DJ_NARRATION text
+let private setTitle text = document.title <- sprintf "%s | %s" DJ_NARRATION text
 
 let private setValidTitle validRoute =
     let text =
@@ -39,14 +39,14 @@ let private setValidTitle validRoute =
 
 let private setInvalidTitle invalidRoute = setTitle (invalidRouteText invalidRoute)
 
-let private unableToParseRouteMessage = debugMessage (sprintf "Unable to parse route: '%s'" Browser.location.hash)
+let private unableToParseRouteMessage = debugMessage (sprintf "Unable to parse route: '%s'" window.location.hash)
 
 let private readPreferencesCmd =
-    let readPreferences () = async { return Option.map ofJson<Preferences> (readJson APP_PREFERENCES_KEY) }
-    Cmd.ofAsync readPreferences () PreferencesRead ErrorReadingPreferences
+    let readPreferences () = async { return readJson APP_PREFERENCES_KEY |> Option.map Decode.Auto.fromString<Preferences> }
+    Cmd.OfAsync.either readPreferences () PreferencesRead ErrorReadingPreferences
 
 let private writePreferencesCmd state =
-    let writePreferences preferences = async { do writeJson APP_PREFERENCES_KEY (toJson preferences) }
+    let writePreferences preferences = async { writeJson APP_PREFERENCES_KEY (Encode.Auto.toString<Preferences>(SPACE_COUNT, preferences)) }
     let lastRoute =
         match state.ValidRoute with
         | Home -> LastWasHome
@@ -56,7 +56,7 @@ let private writePreferencesCmd state =
         | Search searchText -> LastWasSearch searchText
         | Tag tag -> LastWasTag (tagText tag)
     let preferences = { UseDefaultTheme = state.UseDefaultTheme ; LastRoute = lastRoute }
-    Cmd.ofAsync writePreferences preferences (fun _ -> PreferencesWritten) ErrorWritingPreferences       
+    Cmd.OfAsync.either writePreferences preferences (fun _ -> PreferencesWritten) ErrorWritingPreferences
 
 let private processSearchCmd searchText =
     let matches mix searchWords =
@@ -72,13 +72,13 @@ let private processSearchCmd searchText =
         do! Async.Sleep 1
         let searchWords = words (searchText.ToLower ()) |> Array.groupBy id |> Array.map fst // note: limit to unique words
         return allMixes |> List.choose (fun mix -> match matches mix searchWords with | h :: t -> Some (mix.Key, h :: t) | [] -> None) }
-    Cmd.ofAsync processSearch searchText SearchProcessed ErrorProcessingSearch
+    Cmd.OfAsync.either processSearch searchText SearchProcessed ErrorProcessingSearch
 
 let private processTagCmd tag =
     let processTag tag = async {
         do! Async.Sleep 1
         return tag, allMixes |> List.filter (fun mix -> mix.Tags |> List.contains tag) |> List.map (fun mix -> mix.Key) }
-    Cmd.ofAsync processTag tag TagProcessed ErrorProcessingTag
+    Cmd.OfAsync.either processTag tag TagProcessed ErrorProcessingTag
 
 let urlUpdate updateTitle route state =
     match route with
@@ -97,7 +97,7 @@ let urlUpdate updateTitle route state =
     | Some (ValidRoute validRoute) ->
         let state = { state with ValidRoute = validRoute ; SearchBoxText = "" ; SearchId = Guid.NewGuid () ; Tag = None }
         if updateTitle then setValidTitle state.ValidRoute
-        state, writePreferencesCmd state        
+        state, writePreferencesCmd state
     | Some (InvalidRoute invalidRoute) ->
         let state = { state with DebugMessages = invalidRouteMessage invalidRoute false :: state.DebugMessages }
         if updateTitle then setInvalidTitle invalidRoute
@@ -136,7 +136,7 @@ let transition input state =
     | DismissDebugMessage debugId ->
         let state = { state with DebugMessages = state.DebugMessages |> removeDebugMessage debugId }
         state, Cmd.none
-    | PreferencesRead (Some preferences) ->
+    | PreferencesRead (Some (Ok preferences)) ->
         let modifyUrlCmd validRoute = Navigation.modifyUrl (toUrlHash validRoute)
         let lastRoute =
             match preferences.LastRoute with
@@ -166,9 +166,11 @@ let transition input state =
         let initRoute = initRoute state
         let state = { state with Status = Ready }
         urlUpdate true initRoute state
-    | ErrorReadingPreferences exn ->
-        let state = { state with DebugMessages = debugMessage (sprintf "Error reading preferences from local storage -> %s" exn.Message) :: state.DebugMessages }
+    | PreferencesRead (Some (Error error)) ->
+        let state = { state with DebugMessages = debugMessage (sprintf "Error reading preferences from local storage -> %s" error) :: state.DebugMessages }
         state, Cmd.ofMsg (PreferencesRead None)
+    | ErrorReadingPreferences exn ->
+        state, Cmd.ofMsg (PreferencesRead (Some (Error exn.Message)))
     | PreferencesWritten ->
         state, Cmd.none
     | ErrorWritingPreferences exn ->

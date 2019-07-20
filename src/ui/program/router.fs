@@ -1,16 +1,14 @@
-module Aornota.DJNarration.UI.Navigation
+module Aornota.DJNarration.Ui.Program.Router
 
 open System
 
 open Aornota.DJNarration.Data.All
 open Aornota.DJNarration.Data.Common
+open Aornota.DJNarration.Ui.Common.DebugMessages
 
-open Aornota.UI.Common.DebugMessages
+open Elmish.UrlParser
 
-open Elmish.Browser.UrlParser
-open Aornota.DJNarration.Data
-
-module Js = Fable.Import.JS
+open Fable.Core
 
 let [<Literal>] HOME = "home"
 let [<Literal>] ALL = "all"
@@ -21,9 +19,8 @@ let [<Literal>] private TAG = "tag"
 let [<Literal>] private FORWARD_SLASH = "/"
 let [<Literal>] private FORWARD_SLASH_ENCODED = "%2f"
 
-let private decodeUrl (url:string) = Js.decodeURI (url.Replace (FORWARD_SLASH_ENCODED, FORWARD_SLASH))
-
-let private encodeUrl (url:string) = (Js.encodeURI url).Replace (FORWARD_SLASH, FORWARD_SLASH_ENCODED)
+let private decodeUrl (url:string) = JS.decodeURI (url.Replace (FORWARD_SLASH_ENCODED, FORWARD_SLASH))
+let private encodeUrl (url:string) = (JS.encodeURI url).Replace (FORWARD_SLASH, FORWARD_SLASH_ENCODED)
 
 type ValidRoute =
     | Home

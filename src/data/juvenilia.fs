@@ -1,11 +1,9 @@
 module Aornota.DJNarration.Data.Juvenilia
 
 open Aornota.DJNarration.Data.Common
-
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Render.Bulma
-open Aornota.DJNarration.Data
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Render.Bulma
 
 // TODO-NMB: More?...
 
@@ -167,6 +165,4 @@ let sss0010b = {
     ]
 }
 
-
 let juvenilia = [ sss0009a ; sss0009b ; sss0010a ; sss0010b ]
-

@@ -1,9 +1,9 @@
-module Aornota.UI.Theme.Common
+module Aornota.DJNarration.Ui.Theme.Common
 
-open Aornota.UI.Render.Bulma
-open Aornota.UI.Render.Common
+open Aornota.DJNarration.Ui.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
 
-open Fable.Import.React
+open Browser.Types
 
 type ThemeClass = | ThemeClass of themeClass : string
 
@@ -26,7 +26,7 @@ type ButtonInteraction =
     | Loading
     | Static
     | NotEnabled of tooltipData : TooltipData option
-    
+
 type ButtonData = {
     ButtonSemantic : Semantic option
     ButtonSize : Size
@@ -96,7 +96,7 @@ type TabsData = {
     // TODO-NMB?... IsToggleRounded : bool
     TabsAlignment : Alignment
     TabsSize : Size
-    Tabs : TabData list }    
+    Tabs : TabData list }
 
 type TagData = {
     TagSemantic : Semantic option
@@ -230,4 +230,3 @@ let tooltipDefaultTop = { TooltipSemantic = Some Black ; Position = TooltipTop ;
 let tooltipDefaultRight = { tooltipDefaultTop with Position = TooltipRight }
 let tooltipDefaultBottom = { tooltipDefaultTop with Position = TooltipBottom }
 let tooltipDefaultLeft = { tooltipDefaultTop with Position = TooltipLeft }
-

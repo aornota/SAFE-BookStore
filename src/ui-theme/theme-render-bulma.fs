@@ -1,21 +1,17 @@
-module Aornota.UI.Theme.Render.Bulma
+module Aornota.DJNarration.Ui.Theme.Render.Bulma
 
 open System
 
-open Aornota.UI.Render.Bulma
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
+open Aornota.DJNarration.Ui.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
 
 open Fable.Core.JsInterop
-module Rct = Fable.Helpers.React
-open Fable.Helpers.React.Props
+open Fable.React.Props
+module RctS = Fable.React.Standard
 
 open Fulma
-open Fulma.Components
-open Fulma.Elements
-open Fulma.Elements.Form
-open Fulma.Extensions
-open Fulma.Layouts
+open Fulma.Extensions.Wikiki
 
 type FieldData = {
     AddOns : Alignment option
@@ -76,7 +72,7 @@ let button theme buttonData children =
     let size = match buttonData.ButtonSize with | Large -> Some (Button.Size IsLarge) | Medium -> Some (Button.Size IsMedium) | Normal -> None | Small -> Some (Button.Size IsSmall)
     let customClasses = [
         match buttonData.ButtonSemantic with | Some Link -> yield IS_LINK | _ -> ()
-        match tooltipData with 
+        match tooltipData with
         | Some tooltipData -> match getTooltipCustomClass tooltipData with | Some tooltipCustomClass -> yield tooltipCustomClass | None -> ()
         | None -> () ]
     let customClass = match customClasses with | _ :: _ -> Some (Button.CustomClass (String.concat SPACE customClasses)) | _ -> None
@@ -109,7 +105,7 @@ let field theme fieldData children =
         | Some RightAligned -> yield Field.HasAddonsRight
         | Some FullWidth -> yield Field.HasAddonsFullWidth
         | _ -> ()
-        match fieldData.Grouped with 
+        match fieldData.Grouped with
         | Some Centred -> yield Field.IsGroupedCentered
         | Some LeftAligned -> yield Field.IsGrouped
         | Some RightAligned -> yield Field.IsGroupedRight
@@ -127,11 +123,11 @@ let footer theme useAlternativeClass children =
 
 let hr theme useAlternativeClass =
     let className = getClassName theme useAlternativeClass
-    Rct.hr [ ClassName className ] 
+    RctS.hr [ ClassName className ]
 
 let link theme linkData children =
     let (ThemeClass className) = theme.ThemeClass
-    Rct.a [
+    RctS.a [
         yield ClassName className :> IHTMLProp
         yield Href linkData.LinkUrl :> IHTMLProp
         match linkData.LinkType with | NewWindow -> yield Target "_blank" :> IHTMLProp | DownloadFile fileName -> yield Download fileName :> IHTMLProp | SameWindow -> ()
@@ -155,7 +151,7 @@ let message theme messageData headerChildren bodyChildren =
         | Some Dark -> Some (Message.Color IsDark) | Some Light -> Some (Message.Color IsLight) | Some Black -> Some (Message.Color IsBlack) | Some White -> Some (Message.Color IsWhite)
         | None -> None
     let size = match messageData.MessageSize with | Large -> Some (Message.Size IsLarge) | Medium -> Some (Message.Size IsMedium) | Normal -> None | Small -> Some (Message.Size IsSmall)
-    Message.message [ 
+    Message.message [
         match semantic with | Some semantic -> yield semantic | None -> ()
         match messageData.MessageSemantic with | Some Link -> yield Message.CustomClass IS_LINK | _ -> ()
         match size with | Some size -> yield size | None -> ()
@@ -186,8 +182,8 @@ let navbarDropDown theme text children =
     let className = getClassName theme false
     Navbar.Item.div [ Navbar.Item.HasDropdown ; Navbar.Item.IsHoverable ] [
         // Note: Navbar.Link.CustomClass | Navbar.Dropdown.CustomClass do not work, so handle manually.
-        Rct.div [ ClassName (sprintf "navbar-link %s" className) ] [ text ]
-        Rct.div [ ClassName (sprintf "navbar-dropdown %s" className) ] children ]
+        RctS.div [ ClassName (sprintf "navbar-link %s" className) ] [ text ]
+        RctS.div [ ClassName (sprintf "navbar-dropdown %s" className) ] children ]
 
 let navbarDropDownItem theme isActive children =
     let className = getClassName theme false
@@ -212,7 +208,7 @@ let notification theme notificationData children =
         | Some Dark -> Some (Notification.Color IsDark) | Some Light -> Some (Notification.Color IsLight) | Some Black -> Some (Notification.Color IsBlack)
         | Some White -> Some (Notification.Color IsWhite)
         | None -> None
-    Notification.notification [ 
+    Notification.notification [
         match semantic with | Some semantic -> yield semantic | None -> ()
         match notificationData.NotificationSemantic with | Some Link -> yield Notification.CustomClass IS_LINK | _ -> ()
     ] [
@@ -235,7 +231,7 @@ let pageLoader theme pageLoaderData =
 
 let para theme paraData children =
     let paraData = theme.TransformParaData paraData
-    let alignment = 
+    let alignment =
         match paraData.ParaAlignment with
         | Centred -> Some CENTRED | LeftAligned -> Some "left" | RightAligned -> Some "right" | Justified -> Some "justified"
         | _ -> None
@@ -256,7 +252,7 @@ let para theme paraData children =
         yield sprintf "is-size-%i" size
         yield sprintf "has-text-weight-%s" weight ]
     let customClass = match customClasses with | _ :: _ -> Some (ClassName (String.concat SPACE customClasses)) | _ -> None
-    Rct.p [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ] children
+    RctS.p [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ] children
 
 let progress theme useAlternativeClass progressData =
     let className = getClassName theme useAlternativeClass
@@ -301,7 +297,7 @@ let span theme spanData children =
     let customClasses = [
         match spanData.SpanClass with | Some Healthy -> yield "healthy" | Some Unhealthy -> yield "unhealthy" | None -> () ]
     let customClass = match customClasses with | _ :: _ -> Some (ClassName (String.concat SPACE customClasses)) | _ -> None
-    Rct.span [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ] children
+    RctS.span [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ] children
 
 let tabs theme tabsData =
     let className = getClassName theme false
@@ -316,10 +312,10 @@ let tabs theme tabsData =
         match tabsData.TabsAlignment with | Centred -> yield "is-centered" | RightAligned -> yield "is-right" | FullWidth -> yield "is-fullwidth" | _ -> ()
     ]
     let customClass = match customClasses with | _ :: _ -> Some (ClassName (String.concat SPACE customClasses)) | _ -> None
-    Rct.div [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ]
-        [ Rct.ul [] [
+    RctS.div [ match customClass with | Some customClass -> yield customClass :> IHTMLProp | None -> () ]
+        [ RctS.ul [] [
             for tab in tabsData.Tabs do
-                yield Tabs.tab [ Tabs.Tab.IsActive tab.IsActive ] [ Rct.a [ Href tab.TabLink ] [ str tab.TabText ] ]
+                yield Tabs.tab [ Tabs.Tab.IsActive tab.IsActive ] [ RctS.a [ Href tab.TabLink ] [ str tab.TabText ] ]
         ] ]
 
 let table theme useAlternativeClass tableData children =
@@ -330,7 +326,7 @@ let table theme useAlternativeClass tableData children =
         if tableData.IsBordered then yield Table.IsBordered
         if tableData.IsNarrow then yield Table.IsNarrow
         if tableData.IsStriped then yield Table.IsStriped
-        if tableData.IsFullWidth then yield Table.IsFullwidth
+        if tableData.IsFullWidth then yield Table.IsFullWidth
     ] children
 
 let tag theme tagData children =
@@ -354,4 +350,3 @@ let tag theme tagData children =
     ] [
         yield! children
         match tagData.OnDismiss with | Some onDismiss -> yield delete onDismiss | None -> () ]
-

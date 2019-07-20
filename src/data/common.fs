@@ -1,8 +1,8 @@
 module Aornota.DJNarration.Data.Common
 
-open Aornota.UI.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Common
 
-open Fable.Import.React
+open Fable.React
 
 type [<Measure>] second
 
@@ -51,4 +51,3 @@ let tagText tag =
     | Ambient -> "ambient" | Calypso -> "calypso" | Choral -> "choral" | Classical -> "classical" | Dub -> "dub" | Electronic -> "electronic" | Fado -> "fado" | Folk -> "folk"
     | Guitar -> "guitar" | HipHop -> "hip-hop" | House -> "house" | Jazz -> "jazz" | KitchenSink -> "kitchen sink" | ModernClassical -> "modern classical" | Piano -> "piano"
     | SingerSongwriter -> "singer/songwriter" | Ska -> "ska" | Techno -> "techno" | World -> "world"
-

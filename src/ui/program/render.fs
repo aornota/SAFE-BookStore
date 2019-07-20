@@ -1,22 +1,22 @@
-module Aornota.DJNarration.UI.Render
+module Aornota.DJNarration.Ui.Program.Render
 
 open Aornota.DJNarration.Data.All
 open Aornota.DJNarration.Data.Common
-open Aornota.DJNarration.UI.Common
-open Aornota.DJNarration.UI.Navigation
-
-open Aornota.UI.Common.DebugMessages
-open Aornota.UI.Render.Bulma
-open Aornota.UI.Render.Common
-open Aornota.UI.Theme.Common
-open Aornota.UI.Theme.Render.Bulma
-open Aornota.UI.Theme.Shared
+open Aornota.DJNarration.Ui.Common.DebugMessages
+open Aornota.DJNarration.Ui.Program.Common
+open Aornota.DJNarration.Ui.Program.Router
+open Aornota.DJNarration.Ui.Render.Bulma
+open Aornota.DJNarration.Ui.Render.Common
+open Aornota.DJNarration.Ui.Theme.Common
+open Aornota.DJNarration.Ui.Theme.Render.Bulma
+open Aornota.DJNarration.Ui.Theme.Shared
 
 open System
 
 open Elmish.React.Common
 
-module Rct = Fable.Helpers.React
+module RctP = Fable.React.Props
+module RctS = Fable.React.Standard
 
 type private ValidRouteHS = | HomeHS | AllHS | MixSeriesHS of mixSeries : MixSeries | MixHS | SearchHS | TagHS of tag : Tag
 
@@ -55,26 +55,26 @@ let private renderHeader (headerState:HeaderState) dispatch =
             navbarDropDownItem theme (isActive tag) [ para theme paraDefaultSmallest [ link theme { LinkUrl = toUrlHash (Tag tag) ; LinkType = SameWindow } [ str tagText ] ] ])
     let seriesTabs =
         let all = { IsActive = (match headerState.ValidRouteHS with | AllHS -> true | _ -> false) ; TabText = ALL ; TabLink = toUrlHash All }
-        let mixSeriesTabs = 
+        let mixSeriesTabs =
             let isActive mixSeries = match headerState.ValidRouteHS with | MixSeriesHS mixSeries' when mixSeries' = mixSeries -> true | _ -> false
             allMixSeries |> List.map (fun mixSeries -> { IsActive = isActive mixSeries ; TabText = mixSeriesText mixSeries ; TabLink = toUrlHash (MixSeries mixSeries) })
         all :: mixSeriesTabs
-    let toggleTooltipText = match headerState.UseDefaultThemeHS with | true -> "Switch to dark theme" | false -> "Switch to light theme"           
-    let toggleTooltipData = if headerState.NavbarBurgerIsActiveHS then tooltipDefaultRight else tooltipDefaultLeft    
+    let toggleTooltipText = match headerState.UseDefaultThemeHS with | true -> "Switch to dark theme" | false -> "Switch to light theme"
+    let toggleTooltipData = if headerState.NavbarBurgerIsActiveHS then tooltipDefaultRight else tooltipDefaultLeft
     let toggleThemeInteraction = Clickable ((fun _ -> dispatch ToggleTheme), Some { toggleTooltipData with TooltipText = toggleTooltipText })
     let toggleThemeButton = { buttonDarkSmall with IsOutlined = true ; Interaction = toggleThemeInteraction ; IconLeft = Some iconTheme }
     let navbarData = { navbarDefault with NavbarSemantic = Some Light }
     navbar theme navbarData [
         container (Some Fluid) [
             navbarBrand [
-                yield navbarItem [ image "public/resources/djnarration-24x24.png" (Some (FixedSize Square24)) ]
+                yield navbarItem [ image "djnarration-24x24.png" (Some (FixedSize Square24)) ]
                 yield navbarItem [
                     para theme { paraCentredSmallest with ParaColour = SemanticPara Black ; Weight = SemiBold } [
                         link theme { LinkUrl = toUrlHash Home ; LinkType = SameWindow } [ str DJ_NARRATION ] ] ]
                 let searchTooltip = { tooltipDefaultBottom with TooltipText = "Search for tracks" }
                 yield navbarItem [ searchBox theme headerState.SearchIdHS headerState.SearchBoxTextHS searchTooltip (SearchBoxTextChanged >> dispatch) (fun _ -> dispatch RequestSearch) ]
                 yield navbarBurger (fun _ -> dispatch ToggleNavbarBurger) headerState.NavbarBurgerIsActiveHS ]
-            navbarMenu theme navbarData headerState.NavbarBurgerIsActiveHS [ 
+            navbarMenu theme navbarData headerState.NavbarBurgerIsActiveHS [
                 navbarStart [
                     navbarItem [ tabs theme { tabsDefault with Tabs = seriesTabs } ]
                     navbarDropDown theme (para theme paraDefaultSmallest [ str "tags" ]) tags ]
@@ -88,11 +88,11 @@ let private renderMixcloudPlayer isMini isDefault mixcloudUrl =
         | true, false -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&hide_artwork=1&feed=%s" mixcloudUrl
         | false, true -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&hide_artwork=1&feed=%s" mixcloudUrl
         | false, false -> sprintf "https://www.mixcloud.com/widget/iframe/?hide_cover=1&hide_artwork=1&feed=%s" mixcloudUrl
-    Rct.iframe [
-        Rct.Props.HTMLAttr.Width "100%"
-        Rct.Props.HTMLAttr.Height height
-        Rct.Props.Src src
-        Rct.Props.FrameBorder 0 ] []
+    RctS.iframe [
+        RctP.HTMLAttr.Width "100%"
+        RctP.HTMLAttr.Height height
+        RctP.Src src
+        RctP.FrameBorder 0 ] []
 
 let private renderTracklisting theme mix =
     let durations = mix.Tracks |> List.map (fun track -> track.Duration)
@@ -164,7 +164,7 @@ let private renderMixContent useDefaultTheme (mix:Mix) renderMode =
             Some (para theme { paraDefaultSmallest with ParaAlignment = RightAligned }
                 [ link theme { LinkUrl = sprintf "https://www.mixcloud.com%s" mix.MixcloudUrl ; LinkType = NewWindow } [ str "view on mixcloud.com" ] ])
     let (MixKey key) = mix.Key
-    let left = [ image (sprintf "public/resources/%s-128x128.png" key) (Some (FixedSize Square128)) ]
+    let left = [ image (sprintf "%s-128x128.png" key) (Some (FixedSize Square128)) ]
     let content = [
         yield para theme { paraDefaultSmall with Weight = SemiBold } [ title ]
         match mixSeriesLink with | Some mixSeriesLink -> yield mixSeriesLink | None -> ()
@@ -261,27 +261,29 @@ let private renderFooter useDefaultTheme =
     footer theme true [
         container (Some Fluid) [
             para theme paraCentredSmallest [
-                link theme { LinkUrl = "https://github.com/aornota/djnarration" ; LinkType = NewWindow } [ str "Written" ]
+                link theme { LinkUrl = "https://github.com/aornota/djnarration/" ; LinkType = NewWindow } [ str "Written" ]
                 str " in "
                 link theme { LinkUrl = "http://fsharp.org/" ; LinkType = NewWindow } [ str "F#" ]
                 str " using "
                 link theme { LinkUrl = "http://fable.io/" ; LinkType = NewWindow } [ str "Fable" ]
                 str ", "
-                link theme { LinkUrl = "https://fable-elmish.github.io/" ; LinkType = NewWindow } [ str "Elmish" ]
+                link theme { LinkUrl = "https://elmish.github.io/" ; LinkType = NewWindow } [ str "Elmish" ]
                 str " and "
-                link theme { LinkUrl = "https://mangelmaxime.github.io/Fulma/" ; LinkType = NewWindow } [ str "Fulma" ]
+                link theme { LinkUrl = "https://github.com/Fulma/Fulma/" ; LinkType = NewWindow } [ str "Fulma" ]
                 str " / "
                 link theme { LinkUrl = "http://bulma.io/" ; LinkType = NewWindow } [ str "Bulma" ]
                 str ". Developed in "
                 link theme { LinkUrl = "https://code.visualstudio.com/" ; LinkType = NewWindow } [ str "Visual Studio Code" ]
+                str " using "
+                link theme { LinkUrl = "http://ionide.io/docs/" ; LinkType = NewWindow } [ str "Ionide-fsharp" ]
                 str ". Best viewed with "
-                link theme { LinkUrl = "https://www.google.com/chrome/index.html" ; LinkType = NewWindow } [ str "Chrome" ]
+                link theme { LinkUrl = "https://www.google.com/chrome/" ; LinkType = NewWindow } [ str "Chrome" ]
                 str ". Vaguely mobile-friendly." ] ] ]
 
 let render state dispatch =
     let empty () = divEmpty
     let pageLoader useDefaultTheme = pageLoader (getTheme useDefaultTheme) pageLoaderDefault
-    let banner () = image "public/resources/banner-461x230.png" (Some (Ratio TwoByOne))
+    let banner () = image "banner-461x230.png" (Some (Ratio TwoByOne))
     match state.Status with
     | ReadingPreferences _ -> // note: do *not* use pageLoader until we know the preferred theme
         lazyView empty ()

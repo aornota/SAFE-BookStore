@@ -1,7 +1,9 @@
+.fable/
 .fake/
+.ionide/
+node_modules/
+paket-files/
+publish/
 bin/
 obj/
-node_modules/
-packages/
-paket-files/
-src/ui/public/
+yarn-error.log
