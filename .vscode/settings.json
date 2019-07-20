@@ -13,7 +13,7 @@
 		, "src/ui/publish/": true
 		, "temp-gh-pages/": true
 		, ".editorconfig": true
-		, "LICENSE.txt": true
+		, "LICENSE": true
 		, "paket.lock": true
 		, "yarn-error.log": true
 		, "yarn.lock": true
