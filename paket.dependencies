@@ -27,7 +27,7 @@ group ui
     nuget Fable.Elmish.HMR prerelease
     nuget Fable.Elmish.React prerelease
     nuget Fable.FontAwesome.Free prerelease
-    nuget Fable.React prerelease
+    nuget Fable.React
     nuget Fulma prerelease
 	nuget Fulma.Extensions.Wikiki.PageLoader prerelease
 	nuget Fulma.Extensions.Wikiki.Tooltip prerelease
