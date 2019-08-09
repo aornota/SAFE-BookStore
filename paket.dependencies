@@ -6,7 +6,7 @@ group build
     framework: netstandard2.0
     storage: none
 
-    nuget FSharp.Core
+    nuget FSharp.Core 4.6
     nuget Fake.Core.Environment
     nuget Fake.Core.Target
     nuget Fake.Core.Trace
@@ -21,7 +21,7 @@ group ui
 	storage:none
 
     nuget Fable.Core prerelease
-    nuget Fable.Elmish prerelease
+    nuget Fable.Elmish 3.0.4
 	nuget Fable.Elmish.Browser prerelease
     nuget Fable.Elmish.Debugger prerelease
     nuget Fable.Elmish.HMR prerelease
