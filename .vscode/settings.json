@@ -6,7 +6,6 @@
 		, ".ionide/": true
 		, ".paket/": true
 		, "node_modules": true
-		, "packages/": true
 		, "paket-files/": true
 		, "src/**/bin": true
 		, "src/**/obj": true

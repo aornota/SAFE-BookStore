@@ -1,4 +1,4 @@
-version 5.215.0
+version 5.226.0
 
 group build
 
@@ -6,7 +6,7 @@ group build
     framework: netstandard2.0
     storage: none
 
-    nuget FSharp.Core 4.6
+    nuget FSharp.Core
     nuget Fake.Core.Environment
     nuget Fake.Core.Target
     nuget Fake.Core.Trace
@@ -18,17 +18,17 @@ group ui
 
 	source https://api.nuget.org/v3/index.json
     framework: netstandard2.0
-	storage:none
+	storage: none
 
-    nuget Fable.Core prerelease
-    nuget Fable.Elmish 3.0.4
-	nuget Fable.Elmish.Browser prerelease
-    nuget Fable.Elmish.Debugger prerelease
-    nuget Fable.Elmish.HMR prerelease
-    nuget Fable.Elmish.React prerelease
-    nuget Fable.FontAwesome.Free prerelease
+    nuget Fable.Core
+    nuget Fable.Elmish
+	nuget Fable.Elmish.Browser
+    nuget Fable.Elmish.Debugger
+    nuget Fable.Elmish.HMR
+    nuget Fable.Elmish.React
+    nuget Fable.FontAwesome.Free
     nuget Fable.React
-    nuget Fulma prerelease
-	nuget Fulma.Extensions.Wikiki.PageLoader prerelease
-	nuget Fulma.Extensions.Wikiki.Tooltip prerelease
-	nuget Thoth.Json prerelease
+    nuget Fulma
+	nuget Fulma.Extensions.Wikiki.PageLoader
+	nuget Fulma.Extensions.Wikiki.Tooltip 2.0.1 // 2.0.1 is outdated (as is bulma-tooltip 2.0.2) - but 3.0.0 not yet tested
+	nuget Thoth.Json
