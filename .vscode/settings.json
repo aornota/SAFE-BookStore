@@ -17,8 +17,7 @@
 		, "yarn-error.log": true
 		, "yarn.lock": true
 	}
-	,
-	"FSharp.fsacRuntime": "netcore",
-	"FSharp.suggestGitignore": false,
-	"FSharp.suggestSdkScripts": false
+	, "FSharp.fsacRuntime": "netcore"
+	, "FSharp.suggestGitignore": false
+	, "FSharp.suggestSdkScripts": false
 }
