@@ -275,7 +275,7 @@ let private renderFooter useDefaultTheme =
                 str ". Developed in "
                 link theme { LinkUrl = "https://code.visualstudio.com/" ; LinkType = NewWindow } [ str "Visual Studio Code" ]
                 str " using "
-                link theme { LinkUrl = "http://ionide.io/docs/" ; LinkType = NewWindow } [ str "Ionide-fsharp" ]
+                link theme { LinkUrl = "http://ionide.io/" ; LinkType = NewWindow } [ str "Ionide-fsharp" ]
                 str ". Best viewed with "
                 link theme { LinkUrl = "https://www.google.com/chrome/" ; LinkType = NewWindow } [ str "Chrome" ]
                 str ". Vaguely mobile-friendly." ] ] ]
