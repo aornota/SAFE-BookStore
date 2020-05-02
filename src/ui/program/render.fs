@@ -269,7 +269,7 @@ let private renderFooter useDefaultTheme =
                 str ", "
                 link theme { LinkUrl = "https://elmish.github.io/" ; LinkType = NewWindow } [ str "Elmish" ]
                 str " and "
-                link theme { LinkUrl = "https://github.com/Fulma/Fulma/" ; LinkType = NewWindow } [ str "Fulma" ]
+                link theme { LinkUrl = "https://fulma.github.io/Fulma/" ; LinkType = NewWindow } [ str "Fulma" ]
                 str " / "
                 link theme { LinkUrl = "http://bulma.io/" ; LinkType = NewWindow } [ str "Bulma" ]
                 str ". Developed in "
