@@ -13,7 +13,7 @@ type DivData = {
     PadV : int option
     PadH : int option }
 
-let [<Literal>] private KEYBOARD_CODE__ENTER = 13.
+let [<Literal>] private KEY__ENTER = "Enter"
 
 let [<Literal>] CENTRED = "centered" (* sic *)
 let [<Literal>] SPACE = " "
@@ -52,8 +52,9 @@ let divEmpty = div divDefault []
 
 let onEnterPressed onEnter =
     OnKeyDown (fun (ev:KeyboardEvent) ->
+        Browser.Dom.console.log (sprintf "ev.key = %s" ev.key)
         match ev with
-        | _ when ev.keyCode = KEYBOARD_CODE__ENTER ->
+        | _ when ev.key = KEY__ENTER ->
             ev.preventDefault ()
             onEnter ()
         | _ -> ())
