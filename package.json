@@ -12,8 +12,8 @@
         "bulma": "0.7.4",
         "bulma-pageloader": "2.1.0",
         "bulma-tooltip": "2.0.2",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
     },
     "devDependencies": {
         "@babel/core": "^7.12.7",
@@ -21,7 +21,7 @@
         "babel-loader": "^8.2.1",
         "copy-webpack-plugin": "^6.3.2",
         "core-js": "^3.7.0",
-        "css-loader": "^4.2.2",
+        "css-loader": "^5.0.1",
         "fable-compiler": "^2.13.0",
         "fable-loader": "^2.1.9",
         "html-webpack-plugin": "^4.5.0",
@@ -30,7 +30,7 @@
         "sass": "^1.29.0",
         "sass-loader": "^10.1.0",
         "style-loader": "^2.0.0",
-        "webpack": "^4.44.1",
+        "webpack": "^4.44.2",
         "webpack-cli": "^3.3.12",
         "webpack-dev-server": "^3.11.0"
     }
